@@ -125,7 +125,7 @@ class DB_Task extends Db_CLASS {
         $sentencia = "";
 
 
-        $sentencia = "select AppName, Pass, CONCAT(Nombre,' ', Apellidos) as Usuario , App_Id, rol,primer_acceso from " . $this->getTableOwner() . ".accesosapp where upper (AppName)= '" . strtoupper($AppUser) . "'";
+        $sentencia = "select  Email,password, CONCAT(Nombre,' ', Apellidos) as Usuario , Id, rol,primer_acceso from " . $this->getTableOwner() . ".accesosapp where upper (Email)= '" . strtoupper($AppUser) . "'";
 
 
 
@@ -139,10 +139,10 @@ class DB_Task extends Db_CLASS {
         } else {
 
 
-            $this->setMAppUserName($result['AppName']);
-            $this->setMAppUserPwd($result['Pass']);
+            $this->setMAppUserName($result['Email']);
+            $this->setMAppUserPwd($result['password']);
             $this->setMRealUserName($result['Usuario']);
-            $this->setMAppUserId($result['App_Id']);
+            $this->setMAppUserId($result['Id']);
             $this->setMAppRol($result['rol']);
             
             if($result['primer_acceso']=='0'){

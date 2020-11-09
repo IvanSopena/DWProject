@@ -11,6 +11,7 @@
 <link rel="stylesheet" href= "/public/style/bootstrap.min.css"/>
 <link rel="stylesheet" href= "/public/style/typography.css" >    
 <link rel="stylesheet" href= "/public/style/common.css" >
+<link rel="stylesheet" href= "/public/style/Alert.css" >
 <link rel="stylesheet" href= "/public/style/responsive.css" >
 
 <!-- FUENTES -->

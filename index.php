@@ -16,14 +16,18 @@ $router = new Router\Router('');
 $home = new Home();
 $sq = new DB_Task();
 
-//$sq->connect_DB();
+$sq->connect_DB();
 
 $router->add('/', function() {
     $GLOBALS['home']->index();
 });
 
-$router->add('/registr', function() {
+$router->add('/registro', function() {
     $GLOBALS['home']->registro();
+});
+
+$router->add('/registrar', function() {
+    $GLOBALS['registro']->registrar();
 });
 
 $router->add('/reset_password', function() {

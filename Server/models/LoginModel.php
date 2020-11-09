@@ -45,7 +45,7 @@ class LoginModel
 
     public function login($User, $Password)
     {
-
+        
         if ($GLOBALS['sq']->getIsOpen() === true) {
             $GLOBALS['sq']->AppOpen($User, $Password);
 
@@ -58,7 +58,7 @@ class LoginModel
             } else {
 
                 if ($GLOBALS['sq']->getprimeraConexion() == true) {
-                    $this->setView("cambiopass");
+                    $this->setView("restore");
                 } else {
 
                     session_start();
@@ -66,7 +66,7 @@ class LoginModel
                     $_SESSION["user"] = $User;
 
                     if ($GLOBALS['sq']->getMAppRol() == 1) {
-                        $this->setView("selectsession");
+                        $this->setView("admin");
                     } else {
                         $this->setView("user");
                     }
@@ -83,7 +83,10 @@ class LoginModel
         }
     }
 
-    public function OpenSession($user)
+    public function AddUser ($User,$Apellidos,$Email,$pass,$verifica){
+
+    }
+ /*    public function OpenSession($user)
     {
         if ($GLOBALS['sq']->getIsOpen() === true) {
             $GLOBALS['sq']->OpenSession($user);
@@ -105,5 +108,5 @@ class LoginModel
             $this->setView("login");
             return false;
         }
-    }
+    } */
 }

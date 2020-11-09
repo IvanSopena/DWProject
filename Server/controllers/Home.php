@@ -23,13 +23,13 @@ class Home extends Controlador
 		$this->vista('restore', '');
 	}
 	
-	/*public function login()
+	public function login()
 	{
 
 		$model = $this->modelo('LoginModel');
 
-		$user = $_POST["dni"];
-		$pass = $_POST["password"];
+		$user = $_POST["mail_user"];
+		$pass = $_POST["pass"];
 
 		if (isset($_SESSION["user"])) {
 			if ($model->OpenSession($user) === false) {
@@ -50,5 +50,5 @@ class Home extends Controlador
 		$this->vista($model->getView(), '');
 
 		
-	} */
+	} 
 }
