@@ -16,7 +16,7 @@
                 <p class="description">No hemos podido encotrar la pagina</p>
                 <img src="/public/img/logo.png">
             </div>
-            <a href="/"><i class="fa fa-home"></i>Home</a>
+            <a href="/home"><i class="fa fa-home"></i>Home</a>
                </div>
                
             </div>

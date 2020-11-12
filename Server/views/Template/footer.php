@@ -16,3 +16,7 @@
 <script src="/public/js/jquery.magnific-popup.min.js"></script>
 <!-- Slick Animation-->
 <script src="/public/js/slick-animation.min.js"></script>
+<!-- Notifications-->
+<script src="/public/js/toastr.min.js"></script>
+<!-- Genaral-->
+<script src="/public/js/custom.js"></script>

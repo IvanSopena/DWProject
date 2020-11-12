@@ -10,10 +10,8 @@
     define('Err','');
     define('Tipo','');
 
-	//Ruta de la aplicación $_SERVER["DOCUMENT_ROOT"];
-    define('RUTA_APP', dirname(dirname(__FILE__)));
+	
 
-    
     
     //define('RUTA_URL', 'http://localhost/CAP/');
     define('NOMBRE_APP', 'Streaming Movies');

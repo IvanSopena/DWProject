@@ -28,8 +28,8 @@
                            <input type="password" class="form-control mb-0" name="verifica" id="verifica" placeholder="Verificar Contraseña" required>
                         </div>    
                         <div class="custom-control custom-checkbox mb-3">
-                           <input type="checkbox" class="custom-control-input" id="customCheck">
-                           <label class="custom-control-label" for="customCheck">Acepto <a href="#" class="text-primary"> Terminos y Condiciones</a></label>
+                           <input type="checkbox" class="custom-control-input" name="chcek" id="chcek" value="">
+                           <label class="custom-control-label" for="chcek">Acepto <a href="#" class="text-primary"> Terminos y Condiciones</a></label>
                         </div>                      
                            
                         <button type="submit" class="btn btn-hover">Registrarse</button>

@@ -8,8 +8,7 @@
  * las consultas y demas acciones que se realicen con ella.
  */
 
-//Incluimos el fichero de configuración para tener acceso a las varibles de configuración
-//require("Server/config/Config.php");
+
 
 class Db_CLASS {
 
@@ -22,6 +21,13 @@ class Db_CLASS {
     private $OpenTrans;
     public $resultado;
     public $fallo_query;
+    public $errors = false;
+    public $mAppUserName = "";
+    public $mRealUserName = "";
+    public $mAppUserId = "";
+    public $mAppUserPwd = "";
+    public $mAppRol = 0;
+    public $primeraConexion = false;
 
     //Creamos el constructor de la clase
     function __construct() {
@@ -57,6 +63,62 @@ class Db_CLASS {
         return $this->OpenTrans;
     }
 
+    function getMAppUserName() {
+        return $this->mAppUserName;
+    }
+
+    function getMRealUserName() {
+        return $this->mRealUserName;
+    }
+
+    function getMAppUserId() {
+        return $this->mAppUserId;
+    }
+
+    function getMAppUserPwd() {
+        return $this->mAppUserPwd;
+    }
+
+    function getMAppRol() {
+        return $this->mAppRol;
+    }
+
+    function setErrors($errors) {
+        $this->errors = $errors;
+    }
+
+    function getErrors() {
+        return $this->errors;
+    }
+
+    function setMAppUserName($mAppUserName) {
+        $this->mAppUserName = $mAppUserName;
+    }
+
+    function setMRealUserName($mRealUserName) {
+        $this->mRealUserName = $mRealUserName;
+    }
+
+    function setMAppUserId($mAppUserId) {
+        $this->mAppUserId = $mAppUserId;
+    }
+
+    function setMAppUserPwd($mAppUserPwd) {
+        $this->mAppUserPwd = $mAppUserPwd;
+    }
+
+    function setMAppRol($mAppRol) {
+        $this->mAppRol = $mAppRol;
+    }
+    
+    function getPrimeraConexion() {
+        return $this->primeraConexion;
+    }
+
+    function setPrimeraConexion($primeraConexion) {
+        $this->primeraConexion = $primeraConexion;
+    }
+
     function setClsLastError($ClsLastError) {
         $this->ClsLastError = $ClsLastError;
     }
@@ -76,6 +138,8 @@ class Db_CLASS {
     function setOpenTrans($OpenTrans) {
         $this->OpenTrans = $OpenTrans;
     }
+
+
 
     ///-----------------------------------------------------Creamos los atributos que va a conetener nuestra clase------------------------------------------
 
@@ -149,7 +213,62 @@ class Db_CLASS {
         }
     }
     
-    public function DbSelect_tablas($SQL){
+    public function AppOpen($AppUser, $AppPassword) {
+        /**
+         * Funcion que se encarga de verificar si el usuario esta dado de alta en la base de datos
+         * y si la contraseña que ha introducido es la correcta. 
+         */
+        $sentencia = "";
+
+
+        $sentencia = "select  Email,password, CONCAT(Nombre,' ', Apellidos) as Usuario , Id, rol,foto from " . $this->getTableOwner() . ".users where upper (Email)= '" . strtoupper($AppUser) . "'";
+
+
+
+        $result = $this->DB_Select($sentencia);
+
+        if ($this->fallo_query == true) {
+
+            $this->setClsLastError("Fallo al buscar el usuario de la aplicación." . $this->DbLastSQL);
+            $this->setErrors(true);
+            return;
+        } else {
+
+
+            $this->setMAppUserName($result['Email']);
+            $this->setMAppUserPwd($result['password']);
+            $this->setMRealUserName($result['Usuario']);
+            $this->setMAppUserId($result['Id']);
+            $this->setMAppRol($result['rol']);
+            
+           
+              $this->setPrimeraConexion($result['foto']);  
+          
+
+            $AppPwd = crypt($AppPassword, strtoupper($AppUser)); //Encriptamos usando el algoritmo BLOWFISH
+            
+         	
+            
+            if ($this->getMAppUserPwd() == "") {
+                $this->setClsLastError("El usuario introducido no esta dado de alta en el sistema.");
+                $this->setErrors(true);
+                return;
+            }
+
+
+            if ($this->mAppUserPwd != $AppPwd) {
+                $this->setClsLastError("Contraseña del usuario de la aplicación incorrecta.");
+                $this->setErrors(true);
+                return;
+            } else {
+
+
+                $this->setErrors(false);
+                return;
+            }
+        }
+    }
+   /*  public function DbSelect_tablas($SQL){
        try {
            
             $stmt = $this->Connect_DB->query($SQL);
@@ -167,7 +286,7 @@ class Db_CLASS {
         }
         
        
-    }
+    } */
     
 
 }
