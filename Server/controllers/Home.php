@@ -1,118 +1,84 @@
 <?php
 
-
-class Home extends Controlador
+class ActionsUser
 {
+ 
+    private $info;
 
-	public function __construct()
-	{
-	}
-
-	public function index()
-	{
-		$this->vista('login', '');
-	}
-
-	public function registrarse()
-	{
-		$this->vista('register', '');
-	}
-
-	public function registrar()
-	{
-		$GLOBALS['sq']->connect_DB();
-        $model = $this->modelo('LoginModel');
-
-        $Nombre = $_POST["Nombre"];
-        $Apellidos = $_POST["Apellidos"];
-        $Email = $_POST["Email"];
-        $password = $_POST["password"];
-		$verifica = $_POST["verifica"];
-		$leyes = isset($_POST["chcek"]);
-	
-        if($verifica === $password){
-			if($leyes === true){
-				if ( $model->AddUser($Nombre,$Apellidos,$Email,$password,$verifica) === false) {
-				
-					$GLOBALS['tipo'] = $model->getType();
-					$GLOBALS['error'] = $model->getError();
-	
-					$vista = $model->getView();
-	
-				}else{
-					$vista = $model->getView();
-				}
-			}else{
-				$GLOBALS['tipo'] = "info";
-				$GLOBALS['error'] = "Debe de aceptar las condiciones de uso para continuar.";
-				$vista = "register";
-			} 
-        }else{
-
-            $GLOBALS['tipo'] = "error";
-            $GLOBALS['error'] = "Las contraseñas no coinciden";
-            $vista = "register";
+    function getresultado(){
+        return $this->info;
+    }
+    function setresultado($setinfo){
+        $this->info = $setinfo;
+    }
+ 
+    public function buscar_novedades()
+    {
+        $sql = ""; 
+        if ($GLOBALS['sq']->getIsOpen() === false) {
+            $GLOBALS['sq']->connect_DB();
         }
-       
+      
+        $sql = "select name,cover,sinopsis,trailler,details from " . $GLOBALS['sq']->getTableOwner() . ".Movies where status ='1' and active = '1'";
+        $result = $GLOBALS['sq']->DbSelect_tablas($sql);
+    
+        if ($GLOBALS['sq']->fallo_query == false) {
+    
+            $this->setresultado($result);
+            return ;      
+        }
 
-		$this->vista($vista, '');
-		
-		$GLOBALS['sq']->DbClose();
-	}
-	
-	public function login()
-	{
-		$GLOBALS['sq']->connect_DB();
+        $GLOBALS['sq']->DbClose();
+    }
 
-		$model = $this->modelo('LoginModel');
+    public function buscar_favoritas()
+    {
+        $sql = ""; 
+        if ($GLOBALS['sq']->getIsOpen() === false) {
+            $GLOBALS['sq']->connect_DB();
+        }
+      
+        $sql = "select al1.name,al1.cover,al1.sinopsis,al1.trailler,al1.details from " . $GLOBALS['sq']->getTableOwner() . ".Movies as al1, " . 
+        $GLOBALS['sq']->getTableOwner() . ".UserMovie as al2 where al1.IdMovie = al2.IdMovie and al2.IdUser = ".$GLOBALS['sq']->getMAppUserId()." and al1.active = '1'";
+        
+        $result = $GLOBALS['sq']->DbSelect_tablas($sql);
+    
+        if ($GLOBALS['sq']->fallo_query == false) {
+    
+            $this->setresultado($result);
+            return ;      
+        }
 
-		$user = $_POST["mail_user"];
-		$pass = $_POST["pass"];
+        $GLOBALS['sq']->DbClose();
+    }
 
-		
-		if (isset($_SESSION["user"])) {
-			if ($model->OpenSession($user) === false) {
-		
-				$GLOBALS['tipo'] = $model->getType();
-				$GLOBALS['error'] = $model->getError();
-				
-			}
-		} else {
-			if ($model->login($user, $pass) === false) {
-				
-				$GLOBALS['tipo'] = $model->getType();
-				$GLOBALS['error'] = $model->getError();	
-			 }/*else{
-				$foto = "/public/img/users/". $GLOBALS['sq']->getPrimeraConexion(); 
-			} */
-		}
+    public function buscar_estrenos()
+    {
+        $sql = ""; 
+        if ($GLOBALS['sq']->getIsOpen() === false) {
+            $GLOBALS['sq']->connect_DB();
+        }
+      
+        $sql = "select name,cover,sinopsis,trailler,details from " . $GLOBALS['sq']->getTableOwner() . ".Movies where status ='2' and active = '1'";
+        $result = $GLOBALS['sq']->DbSelect_tablas($sql);
+        
+        $result = $GLOBALS['sq']->DbSelect_tablas($sql);
+    
+        if ($GLOBALS['sq']->fallo_query == false) {
+    
+            $this->setresultado($result);
+            return ;      
+        }
 
-		$this->vista($model->getView(), '');
+        $GLOBALS['sq']->DbClose();
+    }
 
-		$GLOBALS['sq']->DbClose();
-		
-	} 
-
-	public function reset_password()
-	{
-		$this->vista('restore', '');
-	}
-
-	public function change_pass(){
-	
-		$Email = $_POST["email"];
-		 $GLOBALS['sq']->connect_DB();
-		$model = $this->modelo('LoginModel');
-
-		$model->change_pass($Email); 
-				
-		$GLOBALS['tipo'] = $model->getType();
-		$GLOBALS['error'] = $model->getError();
-
-		$vista = $model->getView();
-
-
-		$this->vista($vista, '');
-		$GLOBALS['sq']->DbClose(); 
-	}
-}
+    public function buscar_top()
+    {
+        $sql = ""; 
+        if ($GLOBALS['sq']->getIsOpen() === false) {
+            $GLOBALS['sq']->connect_DB();
+        }
+      
+        $sql = "select name,cover,sinopsis,trailler,details from " . $GLOBALS['sq']->getTableOwner() . ".Movies where status ='3' and active = '1'";
+     

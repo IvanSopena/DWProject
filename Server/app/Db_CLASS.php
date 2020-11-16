@@ -147,7 +147,10 @@ class Db_CLASS {
 
         try {
 
-            $this->Connect_DB = new PDO('mysql:host=' . DB_Server . '; dbname=' . DB_Schema, DB_User, DB_Password);
+           
+            $DB_pass = $GLOBALS['security']-> decrypt(DB_Password,DB_User);  
+
+            $this->Connect_DB = new PDO('mysql:host=' . DB_Server . '; dbname=' . DB_Schema, DB_User, $DB_pass );
 
             $this->Connect_DB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -221,7 +224,7 @@ class Db_CLASS {
         $sentencia = "";
 
 
-        $sentencia = "select  Email,password, CONCAT(Nombre,' ', Apellidos) as Usuario , Id, rol,foto from " . $this->getTableOwner() . ".users where upper (Email)= '" . strtoupper($AppUser) . "'";
+        $sentencia = "select  Email,password, CONCAT(Nombre,' ', Apellidos) as Usuario , Id, rol,foto from " . $this->getTableOwner() . ".Users where upper (Email)= '" . strtoupper($AppUser) . "'";
 
 
 
@@ -268,7 +271,7 @@ class Db_CLASS {
             }
         }
     }
-   /*  public function DbSelect_tablas($SQL){
+     public function DbSelect_tablas($SQL){
        try {
            
             $stmt = $this->Connect_DB->query($SQL);
@@ -286,7 +289,7 @@ class Db_CLASS {
         }
         
        
-    } */
+    } 
     
 
 }

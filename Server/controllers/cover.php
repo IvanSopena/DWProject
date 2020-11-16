@@ -12,6 +12,7 @@ class Cover extends Controlador
 	{
         session_start();
         if (isset($_SESSION["user"])) {
+            
             $this->vista('usercover', '');
         }
         else{

@@ -7,6 +7,8 @@
 			jQuery(pill).addClass('active show');
 		}
 
+
+
 		/*---------------------------------------------------------------------
 			Sticky Header Animation & Height
 		----------------------------------------------------------------------- */
@@ -49,6 +51,11 @@
 		btn.on('click', function (e) {
 			e.preventDefault();
 			$('html, body').animate({ scrollTop: 0 }, '300');
+		});
+
+		$('.setbg').each(function () {
+			var bg = $(this).data('setbg');
+			$(this).css('background-image', 'url(' + bg + ')');
 		});
 
 		/*---------------------------------------------------------------------
