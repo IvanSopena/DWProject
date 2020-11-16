@@ -215,7 +215,7 @@ li.slide-item .block-description .parallax-ratting span { font-size: 14px; }
 
 /* parallax */
 .parallax-img img { box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.6); }
-.parallax-window { height: 100%; padding: 100px 0; position: relative; background: url(../images/parallax/p1.jpg)center center; background-size: cover; background-attachment: fixed; }
+
 .parallax-window::after { position: absolute; content: ""; top: 0; bottom: 0; left: 0; right: 0; background: rgba(0, 0, 0, 0.8); }
 .parallaxt-details { z-index: 9; position: relative; }
 

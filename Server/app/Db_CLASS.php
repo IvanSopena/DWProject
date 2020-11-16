@@ -21,24 +21,21 @@ class Db_CLASS {
     private $OpenTrans;
     public $resultado;
     public $fallo_query;
+    public $error_login = "";
     public $errors = false;
     public $mAppUserName = "";
     public $mRealUserName = "";
     public $mAppUserId = "";
     public $mAppUserPwd = "";
     public $mAppRol = 0;
-    public $primeraConexion = false;
+    public $foto = "";
+    public $mi_resultado = "";
+    public $count;
 
     //Creamos el constructor de la clase
-    function __construct() {
-
-        $this->ClsLastError = "";
-        $this->IsOpen = false;
-        $this->DbLastSQL = "";
-        $this->TableOwner = "";
-        $this->OpenTrans = 0;
-        $this->fallo_query = false;
-    }
+    public function __construct()
+	{
+	}
 
     ///-----------------------------------------------------Creamos los getters y Setters de las variables------------------------------------------
 
@@ -63,6 +60,38 @@ class Db_CLASS {
         return $this->OpenTrans;
     }
 
+    function setClsLastError($ClsLastError) {
+        $this->ClsLastError = $ClsLastError;
+    }
+
+    function setIsOpen($IsOpen) {
+        $this->IsOpen = $IsOpen;
+    }
+
+    function setDbLastSQL($DbLastSQL) {
+        $this->DbLastSQL = $DbLastSQL;
+    }
+
+    function setTableOwner($TableOwner) {
+        $this->TableOwner = $TableOwner;
+    }
+
+    function setOpenTrans($OpenTrans) {
+        $this->OpenTrans = $OpenTrans;
+    }
+    function getCount() {
+        return $this->count;
+    }
+
+    function setCount($count) {
+        $this->count = $count;
+    }
+
+        
+    function getErrors() {
+        return $this->errors;
+    }
+
     function getMAppUserName() {
         return $this->mAppUserName;
     }
@@ -82,13 +111,8 @@ class Db_CLASS {
     function getMAppRol() {
         return $this->mAppRol;
     }
-
     function setErrors($errors) {
         $this->errors = $errors;
-    }
-
-    function getErrors() {
-        return $this->errors;
     }
 
     function setMAppUserName($mAppUserName) {
@@ -111,34 +135,21 @@ class Db_CLASS {
         $this->mAppRol = $mAppRol;
     }
     
-    function getPrimeraConexion() {
-        return $this->primeraConexion;
+    function getfoto() {
+        return $this->foto;
     }
 
-    function setPrimeraConexion($primeraConexion) {
-        $this->primeraConexion = $primeraConexion;
+    function setfoto($photo) {
+        $this->foto = $photo;
+    }
+    
+    function getMi_resultado() {
+        return $this->mi_resultado;
     }
 
-    function setClsLastError($ClsLastError) {
-        $this->ClsLastError = $ClsLastError;
+    function setMi_resultado($mi_resultado) {
+        $this->mi_resultado = $mi_resultado;
     }
-
-    function setIsOpen($IsOpen) {
-        $this->IsOpen = $IsOpen;
-    }
-
-    function setDbLastSQL($DbLastSQL) {
-        $this->DbLastSQL = $DbLastSQL;
-    }
-
-    function setTableOwner($TableOwner) {
-        $this->TableOwner = $TableOwner;
-    }
-
-    function setOpenTrans($OpenTrans) {
-        $this->OpenTrans = $OpenTrans;
-    }
-
 
 
     ///-----------------------------------------------------Creamos los atributos que va a conetener nuestra clase------------------------------------------
@@ -147,7 +158,6 @@ class Db_CLASS {
 
         try {
 
-           
             $DB_pass = $GLOBALS['security']-> decrypt(DB_Password,DB_User);  
 
             $this->Connect_DB = new PDO('mysql:host=' . DB_Server . '; dbname=' . DB_Schema, DB_User, $DB_pass );
@@ -171,6 +181,57 @@ class Db_CLASS {
         $this->Connect_DB = null;
 
         return;
+    }
+
+    public function AppOpen($AppUser, $AppPassword) {
+        /**
+         * Funcion que se encarga de verificar si el usuario esta dado de alta en la base de datos
+         * y si la contraseña que ha introducido es la correcta. 
+         */
+        $sentencia = "";
+
+        $sentencia = "select  Email,password, CONCAT(Nombre,' ', Apellidos) as Usuario , Id, rol,foto from " . $this->getTableOwner() . ".Users where upper (Email)= '" . strtoupper($AppUser) . "'";
+
+        $result = $this->DB_Select($sentencia);
+
+        if ($this->fallo_query == true) {
+
+            $this->setError_login("Fallo al buscar el usuario de la aplicación." . $this->DbLastSQL);
+            $this->setErrors(true);
+            return;
+        } else {
+
+
+            $this->setMAppUserName($result['Email']);
+            $this->setMAppUserPwd($result['password']);
+            $this->setMRealUserName($result['Usuario']);
+            $this->setMAppUserId($result['Id']);
+            $this->setMAppRol($result['rol']);
+            
+            $this->setfoto($result['foto']);  
+
+            $AppPwd = crypt($AppPassword, strtoupper($AppUser)); //Encriptamos usando el algoritmo BLOWFISH
+            
+         	
+            
+            if ($this->getMAppUserPwd() == "") {
+                $this->setError_login("El usuario introducido no esta dado de alta en el sistema.");
+                $this->setErrors(true);
+                return;
+            }
+
+
+            if ($this->mAppUserPwd != $AppPwd) {
+                $this->setError_login("Contraseña del usuario de la aplicación incorrecta.");
+                $this->setErrors(true);
+                return;
+            } else {
+
+
+                $this->setErrors(false);
+                return;
+            }
+        }
     }
 
     public function DB_Execute($SQL) {
@@ -216,62 +277,7 @@ class Db_CLASS {
         }
     }
     
-    public function AppOpen($AppUser, $AppPassword) {
-        /**
-         * Funcion que se encarga de verificar si el usuario esta dado de alta en la base de datos
-         * y si la contraseña que ha introducido es la correcta. 
-         */
-        $sentencia = "";
-
-
-        $sentencia = "select  Email,password, CONCAT(Nombre,' ', Apellidos) as Usuario , Id, rol,foto from " . $this->getTableOwner() . ".Users where upper (Email)= '" . strtoupper($AppUser) . "'";
-
-
-
-        $result = $this->DB_Select($sentencia);
-
-        if ($this->fallo_query == true) {
-
-            $this->setClsLastError("Fallo al buscar el usuario de la aplicación." . $this->DbLastSQL);
-            $this->setErrors(true);
-            return;
-        } else {
-
-
-            $this->setMAppUserName($result['Email']);
-            $this->setMAppUserPwd($result['password']);
-            $this->setMRealUserName($result['Usuario']);
-            $this->setMAppUserId($result['Id']);
-            $this->setMAppRol($result['rol']);
-            
-           
-              $this->setPrimeraConexion($result['foto']);  
-          
-
-            $AppPwd = crypt($AppPassword, strtoupper($AppUser)); //Encriptamos usando el algoritmo BLOWFISH
-            
-         	
-            
-            if ($this->getMAppUserPwd() == "") {
-                $this->setClsLastError("El usuario introducido no esta dado de alta en el sistema.");
-                $this->setErrors(true);
-                return;
-            }
-
-
-            if ($this->mAppUserPwd != $AppPwd) {
-                $this->setClsLastError("Contraseña del usuario de la aplicación incorrecta.");
-                $this->setErrors(true);
-                return;
-            } else {
-
-
-                $this->setErrors(false);
-                return;
-            }
-        }
-    }
-     public function DbSelect_tablas($SQL){
+    public function DbSelect_tablas($SQL){
        try {
            
             $stmt = $this->Connect_DB->query($SQL);
@@ -289,7 +295,7 @@ class Db_CLASS {
         }
         
        
-    } 
+    }
     
 
 }

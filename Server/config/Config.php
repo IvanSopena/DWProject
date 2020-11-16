@@ -14,5 +14,5 @@
     //define('Notificaciones');
 
     
-    //define('RUTA_URL', 'http://localhost/CAP/');
+    //define('RUTA_URL', 'http://localhost/');
     define('NOMBRE_APP', 'Streaming Movies');

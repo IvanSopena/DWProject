@@ -1,4 +1,6 @@
-<?php require_once("Template/header.php"); require('Server/models/ActionsUser.php'); ?>
+<?php 
+require_once("Template/header.php"); 
+require_once('server/models/ActionUsers.php'); ?>
 <body >
 <header id="main-header">
          <div class="main-header">
@@ -195,7 +197,7 @@
                               <li class="nav-item nav-icon">
                                  <a href="#" class="iq-user-dropdown search-toggle p-0 d-flex align-items-center"
                                     data-toggle="search-toggle">
-                                 <img src=<?php echo "/public/img/users/". $GLOBALS['sq']->getPrimeraConexion(); ?> class="img-fluid avatar-40 rounded-circle" alt="user">
+                                 <img src=<?php echo "/public/img/users/". $GLOBALS['sq']->getfoto(); ?> class="img-fluid avatar-40 rounded-circle" alt="user">
                                  </a>
                                  <div class="iq-sub-dropdown iq-user-dropdown">
                                     <div class="iq-card shadow-none m-0">
@@ -240,9 +242,9 @@
          <div id="home-slider" class="slider m-0 p-0">
          <?php 
             
-            $modelo = new ActionsUser();
-            $modelo->buscar_novedades();
-            $novedades = $modelo->getresultado();
+            $modelo = new ActionUsers();
+            $novedades = $modelo->cargaPelis(1);
+            //$novedades = $modelo->getresultado();
             $i=1;
             while ($dato = $novedades->fetch()){
               echo "<div class = 'slide slick-bg s-bg-" .$i. "'>
@@ -317,9 +319,9 @@
 
                         <?php 
             
-            $modelo = new ActionsUser();
-            $modelo->buscar_favoritas();
-            $favoritas = $modelo->getresultado();
+            $modelo = new ActionUsers();
+            $favoritas = $modelo->buscar_favoritas();
+            //$favoritas = $modelo->getresultado();
             
             while ($dato = $favoritas->fetch()){
               echo " <li class='slide-item'>
@@ -367,9 +369,9 @@
                         <ul class="favorites-slider list-inline row p-0 mb-0">
                         <?php 
             
-            $modelo = new ActionsUser();
-            $modelo->buscar_estrenos();
-            $estrenos = $modelo->getresultado();
+            $modelo = new ActionUsers();
+            $estrenos = $modelo->cargaPelis(2);
+            //$estrenos = $modelo->getresultado();
             
             while ($dato = $estrenos->fetch()){
               echo " <li class='slide-item'>
@@ -422,9 +424,9 @@
                         
                         <?php 
             
-            $modelo = new ActionsUser();
-            $modelo->buscar_top();
-            $estrenos = $modelo->getresultado();
+            $modelo = new ActionUsers();
+            $estrenos = $modelo->cargaPelis(3);
+            //$estrenos = $modelo->getresultado();
 
             while ($dato = $estrenos->fetch()){
                echo "<li>
@@ -442,9 +444,9 @@
                            <ul id="top-ten-slider-nav" class="list-inline p-0 m-0  d-flex align-items-center">
                            <?php 
                         
-                                    $modelo = new ActionsUser();
-                                    $modelo->buscar_top();
-                                    $estrenos = $modelo->getresultado();
+                                    $modelo = new ActionUsers();
+                                    $estrenos = $modelo->cargaPelis(3);
+                                    //$estrenos = $modelo->getresultado();
                         
                                     while ($dato = $estrenos->fetch()){
                                        echo "<li>
@@ -491,9 +493,9 @@
                         <ul class="list-inline favorites-slider row p-0 mb-0">
                         <?php 
             
-            $modelo = new ActionsUser();
-            $modelo->buscar_tendencias();
-            $estrenos = $modelo->getresultado();
+            $modelo = new ActionUsers();
+            $estrenos =  $modelo->cargaPelis(5);
+            //$estrenos = $modelo->getresultado();
             
             while ($dato = $estrenos->fetch()){
               echo " <li class='slide-item'>
@@ -536,40 +538,70 @@
       
       <!--  -->
       <section id="parallex" class="parallax-window">
-      <?php 
-            
-            $modelo = new ActionsUser();
-            $modelo->buscar_diaria();
-            $diaria = $modelo->getresultado();
-            while ($dato = $diaria->fetch()){
-            echo " <div class='container-fluid h-100'>
-            <div class='row align-items-center justify-content-center h-100 parallaxt-details'>
-            
-               <div class='col-lg-4 r-mb-23'>
-                  <div class='text-left'>
-                  <h5 class='text-white'>Hoy Recomendamos</h6>
-                     <a href='javascript:void(0);'>
-                     <h1 class='slider-text big-title title text-uppercase' data-animation-in='fadeInLeft'
-                     data-delay-in='0.6'>" . $dato['name'] ."</h1>
-                     </a>
-                     <div class='parallax-ratting d-flex align-items-center mt-3 mb-3'>
-                        <ul
-                           class='ratting-start p-0 m-0 list-inline text-primary d-flex align-items-center justify-content-left'>
-                           <li><a href='javascript:void(0);' class='text-primary'><i class='fa fa-star'
-                              aria-hidden='true'></i></a></li>
-                           <li><a href='javascript:void(0);' class='pl-2 text-primary'><i class='fa fa-star'
-                              aria-hidden='true'></i></a></li>
-                           <li><a href='javascript:void(0);' class='pl-2 text-primary'><i class='fa fa-star'
-                              aria-hidden='true'></i></a></li>
-                           <li><a href='javascript:void(0);' class='pl-2 text-primary'><i class='fa fa-star'
-                              aria-hidden='true'></i></a></li>
-                           <li><a href='javascript:void(0);' class='pl-2 text-primary'><i class='fa fa-star-half-o'
-                              aria-hidden='true'></i></a></li>
-                        </ul>
-                        <span class='text-white ml-3'>9.2 (lmdb)</span>
+            <?php 
+                  
+                  $modelo = new ActionUsers();
+                  $diaria = $modelo->cargaPelis(6);
+                 // $diaria = $modelo->getresultado();
+                  while ($dato = $diaria->fetch()){
+                  echo " <div class='container-fluid h-100'>
+                  <div class='row align-items-center justify-content-center h-100 parallaxt-details'>
+                  
+                     <div class='col-lg-4 r-mb-23'>
+                        <div class='text-left'>
+                        <h5 class='text-white'>Hoy Recomendamos</h6>
+                           <a href='javascript:void(0);'>
+                           <h1 class='slider-text big-title title text-uppercase' data-animation-in='fadeInLeft'
+                           data-delay-in='0.6'>" . $dato['name'] ."</h1>
+                           </a>
+                           <div class='parallax-ratting d-flex align-items-center mt-3 mb-3'>
+                              <ul
+                                 class='ratting-start p-0 m-0 list-inline text-primary d-flex align-items-center justify-content-left'>
+                                 <li><a href='javascript:void(0);' class='text-primary'><i class='fa fa-star'
+                                    aria-hidden='true'></i></a></li>
+                                 <li><a href='javascript:void(0);' class='pl-2 text-primary'><i class='fa fa-star'
+                                    aria-hidden='true'></i></a></li>
+                                 <li><a href='javascript:void(0);' class='pl-2 text-primary'><i class='fa fa-star'
+                                    aria-hidden='true'></i></a></li>
+                                 <li><a href='javascript:void(0);' class='pl-2 text-primary'><i class='fa fa-star'
+                                    aria-hidden='true'></i></a></li>
+                                 <li><a href='javascript:void(0);' class='pl-2 text-primary'><i class='fa fa-star-half-o'
+                                    aria-hidden='true'></i></a></li>
+                              </ul>
+                              <span class='text-white ml-3'>9.2 (lmdb)</span>
+                           </div>
+                           <div class='movie-time d-flex align-items-center mb-3'>
+                              <div class='badge badge-secondary mr-3'>13+</div>
+                              <h6 class='text-white'>2h 30m</h6>
+                           </div>
+                           <p>". $dato['sinopsis'] ."</p>
+                           <div class='parallax-buttons'>
+                           <a href='".$dato['trailler']."' target='_blank' class='btn btn-hover'>Play Now</a>
+                           <a href='".$dato['details']."' target='_blank' class='btn btn-link'>More details</a>
+                           </div>
+                        </div>
                      </div>
-                     <div class='movie-time d-flex align-items-center mb-3'>
-                        <div class='badge badge-secondary mr-3'>13+</div>
-                        <h6 class='text-white'>2h 30m</h6>
+                     <div class='col-lg-8'>
+                        <div class='parallax-img'>
+                           <a href='movie-details.html'>
+                              <img src='".$dato['cover']."' class='img-fluid w-100' alt='bailey'>
+                           </a>
+                        </div>
                      </div>
-                     <p>". 
+                  </div>
+               </div>
+               <style> .parallax-window { height: 100%; padding: 100px 0; position: relative; background: url('".$dato['cover']."')center center; background-size: cover; background-attachment: fixed; } </style>";
+            }
+            ?> 
+      </section>
+
+      <div id="back-to-top">
+         <a class="top" href="#top" id="top"> <i class="fa fa-angle-up"></i> </a>
+      </div>
+
+      <?php require_once("Template/footernavigation.php"); ?>
+      <?php require_once("Template/footer.php"); ?>
+   </body>
+
+
+</html>

@@ -53,7 +53,7 @@ class SendMails
             // Content
             $mail->isHTML(true);                                  
             $mail->Subject = "Don't Reply StreaminMovies Team";
-            $mail->Body    = 'Estimado usuario su nueva CONTRASEÑA es :'. $new_password;
+            $mail->Body    = 'Estimado usuario su nueva CONTRASEÑA es :Temporal1';
         
             $mail->send();
             

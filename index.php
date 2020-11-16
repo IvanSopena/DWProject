@@ -1,23 +1,64 @@
-<div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="footer__text-about">
-                            <div class="footer__logo">
-                                <a href="./index.html"><img src="img/logo.png" alt=""></a>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida viverra maecen
-                                lacus vel facilisis. </p>
-                            <div class="footer__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-youtube-play"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-sm-6">
-                        <div class="footer__text-widget">
-                            <h5>Company</h5>
-                            <ul>
-                                <li><a href="#">
+<?php
+
+
+include 'server/app/Route.php';
+include 'server/app/Router.php';
+include 'server/app/Security.php';
+include 'server/config/Config.php';
+include 'server/library/Controlador.php';
+include  'server/controllers/Home.php';
+include  'server/controllers/Cover.php';
+include 'server/app/Db_CLASS.php';
+
+
+
+
+// Si está en el directorio raíz dejar así, si no especificar como primer parámetro '/la-subcarpeta'
+$error = "";
+$tipo= "";
+$router = new Router\Router('');
+$home = new Home();
+$cover = new Cover();
+$sq = new Db_CLASS();
+$security = new Security();
+
+
+$router->add('/', function() {
+    $GLOBALS['home']->index();
+});
+
+$router->add('/home', function() {
+    $GLOBALS['cover']->index();
+});
+
+$router->add('/logoff', function() {
+    $GLOBALS['cover']->logoff();
+});
+
+$router->add('/registro', function() {
+    $GLOBALS['home']->registro();
+});
+
+$router->add('/registrar', function() {
+    $GLOBALS['home']->registrar_usuario();
+});
+
+$router->add('/reset_password', function() { 
+    $GLOBALS['home']->reset_password();
+});
+
+$router->add('/change_pass', function() { 
+    $GLOBALS['home']->cambiar_pass();
+});
+
+$router->post('/login', function() {
+    $GLOBALS['home']->login();
+});
+
+
+$router->add('/.*', function () {
+    require_once  'Server/views/404.php';
+});
+
+
+$router->route();
