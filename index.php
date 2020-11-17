@@ -35,6 +35,10 @@ $router->add('/logoff', function() {
     $GLOBALS['cover']->logoff();
 });
 
+$router->add('/profile', function() {
+    $GLOBALS['cover']->perfil();
+});
+
 $router->add('/registro', function() {
     $GLOBALS['home']->registro();
 });

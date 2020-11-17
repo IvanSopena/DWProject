@@ -74,7 +74,7 @@ class Home extends Controlador
 				
 			}
 		}
-
+		 
 		$this->vista($model->getView(), '');
 
 		$GLOBALS['sq']->DbClose();	

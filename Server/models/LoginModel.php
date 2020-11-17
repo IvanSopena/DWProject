@@ -153,7 +153,19 @@ class LoginModel
                 return false;
             } 
             else{
-                $this->setView("usercover");
+
+                session_start();
+
+                $_SESSION["user"] = $Id;
+
+                $GLOBALS['sq']->setMAppUserName($Email);
+                $GLOBALS['sq']->setMAppUserPwd($password);
+                $GLOBALS['sq']->setMRealUserName($Nombre ." ". $Apellidos);
+                $GLOBALS['sq']->setMAppUserId($Id);
+                $GLOBALS['sq']->setfoto("no_photo.jpg");  
+
+
+                $this->setView("profile");
             }
 
         }

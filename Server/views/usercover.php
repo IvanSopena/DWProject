@@ -2,248 +2,17 @@
 require_once("Template/header.php"); 
 require_once('server/models/ActionUsers.php'); ?>
 <body >
-<header id="main-header">
-         <div class="main-header">
-            <div class="container-fluid">
-               <div class="row">
-                  <div class="col-sm-12">
-                     <nav class="navbar navbar-expand-lg navbar-light p-0">
-                        <a href="#" class="navbar-toggler c-toggler" data-toggle="collapse"
-                           data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                           aria-expanded="false" aria-label="Toggle navigation">
-                           <div class="navbar-toggler-icon" data-toggle="collapse">
-                              <span class="navbar-menu-icon navbar-menu-icon--top"></span>
-                              <span class="navbar-menu-icon navbar-menu-icon--middle"></span>
-                              <span class="navbar-menu-icon navbar-menu-icon--bottom"></span>
-                           </div>
-                        </a>
-                        <a class="navbar-brand" href="/home"> <img class="img-fluid logo" src="public/img/tex1.png"
-                           alt="streamit" /> </a>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                           <div class="menu-main-menu-container">
-                              <ul id="top-menu" class="navbar-nav ml-auto">
-                                 <li class="menu-item">
-                                    <a href="index-2.html">Inicio</a>
-                                 </li>
-                                 <li class="menu-item">
-                                    <a href="show-category.html">Series</a>
-                                 </li>
-                                 <li class="menu-item">
-                                    <a href="movie-category.html">Peliculas</a>
-                                 </li>
-                              </ul>
-                           </div>
-                        </div>
-                        <div class="mobile-more-menu">
-                           <a href="javascript:void(0);" class="more-toggle" id="dropdownMenuButton"
-                              data-toggle="more-toggle" aria-haspopup="true" aria-expanded="false">
-                           <i class="ri-more-line"></i>
-                           </a>
-                           <div class="more-menu" aria-labelledby="dropdownMenuButton">
-                              <div class="navbar-right position-relative">
-                                 <ul class="d-flex align-items-center justify-content-end list-inline m-0">
-                                   <li>
-                                       <a href="#" class="search-toggle">
-                                        <i class="fa fa-search"></i>
-                                       </a>
-                                       <div class="search-box iq-search-bar">
-                                          <form action="#" class="searchbox">
-                                             <div class="form-group position-relative">
-                                                <input type="text" class="text search-input font-size-12"
-                                                placeholder="¿Que pelicula quiere buscar?">
-                                                <i class="search-link ri-search-line"></i>
-                                             </div>
-                                          </form>
-                                       </div>
-                                    </li>
-                                    <li class="nav-item nav-icon">
-                                       <a href="#" class="search-toggle position-relative">
-                                           <i class="fa fa-bell"></i>
-                                          <span class="bg-danger dots"></span>
-                                       </a>
-                                       <div class="iq-sub-dropdown">
-                                          <!--  <div class="iq-card shadow-none m-0">
-                                             <div class="iq-card-body">
-                                                <a href="#" class="iq-sub-card">
-                                                   <div class="media align-items-center">
-                                                      <img src="images/notify/thumb-1.jpg" class="img-fluid mr-3"
-                                                         alt="streamit" />
-                                                      <div class="media-body">
-                                                         <h6 class="mb-0 ">Boop Bitty</h6>
-                                                         <small class="font-size-12"> just now</small>
-                                                      </div>
-                                                   </div>
-                                                </a>
-                                                <a href="#" class="iq-sub-card">
-                                                   <div class="media align-items-center">
-                                                      <img src="images/notify/thumb-2.jpg" class="img-fluid mr-3"
-                                                         alt="streamit" />
-                                                      <div class="media-body">
-                                                         <h6 class="mb-0 ">The Last Breath</h6>
-                                                         <small class="font-size-12">15 minutes ago</small>
-                                                      </div>
-                                                   </div>
-                                                </a>
-                                                <a href="#" class="iq-sub-card">
-                                                   <div class="media align-items-center">
-                                                      <img src="images/notify/thumb-3.jpg" class="img-fluid mr-3"
-                                                         alt="streamit" />
-                                                      <div class="media-body">
-                                                         <h6 class="mb-0 ">The Hero Camp</h6>
-                                                         <small class="font-size-12">1 hour ago</small>
-                                                      </div>
-                                                   </div>
-                                                </a>
-                                             </div>
-                                          </div>-->
-                                       </div>
-                                    </li>
-                                    <li> 
-                                       <a href="#" class="iq-user-dropdown search-toggle d-flex align-items-center">
-                                       <img src="/public/img/users/no_photo.jpg" class="img-fluid avatar-40 rounded-circle"
-                                          alt="user">
-                                       </a>
-                                       <div class="iq-sub-dropdown iq-user-dropdown">
-                                          <div class="iq-card shadow-none m-0">
-                                             <div class="iq-card-body p-0 pl-3 pr-3">
-                                                <a href="manage-profile.html" class="iq-sub-card setting-dropdown">
-                                                   <div class="media align-items-center">
-                                                      <div class="right-icon">
-                                                         <i class="fa fa-user text-primary"></i>
-                                                      </div>
-                                                      <div class="media-body ml-3">
-                                                         <h6 class="mb-0 ">Perfil</h6>
-                                                      </div>
-                                                   </div>
-                                                </a>
-                                               
-                                               
-                                                <a href="/logoff" class="iq-sub-card setting-dropdown">
-                                                   <div class="media align-items-center">
-                                                      <div class="right-icon">
-                                                         <i class="fa fa-sign-out text-primary"></i>
-                                                      </div>
-                                                      <div class="media-body ml-3">
-                                                         <h6 class="mb-0">Salir</h6>
-                                                      </div>
-                                                   </div>
-                                                </a>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </li>
-                                 </ul>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="navbar-right menu-right">
-                           <ul class="d-flex align-items-center list-inline m-0">
-                               <li class="nav-item nav-icon">
-                                 <a href="#" class="search-toggle device-search">
-                                 <i class="fa fa-search"></i>
-                                 </a>
-                                 <div class="search-box iq-search-bar d-search">
-                                    <form action="#" class="searchbox">
-                                       <div class="form-group position-relative">
-                                          <input type="text" class="text search-input font-size-12"
-                                             placeholder="¿Que pelicula quiere buscar?">
-                                          <i class="search-link ri-search-line"></i>
-                                       </div>
-                                    </form>
-                                 </div>
-                              </li>
-                              <li class="nav-item nav-icon">
-                                 <a href="#" class="search-toggle" data-toggle="search-toggle">
-                                 <i class="fa fa-bell"></i>
-                                    <!-- <span class="bg-danger dots"></span> -->
-                                 </a>
-                                 <div class="iq-sub-dropdown">
-                                   <!-- <div class="iq-card shadow-none m-0">
-                                       <div class="iq-card-body">
-                                          <a href="#" class="iq-sub-card">
-                                             <div class="media align-items-center">
-                                                <img src="images/notify/thumb-1.jpg" class="img-fluid mr-3"
-                                                   alt="streamit" />
-                                                <div class="media-body">
-                                                   <h6 class="mb-0 ">Boot Bitty</h6>
-                                                   <small class="font-size-12"> just now</small>
-                                                </div>
-                                             </div>
-                                          </a>
-                                          <a href="#" class="iq-sub-card">
-                                             <div class="media align-items-center">
-                                                <img src="images/notify/thumb-2.jpg" class="img-fluid mr-3"
-                                                   alt="streamit" />
-                                                <div class="media-body">
-                                                   <h6 class="mb-0 ">The Last Breath</h6>
-                                                   <small class="font-size-12">15 minutes ago</small>
-                                                </div>
-                                             </div>
-                                          </a>
-                                          <a href="#" class="iq-sub-card">
-                                             <div class="media align-items-center">
-                                                <img src="images/notify/thumb-3.jpg" class="img-fluid mr-3"
-                                                   alt="streamit" />
-                                                <div class="media-body">
-                                                   <h6 class="mb-0 ">The Hero Camp</h6>
-                                                   <small class="font-size-12">1 hour ago</small>
-                                                </div>
-                                             </div>
-                                          </a>
-                                       </div>
-                                    </div> -->
-                                 </div>
-                              </li>
-                              <li class="nav-item nav-icon">
-                                 <a href="#" class="iq-user-dropdown search-toggle p-0 d-flex align-items-center"
-                                    data-toggle="search-toggle">
-                                 <img src=<?php echo "/public/img/users/". $GLOBALS['sq']->getfoto(); ?> class="img-fluid avatar-40 rounded-circle" alt="user">
-                                 </a>
-                                 <div class="iq-sub-dropdown iq-user-dropdown">
-                                    <div class="iq-card shadow-none m-0">
-                                       <div class="iq-card-body p-0 pl-3 pr-3">
-                                       <a href="manage-profile.html" class="iq-sub-card setting-dropdown">
-                                                   <div class="media align-items-center">
-                                                      <div class="right-icon">
-                                                         <i class="fa fa-user text-primary"></i>
-                                                      </div>
-                                                      <div class="media-body ml-3">
-                                                         <h6 class="mb-0 ">Perfil</h6>
-                                                      </div>
-                                                   </div>
-                                                </a>
-                                               
-                                               
-                                                <a href="/logoff" class="iq-sub-card setting-dropdown">
-                                                   <div class="media align-items-center">
-                                                      <div class="right-icon">
-                                                         <i class="fa fa-sign-out text-primary"></i>
-                                                      </div>
-                                                      <div class="media-body ml-3">
-                                                         <h6 class="mb-0">Salir</h6>
-                                                      </div>
-                                                   </div>
-                                                </a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </li>
-                           </ul>
-                        </div>
-                     </nav>
-                     <div class="nav-overlay"></div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </header>
+
+<?php 
+require_once("Template/navigation.php"); 
+ ?>
 
       <section id="home" class="iq-main-slider p-0">
          <div id="home-slider" class="slider m-0 p-0">
          <?php 
             
             $modelo = new ActionUsers();
-            $novedades = $modelo->cargaPelis(1);
+            $novedades = $modelo->cargaPelis(1,5);
             //$novedades = $modelo->getresultado();
             $i=1;
             while ($dato = $novedades->fetch()){
@@ -261,14 +30,14 @@ require_once('server/models/ActionUsers.php'); ?>
                                     data-delay-in='0.6'>" . $dato['name'] ."</h1>
                                  <div class='d-flex align-items-center' data-animation-in='fadeInUp' data-delay-in='1'>
                                     <span class='badge badge-secondary p-2'>18+</span>
-                                    <span class='ml-3'>2 Seasons</span>
+                                    <span class='ml-3 text-white'>2h 30m</span>
                                  </div>
                                  <p data-animation-in='fadeInUp' data-delay-in='1.2'>" . $dato['sinopsis'].
                                  "</p>
                                  <div class='d-flex align-items-center r-mb-23' data-animation-in='fadeInUp' data-delay-in='1.2'>
                                  <a href='".$dato['trailler']."' target='_blank' class='btn btn-hover'><i class='fa fa-play mr-2'
                                  aria-hidden='true'></i>Ver Ahora</a>
-                                 <a href='". $dato['details'] ."' target='_blank' class='btn btn-link'>More details</a>
+                                 <a href='". $dato['details'] ."' target='_blank' class='btn btn-link'>Mas detalles</a>
                                  </div>
                               </div>
                            </div>
@@ -370,7 +139,7 @@ require_once('server/models/ActionUsers.php'); ?>
                         <?php 
             
             $modelo = new ActionUsers();
-            $estrenos = $modelo->cargaPelis(2);
+            $estrenos = $modelo->cargaPelis(2,5);
             //$estrenos = $modelo->getresultado();
             
             while ($dato = $estrenos->fetch()){
@@ -385,19 +154,19 @@ require_once('server/models/ActionUsers.php'); ?>
                        <div class='movie-time d-flex align-items-center my-2'>
                           <div class='badge badge-secondary p-1 mr-2'>13+</div>
                           <span class='text-white'>2h 30m</span>
-                       </div>
-                       <div class='hover-buttons'>
-                          <span class='btn btn-hover'>
-                          <i class='fa fa-play mr-1' aria-hidden='true'></i>
-                          Ver Ahora
-                          </span>
-                       </div>
-                       <div class='block-social-info'>
+                          <div class='block-social-info'>
                            <ul class='list-inline p-0 m-0 music-play-lists'>
                               <li><span><i class='fa fa-heart'></i></span></li>
                            </ul>
                         </div>
-                     </div>
+                       </div>
+                       <div class='hover-buttons'>
+                       <a href='".$dato['trailler']."' target='_blank' class='btn btn-hover'><i class='fa fa-play mr-2'
+                       aria-hidden='true'></i>Ver Ahora</a>
+                       <a href='". $dato['details'] ."' target='_blank' class='btn btn-link'>Mas detalles</a>
+                          
+                       </div>
+                       
                   </div>
               </a>
            </li>";
@@ -425,7 +194,7 @@ require_once('server/models/ActionUsers.php'); ?>
                         <?php 
             
             $modelo = new ActionUsers();
-            $estrenos = $modelo->cargaPelis(3);
+            $estrenos = $modelo->cargaPelis(3,8);
             //$estrenos = $modelo->getresultado();
 
             while ($dato = $estrenos->fetch()){
@@ -445,7 +214,7 @@ require_once('server/models/ActionUsers.php'); ?>
                            <?php 
                         
                                     $modelo = new ActionUsers();
-                                    $estrenos = $modelo->cargaPelis(3);
+                                    $estrenos = $modelo->cargaPelis(3,8);
                                     //$estrenos = $modelo->getresultado();
                         
                                     while ($dato = $estrenos->fetch()){
@@ -461,9 +230,9 @@ require_once('server/models/ActionUsers.php'); ?>
                                              <span class='text-white'>3h 15m</span>
                                           </div>
                                           <div class='hover-buttons'>
-                                             <a href='movie-details.html' class='btn btn-hover' tabindex='0'>
-                                             <i class='fa fa-play mr-1' aria-hidden='true'></i> Play Now
-                                             </a>
+                                          <a href='".$dato['trailler']."' target='_blank' class='btn btn-hover'><i class='fa fa-play mr-2'
+                                          aria-hidden='true'></i>Ver Ahora</a>
+                                          <a href='". $dato['details'] ."' target='_blank' class='btn btn-link'>Mas detalles</a>
                                           </div>
                                        </div>
                                     </div>
@@ -494,7 +263,7 @@ require_once('server/models/ActionUsers.php'); ?>
                         <?php 
             
             $modelo = new ActionUsers();
-            $estrenos =  $modelo->cargaPelis(5);
+            $estrenos =  $modelo->cargaPelis(5,5);
             //$estrenos = $modelo->getresultado();
             
             while ($dato = $estrenos->fetch()){
@@ -509,19 +278,19 @@ require_once('server/models/ActionUsers.php'); ?>
                        <div class='movie-time d-flex align-items-center my-2'>
                           <div class='badge badge-secondary p-1 mr-2'>13+</div>
                           <span class='text-white'>2h 30m</span>
-                       </div>
-                       <div class='hover-buttons'>
-                          <span class='btn btn-hover'>
-                          <i class='fa fa-play mr-1' aria-hidden='true'></i>
-                          Ver Ahora
-                          </span>
-                       </div>
-                       <div class='block-social-info'>
+                          <div class='block-social-info'>
                            <ul class='list-inline p-0 m-0 music-play-lists'>
                               <li><span><i class='fa fa-heart'></i></span></li>
                            </ul>
                         </div>
-                     </div>
+                       </div>
+                       <div class='hover-buttons'>
+                       <a href='".$dato['trailler']."' target='_blank' class='btn btn-hover'><i class='fa fa-play mr-2'
+                       aria-hidden='true'></i>Ver Ahora</a>
+                       <a href='". $dato['details'] ."' target='_blank' class='btn btn-link'>Mas detalles</a>
+                          
+                       </div>
+                      
                   </div>
               </a>
            </li>";
@@ -541,7 +310,7 @@ require_once('server/models/ActionUsers.php'); ?>
             <?php 
                   
                   $modelo = new ActionUsers();
-                  $diaria = $modelo->cargaPelis(6);
+                  $diaria = $modelo->cargaPelis(6,1);
                  // $diaria = $modelo->getresultado();
                   while ($dato = $diaria->fetch()){
                   echo " <div class='container-fluid h-100'>
@@ -576,8 +345,9 @@ require_once('server/models/ActionUsers.php'); ?>
                            </div>
                            <p>". $dato['sinopsis'] ."</p>
                            <div class='parallax-buttons'>
-                           <a href='".$dato['trailler']."' target='_blank' class='btn btn-hover'>Play Now</a>
-                           <a href='".$dato['details']."' target='_blank' class='btn btn-link'>More details</a>
+                           <a href='".$dato['trailler']."' target='_blank' class='btn btn-hover'><i class='fa fa-play mr-2'
+                       aria-hidden='true'></i>Ver Ahora</a>
+                           <a href='".$dato['details']."' target='_blank' class='btn btn-link'>Mas Detalles</a>
                            </div>
                         </div>
                      </div>

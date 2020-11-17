@@ -196,7 +196,7 @@ class Db_CLASS {
 
         if ($this->fallo_query == true) {
 
-            $this->setError_login("Fallo al buscar el usuario de la aplicación." . $this->DbLastSQL);
+            $this->setClsLastError("Fallo al buscar el usuario de la aplicación." . $this->DbLastSQL);
             $this->setErrors(true);
             return;
         } else {
@@ -207,7 +207,7 @@ class Db_CLASS {
             $this->setMRealUserName($result['Usuario']);
             $this->setMAppUserId($result['Id']);
             $this->setMAppRol($result['rol']);
-            
+            //$GLOBALS['UserId']->$result['Id'];
             $this->setfoto($result['foto']);  
 
             $AppPwd = crypt($AppPassword, strtoupper($AppUser)); //Encriptamos usando el algoritmo BLOWFISH
@@ -215,14 +215,14 @@ class Db_CLASS {
          	
             
             if ($this->getMAppUserPwd() == "") {
-                $this->setError_login("El usuario introducido no esta dado de alta en el sistema.");
+                $this->setClsLastError("El usuario introducido no esta dado de alta en el sistema.");
                 $this->setErrors(true);
                 return;
             }
 
 
             if ($this->mAppUserPwd != $AppPwd) {
-                $this->setError_login("Contraseña del usuario de la aplicación incorrecta.");
+                $this->setClsLastError("Contraseña del usuario de la aplicación incorrecta.");
                 $this->setErrors(true);
                 return;
             } else {

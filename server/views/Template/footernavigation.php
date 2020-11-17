@@ -25,23 +25,25 @@
 
                     
                     <div class="col-lg-3 col-md-4">
-                        <div class="footer__text-about">
+                        <div class="list_link">
                             <h5>Información</h5>
+                            <br>
                             <ul class="f-link list-unstyled mb-0">
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms & Conditions</a></li>
-                        <li><a href="#">Help</a></li>
+                        <li><a href="#">Politica de Privacidad</a></li>
+                        <li><a href="#">Terminos y condiciones</a></li>
+                        <li><a href="#">Tarifas</a></li>
                      </ul>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-4">
-                        <div class="footer__text-about">
+                        <div class="list_link">
                             <h5>Contacto</h5>
+                            <br>
                             <ul class="f-link list-unstyled mb-0">
-                                <li><span class="fa fa-map-marker"></span> 500 South Main Street Los Angeles,<br />
-                                    ZZ-96110 USA</li>
-                                <li><span class="fa fa-mobile"></span> 125-711-811 | 125-668-886</li>
-                                <li><span class="fa fa-headphones"></span> Support.hosting@gmail.com</li>
+                                <li><span class="fa fa-map-marker"></span> Paseo de la Alameda Nº4 19250.<br />
+                                Sigüenza, Guadalajara</li>
+                                <li><span class="fa fa-mobile"></span> 900-654-321 | 900-123-456</li>
+                                <li><span class="fa fa-headphones"></span> Soporte@streamingmovie.com</li>
                             </ul>
                         </div>
                     </div>
@@ -52,8 +54,6 @@
      
          
                     
-                  
-              
          <div class="copyright py-2">
             <div class="container-fluid">
                <p class="mb-0 text-center font-size-14 text-body"><?php echo NOMBRE_APP; ?> - 2020 All Rights Reserved</p>

@@ -1,6 +1,6 @@
 
 
-<div id="toast-container" class="toast-bottom-center">
+<div id="toast-container" class="toast-bottom-full-width"> <!-- bottom-center     toast-bottom-full-width-->
     <div class="toast toast-info" aria-live="polite" style="display: block;">
         <button type="button" class="toast-close-button icon-close" role="button">×</button>
         <div class="toast-title">Información</div>
