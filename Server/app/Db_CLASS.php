@@ -29,8 +29,9 @@ class Db_CLASS {
     public $mAppUserPwd = "";
     public $mAppRol = 0;
     public $foto = "";
-    public $mi_resultado = "";
     public $count;
+    public $UserName = "";
+    public $UserSurname = "";
 
     //Creamos el constructor de la clase
     public function __construct()
@@ -87,6 +88,21 @@ class Db_CLASS {
         $this->count = $count;
     }
 
+    function getUserName() {
+        return $this->UserName;
+    }
+
+    function setUserName($data) {
+        $this->UserName = $data;
+    }
+
+    function getUserSurname() {
+        return $this->UserSurname;
+    }
+
+    function setUserSurname($data) {
+        $this->UserSurname = $data;
+    }
         
     function getErrors() {
         return $this->errors;
@@ -143,13 +159,7 @@ class Db_CLASS {
         $this->foto = $photo;
     }
     
-    function getMi_resultado() {
-        return $this->mi_resultado;
-    }
-
-    function setMi_resultado($mi_resultado) {
-        $this->mi_resultado = $mi_resultado;
-    }
+    
 
 
     ///-----------------------------------------------------Creamos los atributos que va a conetener nuestra clase------------------------------------------
@@ -190,7 +200,9 @@ class Db_CLASS {
          */
         $sentencia = "";
 
-        $sentencia = "select  Email,password, CONCAT(Nombre,' ', Apellidos) as Usuario , Id, rol,foto from " . $this->getTableOwner() . ".Users where upper (Email)= '" . strtoupper($AppUser) . "'";
+      
+
+        $sentencia = "select  Nombre,Apellidos,Email,password, CONCAT(Nombre,' ', Apellidos) as Usuario , Id, rol,foto from " . $this->getTableOwner() . ".Users where upper (Email)= '" . strtoupper($AppUser) . "'";
 
         $result = $this->DB_Select($sentencia);
 
@@ -207,10 +219,12 @@ class Db_CLASS {
             $this->setMRealUserName($result['Usuario']);
             $this->setMAppUserId($result['Id']);
             $this->setMAppRol($result['rol']);
-            //$GLOBALS['UserId']->$result['Id'];
-            $this->setfoto($result['foto']);  
-
-            $AppPwd = crypt($AppPassword, strtoupper($AppUser)); //Encriptamos usando el algoritmo BLOWFISH
+            $this->setUserName($result['Nombre']); 
+            $this->setUserSurname($result['Apellidos']); 
+            $this->setfoto($result['foto']); 
+            
+            
+            $AppPwd = $GLOBALS['security']->decrypt($result['password'], strtoupper($AppUser)); 
             
          	
             
@@ -221,7 +235,7 @@ class Db_CLASS {
             }
 
 
-            if ($this->mAppUserPwd != $AppPwd) {
+            if ($AppPassword != $AppPwd) {
                 $this->setClsLastError("Contraseña del usuario de la aplicación incorrecta.");
                 $this->setErrors(true);
                 return;

@@ -60,20 +60,29 @@ class Cover extends Controlador
 	{
 		$GLOBALS['sq']->connect_DB();
 		$model = $this->modelo('LoginModel');
+		$perfil = $this->modelo('ActionUsers');
 		session_start();
 		if (isset($_SESSION["user"])) {
 			if ($model->opensession($_SESSION["user"]) === true) {
-				$this->vista('profile', '');
+				$perfil->obtener_perfil($_SESSION["user"]);
+				
+				$this->vista('profile', $perfil->getPerfil());
 			}
 			else{
+
 				$GLOBALS['tipo'] = $model->getType();
 				$GLOBALS['error'] = $model->getError();
-				$this->vista('login', '');
+				$this->vista('usercover', '');
 				
 				$GLOBALS['sq']->DbClose();
 			}
 		}
 		
+	}
+
+	public function update()
+	{
+
 	}
 }
 

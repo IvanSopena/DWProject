@@ -52,7 +52,7 @@ class LoginModel
 
             if ($GLOBALS['sq']->geterrors() == true) {
 
-                $this->setError($GLOBALS['sq']->geterror_login());
+                $this->setError($GLOBALS['sq']->getClsLastError());
                 $this->setType("error");
                 $this->setView("login");
                 return false;
@@ -86,7 +86,7 @@ class LoginModel
             
             $sentencia = "";
 
-            $sentencia = "select  Email,password, CONCAT(Nombre,' ', Apellidos) as Usuario , Id, rol,foto from " . $GLOBALS['sq']->getTableOwner() . ".Users where id= '" . $id . "'";
+            $sentencia = "select  Nombre,Apellidos,Email,password, CONCAT(Nombre,' ', Apellidos) as Usuario , Id, rol,foto from " . $GLOBALS['sq']->getTableOwner() . ".Users where id= '" . $id . "'";
 
             $result = $GLOBALS['sq']->DB_Select($sentencia);
 
@@ -105,10 +105,10 @@ class LoginModel
                 $GLOBALS['sq']->setMRealUserName($result['Usuario']);
                 $GLOBALS['sq']->setMAppUserId($result['Id']);
                 $GLOBALS['sq']->setMAppRol($result['rol']);
-            
+                $GLOBALS['sq']->setUserName($result['Nombre']); 
+                $GLOBALS['sq']->setUserSurname($result['Apellidos']); 
                 $GLOBALS['sq']->setfoto($result['foto']);  
            
-
                 return true;
             }
         } 

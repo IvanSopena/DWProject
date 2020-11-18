@@ -59,6 +59,9 @@ $router->post('/login', function() {
     $GLOBALS['home']->login();
 });
 
+$router->add('/update_profile', function() {
+    $GLOBALS['cover']->update();
+});
 
 $router->add('/.*', function () {
     require_once  'Server/views/404.php';

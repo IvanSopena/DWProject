@@ -20,3 +20,4 @@
 <script src="/public/js/toastr.min.js"></script>
 <!-- Genaral-->
 <script src="/public/js/custom.js"></script>
+<script src="/public/js/varios.js"></script>

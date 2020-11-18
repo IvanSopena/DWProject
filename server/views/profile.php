@@ -1,22 +1,29 @@
 <?php 
-require_once("Template/header.php"); 
-require_once('server/models/ActionUsers.php'); ?>
+    require_once("Template/header.php"); 
+    require_once('server/models/ActionUsers.php'); ?>
 <body >
 
 <?php 
-require_once("Template/navigation.php"); 
- ?>
+    require_once("Template/navigation.php"); 
+?>
 
-<section class="m-profile setting-wrapper">        
+<section class="m-profile setting-wrapper">    
+    <form class="mt-4" action="/update_profile" method="POST">    
         <div class="container">
             <h4 class="main-title mb-4">Información de la cuenta</h4>
             <div class="row">
                 <div class="col-lg-4 mb-3">
                     <div class="sign-user_card text-center">
-                        <img src=<?php echo "/public/img/users/". $GLOBALS['sq']->getfoto(); ?> class="rounded-circle img-fluid d-block mx-auto mb-3" alt="user">
-                        <h4 class="mb-3"><?php echo $GLOBALS['sq']->getMRealUserName(); ?></h4>
+                        <img id = "FotoPerfil" src=<?php echo "/public/img/users/". $datos["foto"]; ?> class="rounded-circle img-fluid d-block mx-auto mb-3" alt="user">
+
+                        <h4 class="mb-3"><?php echo $datos["Usuario"]; ?></h4>
+                    
+                        <input id="thefile" type="file" hidden value="" />
+                        <a class="edit-icon text-primary" href="#"><label for="thefile">Editar</label></a>
                        
-                        <a href="#" class="edit-icon text-primary">Editar</a>
+                    </div>
+                    <div class=" sign-user_button text-center" >
+                        <a href="#" class="btn btn-hover">Modifica tu Perfil</a>
                     </div>
                 </div>
                 <div class="col-lg-8">
@@ -24,78 +31,73 @@ require_once("Template/navigation.php");
                         <h5 class="mb-3 pb-3 a-border">Datos Personales</h5>
                         <div class="row align-items-center justify-content-between mb-3">
                             <div class="col-md-8">
-                                <span class="text-light font-size-13">Nombre</span>
-                                <p class="mb-0"><?php echo $GLOBALS['sq']->getMRealUserName(); ?></p>
-                            </div>   
-                            <div class="col-md-4 text-md-right text-left">                      
-                                <a href="#" class="text-primary">Cambiar</a>
-                            </div>
+                                <span class="text-light font-size-18">Nombre</span>
+                                <input type="text" class="profile_input" name="name" id="name" value="<?php echo $datos["Nombre"]; ?>" required>
+                            </div>     
                         </div>
                         <div class="row align-items-center justify-content-between mb-3">
                             <div class="col-md-8">
-                                <span class="text-light font-size-13">Apellidos</span>
-                                <p class="mb-0"><?php echo $GLOBALS['sq']->getMRealUserName(); ?></p>
-                            </div>   
-                            <div class="col-md-4 text-md-right text-left">                      
-                                <a href="#" class="text-primary">Cambiar</a>
-                            </div>
+                                <span class="text-light font-size-18">Apellidos</span>
+                                <input type="text" class="profile_input" name="name" id="name" value="<?php echo $datos["Apellidos"]; ?>" required>
+                            </div>    
                         </div>
                         <div class="row align-items-center justify-content-between mb-3">
                             <div class="col-md-8">
-                                <span class="text-light font-size-13">Email</span>
-                                <p class="mb-0"><?php echo $GLOBALS['sq']->getMAppUserName(); ?></p>
-                            </div>   
-                            <div class="col-md-4 text-md-right text-left">                      
-                                <a href="#" class="text-primary">Cambiar</a>
-                            </div>
+                                <span class="text-light font-size-18">Email</span>
+                                <input type="text" class="profile_input" name="name" id="name" value="<?php echo $datos["Email"]; ?>" required>
+                            </div>    
                         </div>
                         <div class="row align-items-center justify-content-between mb-3">
                             <div class="col-md-8">
-                                <span class="text-light font-size-13">Password</span>
-                                <p class="mb-0"><?php echo $GLOBALS['sq']->getMAppUserPwd(); ?></p>
+                                <span class="text-light font-size-18">Password</span>
+                                <input type="password" class="profile_input" name="name" id="name" value=<?php echo $GLOBALS['security']->decrypt($datos["password"], strtoupper($datos["Email"])); ?> required>
                             </div>
-                            <div class="col-md-4 text-md-right text-left">
-                                <a href="#" class="text-primary">Cambiar</a>
-                                <br>
-                                <a href="#" class="text-primary">Ver Password</a>
-                            </div>
-                           
                         </div>
                         <div class="row align-items-center justify-content-between mb-3">
-                            <div class="col-md-8">
-                                <span class="text-light font-size-13">Fecha de Nacimiento</span>
-                                <p class="mb-0">08-03-1995</p>
-                            </div>
-                            <div class="col-md-4 text-md-right text-left">
-                                <a href="#" class="text-primary">Cambiar</a>
-                            </div>
+
+                                <div class="col-md-8">
+                                    <span class="text-light font-size-18">Fecha de Nacimiento</span>
+                                    <input type="text" class="profile_input" name="name" id="name" value="<?php echo $datos["Nacimiento"]; ?>" required>
+                                </div>
+                              
+
                         </div>
-                        <div class="row align-items-center justify-content-between">
-                            <div class="col-md-8">
-                                <span class="text-light font-size-13">Pais</span>
-                                <p class="mb-0">España</p>
-                            </div>
-                            <div class="col-md-4 text-md-right text-left">
-                                <a href="#" class="text-primary">Cambiar</a>
-                            </div>
+                        <div class="row align-items-center justify-content-between">                 
+                                <div class="col-md-8">
+                                    <span class="text-light font-size-18">Pais</span>
+                                    <input type="text" class="profile_input" name="name" id="name" value="<?php echo $datos["Pais"]; ?>" required>
+                                </div>
                         </div>
                         <h5 class="mb-3 mt-4 pb-3 a-border">Detalles de Pago</h5>
                         <div class="row justify-content-between mb-3">
+
+                        <?php if($datos["ProximoPago"]=== ""){ ?>
                             <div class="col-md-8 r-mb-15">
-                                <p>Tu proximo pago es:  19 September 2020.</p>
-                                <a href="#" class="btn btn-hover">Cancelar Suscripción</a>
+                                <p> No hay pagos pendientes, una vez seleccione un paln se agregara una fecha de cobro.</p>
                             </div>
-                           
+                           <?php } else { ?>
+                                <div class="col-md-8">
+                                    <span class="text-light font-size-13">Fecha de Nacimiento</span>
+                                    <p class="mb-0">El siguiente paso se realizara: <?php echo $datos["ProximoPago"]; ?></p>
+                                </div>
+                            
+                           <?php } ?>
+
                         </div>
                         <h5 class="mb-3 mt-4 pb-3 a-border">Detalles del Plan</h5>
                         <div class="row justify-content-between mb-3">
-                            <div class="col-md-8">
-                                <p>Premium</p>                                
-                            </div>
-                            <div class="col-md-4 text-md-right text-left">
-                                <a href="pricing-plan.html" class="text-primary">Cambiar de Plan</a>
-                            </div>
+
+                        <div style="margin-left:20px;"class="iq-custom-select d-inline-block sea-epi">
+                        <select name="cars" class="form-control season-select">
+                                    <option value="op1">Basico</option>
+                                    <option selected="selected" value="op2">Estandar</option>
+                                    <option value="op3">Platino</option>
+                                    <option value="op4">Premium</option>
+                                </select>
                         </div>
+                            
+                        </div>
+    </form>
                         <h5 class="mb-3 pb-3 mt-4 a-border">Opciones</h5>
                         <div class="row">
                             <div class="col-12 setting">
@@ -110,7 +112,26 @@ require_once("Template/navigation.php");
         </div>
     </section>
 
-
+    <?php
+                    if (isset($GLOBALS['error'])) { 
+                    
+                        switch ($GLOBALS['tipo']) {
+                            case 'info':
+                                require_once  'Server/views/messages/info.php';
+                                break;
+                                case 'error':
+                                    require_once  'Server/views/messages/error.php';
+                                break;
+                                case 'warning':
+                                    require_once  'Server/views/messages/warning.php';
+                                break;
+                                case 'ok':
+                                    require_once  'Server/views/messages/success.php';
+                                break;
+                        }
+                        
+                    }
+    ?>                  
 
 
 <?php require_once("Template/footernavigation.php"); ?>

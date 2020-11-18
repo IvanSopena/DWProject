@@ -1,36 +1,4 @@
-/*
-Template: streamit - Responsive Bootstrap 4 Template
-Author: iqonicthemes.in
-Design and Developed by: iqonicthemes.in
-NOTE: This file contains the styling for responsive Template.
-*/
 
-/*================================================
-[  Table of contents  ]
-================================================
-
-:: Import CSS
-:: Font
-:: General
-:: Input
-:: Loading
-:: Background Color
-:: Background Color Opacity
-:: Border Color
-:: Buttons Design
-:: Text Color
-:: Line Height
-:: Font Size
-:: Font Weight
-:: Avatar Size
-:: Tab Pills
-:: Overflow
-:: Custom Column
-:: Select 2
-
-======================================
-[ End table content ]
-======================================*/
 
 /*---------------------------------------------------------------------
 Import CSS
@@ -53,6 +21,7 @@ Font
 -----------------------------------------------------------------------*/
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&amp;display=swap');
 @font-face { font-family: 'Helvetica Neue Regular'; src: url(../fonts/helvetica/HelveticaNeueBold.woff) format('woff'); }
+@font-face { font-family: 'remixicon'; src: url(../fonts/remixicon4d30.woff) format('woff'); }
 
 /*---------------------------------------------------------------------
 General
@@ -97,11 +66,8 @@ label { color: var(--iq-dark); }
 dl dd { margin-bottom: 15px; }
 dl dd:last-child { margin-bottom: 0px; }
 
-/*----------------------------------------------
-loading
-------------------------------------------------*/
-#loading { background: var(--iq-body-bg) url(../images/loader.gif) no-repeat scroll center center; height: 100%; width: 100%; background-size: 15%; position: fixed; margin-top: 0px; top: 0px; left: 0px; bottom: 0px; overflow: hidden !important; right: 0px; z-index: 999999; }
-#loading-center { width: 100%; height: 100%; position: relative; }
+
+
 
 /*----------------------------------------------
 Background Color
@@ -125,6 +91,7 @@ Border Color
 ------------------------------------------------*/
 .btn { padding: 9px 30px; position: relative; display: inline-block; -webkit-border-radius: 0p; -moz-border-radius: 0; border-radius: 0 !important; cursor: pointer; z-index: 4; }
 .btn-hover { background: var(--iq-primary-hover); border: 1px solid var(--iq-primary-hover); color: var(--iq-white); transition: color 0.3s ease; display: inline-block; vertical-align: middle; -webkit-transform: perspective(1px) translateZ(0); transform: perspective(1px) translateZ(0); box-shadow: 0 0 1px rgba(0, 0, 0, 0); position: relative; border-radius: 5px; }
+.btn-wng-hover { background: var(--iq-yellow); border: 1px solid var(--iq-yellow); color: var(--iq-black); transition: color 0.3s ease; display: inline-block; vertical-align: middle; -webkit-transform: perspective(1px) translateZ(0); transform: perspective(1px) translateZ(0); box-shadow: 0 0 1px rgba(0, 0, 0, 0); position: relative; border-radius: 5px; }
 .btn-hover:before { content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: 0; right: 0; background: var(--iq-primary); border: 1px solid var(--iq-primary); -webkit-transform: scaleX(1); transform: scaleX(1); -webkit-transform-origin: 50%; transform-origin: 50%; transition: transform 0.3s ease-out; -webkit-transition: transform 0.3s ease-out; }
 .btn-hover:hover, .btn-hover:focus, .btn-hover:active { color: var(--iq-white); }
 .btn-hover:focus { box-shadow: none !important; }
@@ -142,6 +109,12 @@ button:focus { outline: none; }
 .btn-link:hover { color: var(--iq-primary); text-decoration: none; }
 
 /*----------------------------------------------
+Profile Inputs
+------------------------------------------------*/
+
+.profile_input{background: none;color: #c6c6c6;font-size: 18px;padding: 10px 10px 10px 5px;display: block;width: 320px;border: none;border-radius: 0;border-bottom: 1px solid #c6c6c6;}
+
+/*----------------------------------------------
 Text Color
 ------------------------------------------------*/
 .text-body { color: var(--iq-body-text) !important; }
@@ -149,6 +122,7 @@ Text Color
 .text-white { color: var(--iq-white) !important; }
 .text-black { color: var(--iq-black) !important; }
 .text-gold { color: var(--iq-gold) !important; }
+.text-yellow{color: var(--iq-yellow) !important;}
 
 /*----------------------------------------------
 Line Height
@@ -246,3 +220,29 @@ Select 2
 .select2-container--bootstrap4 .select2-selection--single, .select2-container--bootstrap4 .select2-selection--multiple { height: 45px !important; }
 .select2-container--bootstrap4 .select2-dropdown.select2-dropdown--above { border-radius: 0; border: none; }
 .sea-epi .select2-container { width: 150px !important; }
+.select1 {
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: -internal-light-dark(black, white);
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    appearance: menulist;
+    box-sizing: border-box;
+    align-items: center;
+    white-space: pre;
+    -webkit-rtl-ordering: logical;
+    background-color: -internal-light-dark(rgb(255, 255, 255), rgb(59, 59, 59));
+    cursor: default;
+    margin: 0em;
+    font: 400 13.3333px Arial;
+    border-radius: 2px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    border-image: initial;
+}

@@ -150,8 +150,7 @@ class Home extends Controlador
 				return;
 			}
 
-			$pass = crypt("Temporal1", strtoupper($verificaMail)); 
-
+			$pass = $GLOBALS['security']-> crypt("Temporal1",strtoupper($verificaMail));  
 
 			$sql = "Update " . $GLOBALS['sq']->getTableOwner() . ".Users set password = '".$pass."'";
            	$sql = $sql. " where Email = '". $verificaMail ."'";

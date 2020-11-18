@@ -3,11 +3,21 @@
 class ActionUsers
 {
 
-   
+   public $perfil_result ="";
     
     public function __construct()
     {
         
+    }
+
+    function getPerfil()
+    {
+        return $this->perfil_result;
+    }
+
+    function setPerfil($data)
+    {
+        $this->perfil_result = $data;
     }
 
     public function buscar_favoritas()
@@ -73,6 +83,28 @@ class ActionUsers
                 return $result ;   
                 
             } 
+    }
+
+    public function obtener_perfil($User)
+    {
+        $sql = "";
+        $sql = "select  Nombre,Apellidos,CONCAT(Nombre,' ', Apellidos) as Usuario,Email,password,foto,IFNULL(Nacimiento,'dd/mm/yyyy') as Nacimiento ,IFNULL(Pais,'') as Pais ,IFNULL(ProximoPago,'') as ProximoPago ,IFNULL(Plan,'') as Plan ,Dispositivos from " . $GLOBALS['sq']->getTableOwner() . ".Users where id= '" . $User . "'";
+        $result = $GLOBALS['sq']->DB_Select($sql);
+
+            if ($GLOBALS['sq']->fallo_query == true) {
+
+                $GLOBALS['error'] = "Fallo al buscar el usuario de la aplicación." . $GLOBALS['sq']->getDbLastSQL();
+                $GLOBALS['type'] = "error";
+               
+                return;
+            } 
+            else 
+            {
+
+                $this->setPerfil($result);
+            
+                return;
+            }
     }
 }
 
