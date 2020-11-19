@@ -36,6 +36,7 @@ $router->add('/logoff', function() {
 });
 
 $router->add('/profile', function() {
+    session_start();
     $GLOBALS['cover']->perfil();
 });
 
@@ -45,6 +46,7 @@ $router->add('/registro', function() {
 
 $router->add('/registrar', function() {
     $GLOBALS['home']->registrar_usuario();
+    $GLOBALS['cover']->perfil();
 });
 
 $router->add('/reset_password', function() { 
@@ -61,6 +63,12 @@ $router->post('/login', function() {
 
 $router->add('/update_profile', function() {
     $GLOBALS['cover']->update();
+    $GLOBALS['cover']->perfil();
+});
+
+$router->add('/close_acount', function() {
+    $GLOBALS['cover']->delete();
+    
 });
 
 $router->add('/.*', function () {

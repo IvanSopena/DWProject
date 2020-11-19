@@ -16,15 +16,12 @@
                            <input type="email" class="form-control mb-0" name="mail_user" id="email" placeholder="Email" autocomplete="off" required>
                         </div>
                         <div class="form-group">                                 
-                           <input type="password" class="form-control mb-0" name="pass" id="password" placeholder="Contraseña" required>
+                           <input type="password" class="form-control mb-0" name="pass" id="pass" placeholder="Contraseña" required>
                         </div>
                         
                            <div class="sign-info">
                               <button type="submit" class="btn btn-hover">Acceder</button>
-                              <!-- <div class="custom-control custom-checkbox d-inline-block">
-                                 <input type="checkbox" class="custom-control-input" id="customCheck">
-                                 <label class="custom-control-label" for="customCheck">Recuerdame</label>
-                              </div>     -->                            
+                                                 
                            </div>                                    
                      </form>
                   </div>

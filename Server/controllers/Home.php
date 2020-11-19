@@ -117,7 +117,6 @@ class Home extends Controlador
 			$vista = "register";
 		}
 
-		$this->vista($vista, '');
 		$GLOBALS['sq']->DbClose();
 	}
 

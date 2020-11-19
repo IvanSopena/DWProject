@@ -18,6 +18,11 @@
 <!-- FUENTES -->
 <link rel="stylesheet" href="/public/fonts/font-awesome.min.css" type="text/css">
 
+<!-- jQuery, Popper JS -->
+<script src="/public/js/jquery-3.4.1.min.js"></script>
+<!-- Notifications-->
+<script src="/public/js/toastr.min.js"></script>
+<script src="/public/js/varios.js"></script>
 
 </head>
 

@@ -5,7 +5,7 @@ Import CSS
 -----------------------------------------------------------------------*/
 @import url("variable.css");
 @import url("all.min.css");
-@import url("remixicon.css");
+/* @import url("remixicon.css"); */
 @import url("slick.css");
 @import url("slick-theme.css");
 @import url("owl.carousel.min.css");
@@ -219,30 +219,79 @@ Select 2
 .select2-container--bootstrap4 .select2-selection--single .select2-selection__arrow { width: auto; }
 .select2-container--bootstrap4 .select2-selection--single, .select2-container--bootstrap4 .select2-selection--multiple { height: 45px !important; }
 .select2-container--bootstrap4 .select2-dropdown.select2-dropdown--above { border-radius: 0; border: none; }
-.sea-epi .select2-container { width: 150px !important; }
-.select1 {
-    -webkit-writing-mode: horizontal-tb !important;
-    text-rendering: auto;
-    color: -internal-light-dark(black, white);
-    letter-spacing: normal;
-    word-spacing: normal;
-    text-transform: none;
-    text-indent: 0px;
-    text-shadow: none;
+.sea-epi .select2-container { width: 250px !important; }
+
+/*----------------------------------------------
+Password_Options
+------------------------------------------------*/
+.password-icon {
+    float: right;
+    position: relative;
+    margin: -25px 172px 0 0;
+    cursor: pointer;
+}
+
+ .strength_wrapper {
     display: inline-block;
-    text-align: start;
-    appearance: menulist;
-    box-sizing: border-box;
-    align-items: center;
-    white-space: pre;
-    -webkit-rtl-ordering: logical;
-    background-color: -internal-light-dark(rgb(255, 255, 255), rgb(59, 59, 59));
-    cursor: default;
-    margin: 0em;
-    font: 400 13.3333px Arial;
-    border-radius: 2px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
-    border-image: initial;
+    text-align: left;
+    width: 71%;
+} 
+
+.veryweak {
+    background-color: #FF7979;
+    display: block;
+    width: 320px;
+    height: calc(1.5em + .75rem + 2px);
+    padding: 10px 10px 10px 5px;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    border: none;border-radius: 0 !important;border-bottom: 1px;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.weak {
+    background-color: #FDA068;
+    display: block;
+    width: 320px;
+    height: calc(1.5em + .75rem + 2px);
+    padding: 10px 10px 10px 5px;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    
+    border: none;border-radius: 0 !important;border-bottom: 1px;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.medium {
+    background-color: #FFE560;
+    display: block;
+    width: 320px;
+    height: calc(1.5em + .75rem + 2px);
+    padding: 10px 10px 10px 5px;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    border: none;border-radius: 0 !important;border-bottom: 1px;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.strong {
+    background-color: #9BF47D;
+    display: block;
+    width: 320px;
+    height: calc(1.5em + .75rem + 2px);
+    padding: 10px 10px 10px 5px;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    border: none;
+    border-radius: 0 !important;
+    border-bottom: 1px;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }

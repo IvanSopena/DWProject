@@ -118,7 +118,7 @@
                                                          <i class="fa fa-sign-out text-primary"></i>
                                                       </div>
                                                       <div class="media-body ml-3">
-                                                         <h6 class="mb-0">Salir</h6>
+                                                      <h6 class="mb-0">Cerrar Sesión</h6>
                                                       </div>
                                                    </div>
                                                 </a>
@@ -210,7 +210,7 @@
                                                          <i class="fa fa-sign-out text-primary"></i>
                                                       </div>
                                                       <div class="media-body ml-3">
-                                                         <h6 class="mb-0">Salir</h6>
+                                                         <h6 class="mb-0">Cerrar Sesión</h6>
                                                       </div>
                                                    </div>
                                                 </a>

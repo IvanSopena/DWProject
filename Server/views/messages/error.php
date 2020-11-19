@@ -1,5 +1,5 @@
 
-<div id="toast-container" class="toast-bottom-full-width"> <!-- bottom-center     toast-bottom-full-width-->
+<div id="toast-container" class="toast-bottom-full-width"> <!-- bottom-center  toast-top-right    toast-bottom-full-width-->
     <div class="toast toast-error" aria-live="assertive" style="display: block;">
         <button type="button" class="toast-close-button icon-close" role="button">×</button>
         <div class="toast-title">ERROR</div>

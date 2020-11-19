@@ -123,7 +123,7 @@ class LoginModel
 
     public function AddUser($Nombre,$Apellidos,$Email,$password)
     {
-        $password = crypt($password, strtoupper($Email));
+        $password = $GLOBALS['security']->crypt($password, strtoupper($Email)); 
 
         $sql = "";
 
@@ -140,8 +140,8 @@ class LoginModel
         else
         {
             $Id = $result['id'];
-            $sql = "Insert into " . $GLOBALS['sq']->getTableOwner() . ".Users (Id,Nombre,Apellidos,Email,password,rol,foto) ";
-            $sql = $sql. "Values('". $Id ."','". $Nombre ."','". $Apellidos ."','". $Email ."','". $password ."','1','no_photo.jpg')";
+            $sql = "Insert into " . $GLOBALS['sq']->getTableOwner() . ".Users (Id,Nombre,Apellidos,Email,password,rol,foto,Activo) ";
+            $sql = $sql. "Values('". $Id ."','". $Nombre ."','". $Apellidos ."','". $Email ."','". $password ."','1','no_photo.jpg','1')";
 
             $GLOBALS['sq']->DB_Execute($sql);
 
@@ -165,10 +165,12 @@ class LoginModel
                 $GLOBALS['sq']->setfoto("no_photo.jpg");  
 
 
-                $this->setView("profile");
+                return true;
             }
 
         }
        
     }
+
+   
 }

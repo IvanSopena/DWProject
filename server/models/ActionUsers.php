@@ -4,12 +4,44 @@ class ActionUsers
 {
 
    public $perfil_result ="";
+   private $Error;
+   private $Type;
+   private $View;
     
-    public function __construct()
-    {
-        
-    }
+   public function __construct()
+   {
+   }
 
+   function getView()
+   {
+       return $this->View;
+   }
+
+   function setView($view)
+   {
+       $this->View = $view;
+   }
+
+
+   function getError()
+   {
+       return $this->Error;
+   }
+
+   function setError($err)
+   {
+       $this->Error = $err;
+   }
+
+   function getType()
+   {
+       return $this->Type;
+   }
+
+   function setType($type)
+   {
+       $this->Type = $type;
+   }
     function getPerfil()
     {
         return $this->perfil_result;
@@ -88,7 +120,7 @@ class ActionUsers
     public function obtener_perfil($User)
     {
         $sql = "";
-        $sql = "select  Nombre,Apellidos,CONCAT(Nombre,' ', Apellidos) as Usuario,Email,password,foto,IFNULL(Nacimiento,'dd/mm/yyyy') as Nacimiento ,IFNULL(Pais,'') as Pais ,IFNULL(ProximoPago,'') as ProximoPago ,IFNULL(Plan,'') as Plan ,Dispositivos from " . $GLOBALS['sq']->getTableOwner() . ".Users where id= '" . $User . "'";
+        $sql = "select  Nombre,Apellidos,CONCAT(Nombre,' ', Apellidos) as Usuario,Email,password,foto,IFNULL(Nacimiento,'') as Nacimiento ,IFNULL(Pais,'') as Pais ,IFNULL(Plan,'0') as Plan ,Dispositivos from " . $GLOBALS['sq']->getTableOwner() . ".Users where id= '" . $User . "'";
         $result = $GLOBALS['sq']->DB_Select($sql);
 
             if ($GLOBALS['sq']->fallo_query == true) {
@@ -100,12 +132,58 @@ class ActionUsers
             } 
             else 
             {
-
-                $this->setPerfil($result);
+                $GLOBALS['sq']->setfoto($result['foto']);
+                //$this->setPerfil($result);
             
-                return;
+                return $result;
             }
     }
+
+    public function EditProfile($Foto,$Nombre,$Apellidos,$Email,$password,$fecha,$pais,$plan,$id)
+    {
+        $sql="";
+
+        $sql = "Update " . $GLOBALS['sq']->getTableOwner() . ".Users set Nombre = '".$Nombre."',Apellidos = '".$Apellidos."',Email = '".$Email."',";
+        $sql = $sql. " password = '".$password."',foto = '".$Foto."',Nacimiento = '".$fecha."',Pais = '".$pais."',Plan = '".$plan."',Dispositivos = '1'";
+        $sql = $sql. " where id = '". $id ."'";
+
+        $GLOBALS['sq']->DB_Execute($sql);
+
+        if ($GLOBALS['sq']->fallo_query == true) {
+
+            $this->setError("Error al actualizar tu perfil. " . $GLOBALS['sq']->getDbLastSQL());
+            $this->setType("error");
+            
+            return false;
+        } 
+        else{
+            return true;
+        }
+    }
+
+    public function BorrarPerfil($User)
+    {
+        $sql="";
+
+        $sql = "delete from " . $GLOBALS['sq']->getTableOwner() . ".Users where id = '". $User ."'";
+       
+
+        $GLOBALS['sq']->DB_Execute($sql);
+
+        if ($GLOBALS['sq']->fallo_query == true) {
+
+            $this->setError("Error al eliminar la suscripcion, ponte en contacto con el administador en el 900123456. " . $GLOBALS['sq']->getDbLastSQL());
+            $this->setType("error");
+            
+            return false;
+        } 
+        else{
+            $this->setError("Perfil eliminado.Esperamos que vuelvas pronto");
+            $this->setType("info");
+            $this->setView("login");
+            return true;
+        }
+    } 
 }
 
 

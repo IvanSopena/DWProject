@@ -18,14 +18,16 @@
 
                         <h4 class="mb-3"><?php echo $datos["Usuario"]; ?></h4>
                     
-                        <input id="thefile" type="file" hidden value="" />
+                        <input id="thefile" name="thefile" type="file" hidden value="" />
                         <a class="edit-icon text-primary" href="#"><label for="thefile">Editar</label></a>
                        
                     </div>
                     <div class=" sign-user_button text-center" >
-                        <a href="#" class="btn btn-hover">Modifica tu Perfil</a>
+                        <button type="submit" class="btn btn-hover">Modifica tu Perfil</button>
                     </div>
                 </div>
+
+                
                 <div class="col-lg-8">
                     <div class="sign-user_card">
                         <h5 class="mb-3 pb-3 a-border">Datos Personales</h5>
@@ -38,47 +40,58 @@
                         <div class="row align-items-center justify-content-between mb-3">
                             <div class="col-md-8">
                                 <span class="text-light font-size-18">Apellidos</span>
-                                <input type="text" class="profile_input" name="name" id="name" value="<?php echo $datos["Apellidos"]; ?>" required>
+                                <input type="text" class="profile_input" name="surname"  value="<?php echo $datos["Apellidos"]; ?>" required>
                             </div>    
                         </div>
                         <div class="row align-items-center justify-content-between mb-3">
                             <div class="col-md-8">
                                 <span class="text-light font-size-18">Email</span>
-                                <input type="text" class="profile_input" name="name" id="name" value="<?php echo $datos["Email"]; ?>" required>
+                                <input type="text" class="profile_input" name="email"  value="<?php echo $datos["Email"]; ?>" required>
                             </div>    
                         </div>
                         <div class="row align-items-center justify-content-between mb-3">
-                            <div class="col-md-8">
+                            <div class="col-md-8 strength_wrapper">
                                 <span class="text-light font-size-18">Password</span>
-                                <input type="password" class="profile_input" name="name" id="name" value=<?php echo $GLOBALS['security']->decrypt($datos["password"], strtoupper($datos["Email"])); ?> required>
+                                <input type="password" class="profile_input Password1" name="pass" id="password"  value=<?php echo $GLOBALS['security']->decrypt($datos["password"], strtoupper($datos["Email"])); ?> required>
+                                <span class="fa fa-fw fa-eye password-icon show-password"></span>
                             </div>
                         </div>
                         <div class="row align-items-center justify-content-between mb-3">
 
                                 <div class="col-md-8">
                                     <span class="text-light font-size-18">Fecha de Nacimiento</span>
-                                    <input type="text" class="profile_input" name="name" id="name" value="<?php echo $datos["Nacimiento"]; ?>" required>
+                                   
+                                    <div class="input-group-prepend">
+                                    
                                 </div>
+
+                                <input style="color:white;"class="profile_input" id="date" name="brid" placeholder="dd/mm/yyyy" type="date" value="<?php echo $datos["Nacimiento"]; ?>" required />
+                                <script>
+                                    $('#date').datetimepicker({ footer: true, modal: true });
+                                </script>
+                            </div>
                               
 
                         </div>
                         <div class="row align-items-center justify-content-between">                 
                                 <div class="col-md-8">
                                     <span class="text-light font-size-18">Pais</span>
-                                    <input type="text" class="profile_input" name="name" id="name" value="<?php echo $datos["Pais"]; ?>" required>
+                                    <input type="text" class="profile_input" name="country" id="country" value="<?php echo $datos["Pais"]; ?>" required>
                                 </div>
                         </div>
                         <h5 class="mb-3 mt-4 pb-3 a-border">Detalles de Pago</h5>
                         <div class="row justify-content-between mb-3">
 
-                        <?php if($datos["ProximoPago"]=== ""){ ?>
+                        <?php if($datos["Plan"]=== "0"){ ?>
                             <div class="col-md-8 r-mb-15">
                                 <p> No hay pagos pendientes, una vez seleccione un paln se agregara una fecha de cobro.</p>
                             </div>
                            <?php } else { ?>
                                 <div class="col-md-8">
-                                    <span class="text-light font-size-13">Fecha de Nacimiento</span>
-                                    <p class="mb-0">El siguiente paso se realizara: <?php echo $datos["ProximoPago"]; ?></p>
+                                    <span class="text-light font-size-13">Fecha del Siguiente pago</span>
+                                    <p class="mb-0">El siguiente paso se realizara el: <?php echo gmDate("d/m/Y", strtotime("+1 month")); ?></p>
+                                    <br>
+                                    <a href="/close_acount" class="btn btn-hover">Cancelar Suscripción</a>
                                 </div>
                             
                            <?php } ?>
@@ -88,12 +101,51 @@
                         <div class="row justify-content-between mb-3">
 
                         <div style="margin-left:20px;"class="iq-custom-select d-inline-block sea-epi">
-                        <select name="cars" class="form-control season-select">
-                                    <option value="op1">Basico</option>
-                                    <option selected="selected" value="op2">Estandar</option>
-                                    <option value="op3">Platino</option>
-                                    <option value="op4">Premium</option>
-                                </select>
+                        <select name="plan" class="form-control season-select">
+
+                                    <?php
+                                        switch ($datos["Plan"]) {
+                                            case "0":
+                                                echo "<option selected='selected' value='0'>Seleccione un Plan</option>
+                                                <option value='1'>Basico</option>
+                                                <option value='2'>Estandar</option>
+                                                <option value='3'>Platino</option>
+                                                <option value='4'>Premium</option>";
+                                                break;
+                                            case "1":
+                                                echo "<option  value='0'>Seleccione un Plan</option>
+                                                <option selected='selected' value='1'>Basico</option>
+                                                <option value='2'>Estandar</option>
+                                                <option value='3'>Platino</option>
+                                                <option value='4'>Premium</option>";
+                                                break;
+                                            case "2":
+                                                echo "<option  value='0'>Seleccione un Plan</option>
+                                                <option value='1'>Basico</option>
+                                                <option selected='selected' value='2'>Estandar</option>
+                                                <option value='3'>Platino</option>
+                                                <option value='4'>Premium</option>";
+                                                break;
+                                            case "3":
+                                                echo "<option  value='0'>Seleccione un Plan</option>
+                                                <option value='1'>Basico</option>
+                                                <option value='2'>Estandar</option>
+                                                <option selected='selected' value='3'>Platino</option>
+                                                <option value='4'>Premium</option>";
+                                                break;
+                                            case "4":
+                                                echo "<option  value='0'>Seleccione un Plan</option>
+                                                <option value='1'>Basico</option>
+                                                <option value='2'>Estandar</option>
+                                                <option value='3'>Platino</option>
+                                                <option selected='selected' value='4'>Premium</option>";
+                                                break;
+
+                                        }
+                                    ?>
+
+                                    
+                        </select>
                         </div>
                             
                         </div>
@@ -102,7 +154,7 @@
                         <div class="row">
                             <div class="col-12 setting">
                                 <a href="#" class="text-body d-block mb-1">Ver la actividad reciente</a>
-                                <a href="#" class="text-body d-block mb-1">Cerrar sesión en todos los dispositivos </a>
+                                <a href="/logoff" class="text-body d-block mb-1">Cerrar sesión en todos los dispositivos </a>
                                 
                             </div>                            
                         </div>
@@ -112,30 +164,31 @@
         </div>
     </section>
 
+  
+
     <?php
-                    if (isset($GLOBALS['error'])) { 
-                    
-                        switch ($GLOBALS['tipo']) {
-                            case 'info':
-                                require_once  'Server/views/messages/info.php';
-                                break;
-                                case 'error':
-                                    require_once  'Server/views/messages/error.php';
-                                break;
-                                case 'warning':
-                                    require_once  'Server/views/messages/warning.php';
-                                break;
-                                case 'ok':
-                                    require_once  'Server/views/messages/success.php';
-                                break;
+                    $temp = "".$GLOBALS['error']; 
+                    if ($temp != "") {    
+                        $tipo = $GLOBALS['tipo'];
+                        if($tipo==="Preguntar"){
+                            //echo "<script> LlamarPregunta();
+                        
+                        //</script>";
+                        }else{
+                            echo "<script> LlamarAviso('Información','" .$temp. "',true,'".$tipo."','toast-top-full-width',5000,true);
+                        
+                        </script>";
                         }
                         
                     }
-    ?>                  
 
+    ?>
+   
+  
 
-<?php require_once("Template/footernavigation.php"); ?>
+      <?php require_once("Template/footernavigation.php"); ?>
       <?php require_once("Template/footer.php"); ?>
+      
    </body>
 
 

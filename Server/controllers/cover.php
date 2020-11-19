@@ -35,8 +35,6 @@ class Cover extends Controlador
 					$GLOBALS['sq']->DbClose();
 				}
 			}
-
-
 		}
 		else{
 			$this->vista('login', '');
@@ -61,12 +59,12 @@ class Cover extends Controlador
 		$GLOBALS['sq']->connect_DB();
 		$model = $this->modelo('LoginModel');
 		$perfil = $this->modelo('ActionUsers');
-		session_start();
+		
 		if (isset($_SESSION["user"])) {
 			if ($model->opensession($_SESSION["user"]) === true) {
-				$perfil->obtener_perfil($_SESSION["user"]);
-				
-				$this->vista('profile', $perfil->getPerfil());
+				$datos_recibidos = $perfil->obtener_perfil($_SESSION["user"]);
+				//$GLOBALS['error'] = "";
+				$this->vista('profile',$datos_recibidos);
 			}
 			else{
 
@@ -82,6 +80,70 @@ class Cover extends Controlador
 
 	public function update()
 	{
+		$GLOBALS['sq']->connect_DB();
+		$model = $this->modelo('ActionUsers');
+		$model1 = $this->modelo('LoginModel');
+		session_start();
+		$Foto = $_POST["thefile"];
+		$Nombre = $_POST["name"];
+        $Apellidos = $_POST["surname"];
+        $Email = $_POST["email"];
+        $password = $_POST["pass"];
+		$fecha = $_POST["brid"];
+		$pais = $_POST["country"];
+		$plan = $_POST["plan"];
+
+		$password = $GLOBALS['security']->crypt($password, strtoupper($Email));
+
+		if($Foto === ""){
+			$model1->opensession($_SESSION["user"]);
+			$Foto = $GLOBALS['sq']->getfoto();
+		}
+
+		if($plan==="0"){
+			$GLOBALS['tipo'] = "info";
+			$GLOBALS['error'] = "Debes seleccionar un plan antes de poder actualizar tu perfil.";
+			
+		}
+		else
+		{
+			if($model->EditProfile($Foto,$Nombre,$Apellidos,$Email,$password,$fecha,$pais,$plan,$_SESSION["user"])===true)
+			{
+				$GLOBALS['tipo'] = "success";
+				$GLOBALS['error'] = "Tu perfil se ha actualizado correctamente.";
+				
+			}else{
+				$GLOBALS['tipo'] = $model->getType();
+				$GLOBALS['error'] = $model->getError();
+				$GLOBALS['sq']->DbClose();
+				
+			}
+		}
+	}
+
+	public function delete()
+	{
+		$GLOBALS['sq']->connect_DB();
+		$model = $this->modelo('ActionUsers');
+		session_start();
+		
+		$GLOBALS['tipo'] = "Preguntar";
+		$GLOBALS['error'] = "Seguro que quiere borrar la suscripció?";
+		$this->perfil();
+		/* if($model->BorrarPerfil($_SESSION["user"])===true)
+			{
+				$GLOBALS['tipo'] = $model->getType();
+				$GLOBALS['error'] = $model->getError();
+				session_unset();
+				$this->vista('login', '');
+				
+			}else{
+				$GLOBALS['tipo'] = $model->getType();
+				$GLOBALS['error'] = $model->getError();
+				$this->perfil();
+				$GLOBALS['sq']->DbClose();
+				
+			} */
 
 	}
 }
