@@ -91,7 +91,7 @@
                                     <span class="text-light font-size-13">Fecha del Siguiente pago</span>
                                     <p class="mb-0">El siguiente paso se realizara el: <?php echo gmDate("d/m/Y", strtotime("+1 month")); ?></p>
                                     <br>
-                                    <a href="/close_acount" class="btn btn-hover">Cancelar Suscripción</a>
+                                    <a href="#" onclick="alerta()" class="btn btn-hover">Cancelar Suscripción</a>
                                 </div>
                             
                            <?php } ?>
@@ -169,17 +169,9 @@
     <?php
                     $temp = "".$GLOBALS['error']; 
                     if ($temp != "") {    
-                        $tipo = $GLOBALS['tipo'];
-                        if($tipo==="Preguntar"){
-                            //echo "<script> LlamarPregunta();
-                        
-                        //</script>";
-                        }else{
-                            echo "<script> LlamarAviso('Información','" .$temp. "',true,'".$tipo."','toast-top-full-width',5000,true);
-                        
+                        $tipo = $GLOBALS['tipo'];             
+                            echo "<script> LlamarAviso('Información','" .$temp. "',true,'".$tipo."','toast-top-full-width',5000,true);                        
                         </script>";
-                        }
-                        
                     }
 
     ?>

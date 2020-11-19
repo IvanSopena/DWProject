@@ -28,31 +28,17 @@ function CambioImagenPerfil() {
     
 }
 
-function LlamarPregunta(){
-    toastr.options = {
-        "closeButton": false,
-        "debug": false,
-        "newestOnTop": false,
-        "progressBar": false,
-        "positionClass": "toast-top-full-width",
-        "preventDuplicates": false,
-        "onclick": null,
-        "showDuration": "300",
-        "hideDuration": "1000",
-        "timeOut": 0,
-        "extendedTimeOut": 0,
-        "showEasing": "swing",
-        "hideEasing": "linear",
-        "showMethod": "fadeIn",
-        "hideMethod": "fadeOut",
-        "tapToDismiss": false
-      }
-      toastr["warning"]("<br /><br/> <button type='button' onclick='myFunction()' class='btn clear'>No</button> <button type='button' class='btn clear'>No</button>", "¿Esta seguro de que quiere eliminar la suscripción?");
-};
 
-function myFunction() {
-    window.toastr.clear();
-}; 
+
+function alerta()
+{
+    
+    var opcion = confirm("¿Estas seguro de que quieres eliminar la suscripción?");
+    if (opcion == true) {
+        window.location.href = "/close_acount";
+	} 
+	
+}
 
 
 function LlamarAviso(titulo,mensaje,boton,tipo,colocacion,tiempo,progress) {

@@ -127,10 +127,7 @@ class Cover extends Controlador
 		$model = $this->modelo('ActionUsers');
 		session_start();
 		
-		$GLOBALS['tipo'] = "Preguntar";
-		$GLOBALS['error'] = "Seguro que quiere borrar la suscripció?";
-		$this->perfil();
-		/* if($model->BorrarPerfil($_SESSION["user"])===true)
+		 if($model->BorrarPerfil($_SESSION["user"])===true)
 			{
 				$GLOBALS['tipo'] = $model->getType();
 				$GLOBALS['error'] = $model->getError();
@@ -143,7 +140,7 @@ class Cover extends Controlador
 				$this->perfil();
 				$GLOBALS['sq']->DbClose();
 				
-			} */
+			}
 
 	}
 }
