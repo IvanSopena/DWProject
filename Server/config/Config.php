@@ -10,10 +10,10 @@
 
     define('Err','');
     define('Tipo','');
-    //define('Favoritas');
-    define('Novedades',[]);
-    //define('Notificaciones');
-
     
+    //Ruta de la aplicación $_SERVER["DOCUMENT_ROOT"];
+   // define('RUTA_APP', dirname(dirname(__FILE__)));
+   define('RUTA_APP', "DWProject");
+
     //define('RUTA_URL', 'http://localhost/');
     define('NOMBRE_APP', 'Streaming Movies');

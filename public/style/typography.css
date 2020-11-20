@@ -4,17 +4,16 @@
 Import CSS
 -----------------------------------------------------------------------*/
 @import url("variable.css");
-@import url("all.min.css");
-/* @import url("remixicon.css"); */
-@import url("slick.css");
-@import url("slick-theme.css");
-@import url("owl.carousel.min.css");
-@import url("animate.min.css");
-@import url("magnific-popup.css");
-@import url("select2.min.css");
-@import url("select2-bootstrap4.min.css");
+@import url("../plugins/css/all.min.css");
+@import url("../plugins/css/slick.css");
+@import url("../plugins/css/slick-theme.css");
+@import url("../plugins/css/owl.carousel.min.css");
+@import url("../plugins/css/animate.min.css");
+@import url("../plugins/css/magnific-popup.css");
+@import url("../plugins/css/select2.min.css");
+@import url("../plugins/css/select2-bootstrap4.min.css");
 @import url("dark.css");
-@import url("slick-animation.css");
+@import url("../plugins/css/slick-animation.css");
 
 /*---------------------------------------------------------------------
 Font

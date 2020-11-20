@@ -28,15 +28,24 @@ function CambioImagenPerfil() {
     
 }
 
-
+function vervideo(id){
+    var pelicula = id;//document.getElementById("idmovie").value;
+    /* alertify.alert(pelicula, function(){
+        alertify.message('OK');
+      }); */
+      window.location.href = "/ver" + "?id=" + pelicula;
+}
 
 function alerta()
 {
     
-    var opcion = confirm("¿Estas seguro de que quieres eliminar la suscripción?");
-    if (opcion == true) {
-        window.location.href = "/close_acount";
-	} 
+        alertify.confirm("Streaming Movie","¿Estas seguro de que quieres eliminar la suscripción?",
+        function(){
+            window.location.href = "/close_acount";
+        },
+        function(){
+            
+        });
 	
 }
 

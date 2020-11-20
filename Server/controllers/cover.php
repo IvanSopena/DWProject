@@ -143,5 +143,15 @@ class Cover extends Controlador
 			}
 
 	}
+
+	public function ver_pelicula()
+    {
+        $GLOBALS['sq']->connect_DB();
+		$model = $this->modelo('ActionUsers');
+		session_start();
+		$triller = $model->pelicula_para_ver($_GET["id"]);
+		$GLOBALS['sq']->refrescar_credenciales($_SESSION["user"]);
+		$this->vista('tv', $triller);
+    }
 }
 

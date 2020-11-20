@@ -66,6 +66,10 @@ $router->add('/update_profile', function() {
     $GLOBALS['cover']->perfil();
 });
 
+$router->add('/ver', function() {
+    $GLOBALS['cover']->ver_pelicula(); 
+});
+
 $router->add('/close_acount', function() {
     $GLOBALS['cover']->delete();
     

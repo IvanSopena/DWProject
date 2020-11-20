@@ -193,6 +193,36 @@ class Db_CLASS {
         return;
     }
 
+
+    public function refrescar_credenciales($id)
+    {
+        $sentencia = "";
+
+      
+        $sentencia = "select  Nombre,Apellidos,Email,password, CONCAT(Nombre,' ', Apellidos) as Usuario , Id, rol,foto from " . $GLOBALS['sq']->getTableOwner() . ".Users where id= '" . $id . "'";
+
+        $result = $this->DB_Select($sentencia);
+
+        if ($this->fallo_query == true) {
+
+            $this->setClsLastError("Fallo al buscar el usuario de la aplicación." . $this->DbLastSQL);
+            $this->setErrors(true);
+            return;
+        } else {
+
+
+            $this->setMAppUserName($result['Email']);
+            $this->setMAppUserPwd($result['password']);
+            $this->setMRealUserName($result['Usuario']);
+            $this->setMAppUserId($result['Id']);
+            $this->setMAppRol($result['rol']);
+            $this->setUserName($result['Nombre']); 
+            $this->setUserSurname($result['Apellidos']); 
+            $this->setfoto($result['foto']); 
+        }
+            
+    }
+
     public function AppOpen($AppUser, $AppPassword) {
         /**
          * Funcion que se encarga de verificar si el usuario esta dado de alta en la base de datos
@@ -255,7 +285,7 @@ class Db_CLASS {
             $query = $this->Connect_DB->prepare($SQL);
             $query->execute();
 
-            echo $SQL;
+            
             $this->fallo_query = false;
             return;
             

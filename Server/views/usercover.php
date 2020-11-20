@@ -25,17 +25,18 @@ require_once("Template/navigation.php");
                                     <div class='channel-logo' data-animation-in='fadeInLeft' data-delay-in='0.5'>
                                        <img src='/Public/img/tex1.png' class='c-logo' alt='streamit'>
                                     </div>
-                                  
-                                 <h1 class='slider-text big-title title text-uppercase' data-animation-in='fadeInLeft'
+                                    
+                                 <h1 class='slider-text big-title title text-uppercase' id='title' data-animation-in='fadeInLeft'
                                     data-delay-in='0.6'>" . $dato['name'] ."</h1>
+                                    
                                  <div class='d-flex align-items-center' data-animation-in='fadeInUp' data-delay-in='1'>
-                                    <span class='badge badge-secondary p-2'>18+</span>
-                                    <span class='ml-3 text-white'>2h 30m</span>
+                                    <span class='badge badge-secondary p-2'>" . $dato['age'] ."</span>
+                                    <span class='ml-3 text-white'>" . $dato['duration'] ." min</span>
                                  </div>
                                  <p data-animation-in='fadeInUp' data-delay-in='1.2'>" . $dato['sinopsis'].
                                  "</p>
                                  <div class='d-flex align-items-center r-mb-23' data-animation-in='fadeInUp' data-delay-in='1.2'>
-                                 <a href='".$dato['trailler']."' target='_blank' class='btn btn-hover'><i class='fa fa-play mr-2'
+                                 <a href='#' onclick='vervideo(". $dato['idmovie'] .")' class='btn btn-hover'><i class='fa fa-play mr-2'
                                  aria-hidden='true'></i>Ver Ahora</a>
                                  <a href='". $dato['details'] ."' target='_blank' class='btn btn-link'>Mas detalles</a>
                                  </div>
@@ -102,14 +103,12 @@ require_once("Template/navigation.php");
                     <div class='block-description'>
                        <h6>". $dato['name'] ."</h6>
                        <div class='movie-time d-flex align-items-center my-2'>
-                          <div class='badge badge-secondary p-1 mr-2'>13+</div>
-                          <span class='text-white'>2h 30m</span>
+                          <div class='badge badge-secondary p-1 mr-2'>" . $dato['age'] ."</div>
+                          <span class='text-white'>" . $dato['duration'] ." min</span>
                        </div>
                        <div class='hover-buttons'>
-                          <span class='btn btn-hover'>
-                          <i class='fa fa-play mr-1' aria-hidden='true'></i>
-                          Ver Ahora
-                          </span>
+                       <a href='#' onclick='vervideo(". $dato['idmovie'] .")' class='btn btn-hover'><i class='fa fa-play mr-2'
+                       aria-hidden='true'></i>Ver Ahora</a>
                        </div>
                     </div>
                     
@@ -152,8 +151,8 @@ require_once("Template/navigation.php");
                     <div class='block-description'>
                        <h6>". $dato['name'] ."</h6>
                        <div class='movie-time d-flex align-items-center my-2'>
-                          <div class='badge badge-secondary p-1 mr-2'>13+</div>
-                          <span class='text-white'>2h 30m</span>
+                          <div class='badge badge-secondary p-1 mr-2'>" . $dato['age'] ."</div>
+                          <span class='text-white'>" . $dato['duration'] ." min</span>
                           <div class='block-social-info'>
                            <ul class='list-inline p-0 m-0 music-play-lists'>
                               <li><span><i class='fa fa-heart'></i></span></li>
@@ -161,8 +160,8 @@ require_once("Template/navigation.php");
                         </div>
                        </div>
                        <div class='hover-buttons'>
-                       <a href='".$dato['trailler']."' target='_blank' class='btn btn-hover'><i class='fa fa-play mr-2'
-                       aria-hidden='true'></i>Ver Ahora</a>
+                       <a href='#' onclick='vervideo(". $dato['idmovie'] .")' class='btn btn-hover'><i class='fa fa-play mr-2'
+                                 aria-hidden='true'></i>Ver Ahora</a>
                        <a href='". $dato['details'] ."' target='_blank' class='btn btn-link'>Mas detalles</a>
                           
                        </div>
@@ -226,12 +225,12 @@ require_once("Template/navigation.php");
                                        <div class='block-description'>
                                           <h5>". $dato['name'] ."</h5>
                                           <div class='movie-time d-flex align-items-center my-2'>
-                                             <div class='badge badge-secondary p-1 mr-2'>10+</div>
-                                             <span class='text-white'>3h 15m</span>
+                                             <div class='badge badge-secondary p-1 mr-2'>" . $dato['age'] ."</div>
+                                             <span class='text-white'>" . $dato['duration'] ." min</span>
                                           </div>
                                           <div class='hover-buttons'>
-                                          <a href='".$dato['trailler']."' target='_blank' class='btn btn-hover'><i class='fa fa-play mr-2'
-                                          aria-hidden='true'></i>Ver Ahora</a>
+                                          <a href='#' onclick='vervideo(". $dato['idmovie'] .")' class='btn btn-hover'><i class='fa fa-play mr-2'
+                                 aria-hidden='true'></i>Ver Ahora</a>
                                           <a href='". $dato['details'] ."' target='_blank' class='btn btn-link'>Mas detalles</a>
                                           </div>
                                        </div>
@@ -276,8 +275,8 @@ require_once("Template/navigation.php");
                     <div class='block-description'>
                        <h6>". $dato['name'] ."</h6>
                        <div class='movie-time d-flex align-items-center my-2'>
-                          <div class='badge badge-secondary p-1 mr-2'>13+</div>
-                          <span class='text-white'>2h 30m</span>
+                          <div class='badge badge-secondary p-1 mr-2'>" . $dato['age'] ."</div>
+                          <span class='text-white'>" . $dato['duration'] ." min</span>
                           <div class='block-social-info'>
                            <ul class='list-inline p-0 m-0 music-play-lists'>
                               <li><span><i class='fa fa-heart'></i></span></li>
@@ -285,7 +284,7 @@ require_once("Template/navigation.php");
                         </div>
                        </div>
                        <div class='hover-buttons'>
-                       <a href='".$dato['trailler']."' target='_blank' class='btn btn-hover'><i class='fa fa-play mr-2'
+                       <a href='#' onclick='vervideo(". $dato['idmovie'] .")' class='btn btn-hover'><i class='fa fa-play mr-2'
                        aria-hidden='true'></i>Ver Ahora</a>
                        <a href='". $dato['details'] ."' target='_blank' class='btn btn-link'>Mas detalles</a>
                           
@@ -340,13 +339,13 @@ require_once("Template/navigation.php");
                               <span class='text-white ml-3'>9.2 (lmdb)</span>
                            </div>
                            <div class='movie-time d-flex align-items-center mb-3'>
-                              <div class='badge badge-secondary mr-3'>13+</div>
-                              <h6 class='text-white'>2h 30m</h6>
+                              <div class='badge badge-secondary mr-3'>" . $dato['age'] ."</div>
+                              <h6 class='text-white'>" . $dato['duration'] ." min</h6>
                            </div>
                            <p>". $dato['sinopsis'] ."</p>
                            <div class='parallax-buttons'>
-                           <a href='".$dato['trailler']."' target='_blank' class='btn btn-hover'><i class='fa fa-play mr-2'
-                       aria-hidden='true'></i>Ver Ahora</a>
+                           <a href='#' onclick='vervideo(". $dato['idmovie'] .")' class='btn btn-hover'><i class='fa fa-play mr-2'
+                           aria-hidden='true'></i>Ver Ahora</a>
                            <a href='".$dato['details']."' target='_blank' class='btn btn-link'>Mas Detalles</a>
                            </div>
                         </div>
