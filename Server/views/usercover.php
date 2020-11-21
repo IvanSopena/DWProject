@@ -5,7 +5,26 @@ require_once('server/models/ActionUsers.php'); ?>
 
 <?php 
 require_once("Template/navigation.php"); 
- ?>
+
+$temp = "".$GLOBALS['error']; 
+if ($temp != "") {    
+   switch ($GLOBALS['tipo']) {
+      case 'info':
+          require_once  'Server/views/messages/info.php';
+          break;
+          case 'error':
+              require_once  'Server/views/messages/error.php';
+          break;
+          case 'warning':
+              require_once  'Server/views/messages/warning.php';
+          break;
+          case 'ok':
+              require_once  'Server/views/messages/success.php';
+          break;
+  }
+ }
+
+?>
 
       <section id="home" class="iq-main-slider p-0">
          <div id="home-slider" class="slider m-0 p-0">
@@ -13,7 +32,7 @@ require_once("Template/navigation.php");
             
             $modelo = new ActionUsers();
             $novedades = $modelo->cargaPelis(1,5);
-            //$novedades = $modelo->getresultado();
+            
             $i=1;
             while ($dato = $novedades->fetch()){
               echo "<div class = 'slide slick-bg s-bg-" .$i. "'>
@@ -91,7 +110,7 @@ require_once("Template/navigation.php");
             
             $modelo = new ActionUsers();
             $favoritas = $modelo->buscar_favoritas();
-            //$favoritas = $modelo->getresultado();
+            
             
             while ($dato = $favoritas->fetch()){
               echo " <li class='slide-item'>
@@ -139,7 +158,7 @@ require_once("Template/navigation.php");
             
             $modelo = new ActionUsers();
             $estrenos = $modelo->cargaPelis(2,5);
-            //$estrenos = $modelo->getresultado();
+            
             
             while ($dato = $estrenos->fetch()){
               echo " <li class='slide-item'>
@@ -155,7 +174,9 @@ require_once("Template/navigation.php");
                           <span class='text-white'>" . $dato['duration'] ." min</span>
                           <div class='block-social-info'>
                            <ul class='list-inline p-0 m-0 music-play-lists'>
+                           <a href='#' onclick='addfav(". $dato['idmovie'] .",". $GLOBALS['sq']->getMAppUserId() .")'> 
                               <li><span><i class='fa fa-heart'></i></span></li>
+                           </a>
                            </ul>
                         </div>
                        </div>
@@ -194,7 +215,7 @@ require_once("Template/navigation.php");
             
             $modelo = new ActionUsers();
             $estrenos = $modelo->cargaPelis(3,8);
-            //$estrenos = $modelo->getresultado();
+            
 
             while ($dato = $estrenos->fetch()){
                echo "<li>
@@ -214,7 +235,7 @@ require_once("Template/navigation.php");
                         
                                     $modelo = new ActionUsers();
                                     $estrenos = $modelo->cargaPelis(3,8);
-                                    //$estrenos = $modelo->getresultado();
+                                    
                         
                                     while ($dato = $estrenos->fetch()){
                                        echo "<li>
@@ -263,7 +284,7 @@ require_once("Template/navigation.php");
             
             $modelo = new ActionUsers();
             $estrenos =  $modelo->cargaPelis(5,5);
-            //$estrenos = $modelo->getresultado();
+           
             
             while ($dato = $estrenos->fetch()){
               echo " <li class='slide-item'>
@@ -304,13 +325,13 @@ require_once("Template/navigation.php");
          </section>
       </div>
       
-      <!--  -->
+
       <section id="parallex" class="parallax-window">
             <?php 
                   
                   $modelo = new ActionUsers();
                   $diaria = $modelo->cargaPelis(6,1);
-                 // $diaria = $modelo->getresultado();
+                 
                   while ($dato = $diaria->fetch()){
                   echo " <div class='container-fluid h-100'>
                   <div class='row align-items-center justify-content-center h-100 parallaxt-details'>
@@ -367,6 +388,8 @@ require_once("Template/navigation.php");
       <div id="back-to-top">
          <a class="top" href="#top" id="top"> <i class="fa fa-angle-up"></i> </a>
       </div>
+
+     
 
       <?php require_once("Template/footernavigation.php"); ?>
       <?php require_once("Template/footer.php"); ?>

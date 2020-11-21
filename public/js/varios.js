@@ -24,7 +24,7 @@ function CambioImagenPerfil() {
     var imagenAsubir = perfil.files[0];
     alert("Imagen modificada.");
     document.getElementById("FotoPerfil").src = "/public/img/users/" + imagenAsubir.name;
-    //document.getElementById("NavFoto").src = "/public/img/users/" + imagenAsubir.name;
+    
     
 }
 
@@ -34,6 +34,14 @@ function vervideo(id){
         alertify.message('OK');
       }); */
       window.location.href = "/ver" + "?id=" + pelicula;
+}
+
+function addfav(movie,id){
+    
+    /* alertify.alert(pelicula, function(){
+        alertify.message('OK');
+      }); */
+      window.location.href = "/add_fav" + "?mov=" + movie + "&id=" + id ;
 }
 
 function alerta()
@@ -50,9 +58,27 @@ function alerta()
 }
 
 
-function LlamarAviso(titulo,mensaje,boton,tipo,colocacion,tiempo,progress) {
-    
-    toastr.options = { 
+function LlamarAviso(mensaje,tipo,colocacion,tiempo) {
+
+    //alertify.set('notifier','delay', tiempo);
+    //alertify.set('notifier','position', colocacion);
+
+    /* switch (tipo) { 
+        case 'error': 
+            alertify.error(mensaje); 
+            break;
+        case 'warning': 
+        alertify.warning(mensaje); 
+            break;
+        case 'success': 
+        alertify.success(mensaje); 
+            break;		
+        case 'info': 
+        alertify.notify(mensaje); 
+            break;
+        
+    } */
+     toastr.options = { 
         //primeras opciones
         "closeButton": boton,//false, //boton cerrar
         "debug": false,
@@ -76,7 +102,9 @@ function LlamarAviso(titulo,mensaje,boton,tipo,colocacion,tiempo,progress) {
         "hideMethod": "fadeOut",
         "tapToDismiss": false
     };
-    toastr[tipo](mensaje, titulo);
+    toastr[tipo](mensaje, titulo); 
+
+
 }; 
 
 /* $( "#yes" ).click(function() {

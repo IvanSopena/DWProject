@@ -35,6 +35,8 @@ $router->add('/logoff', function() {
     $GLOBALS['cover']->logoff();
 });
 
+
+
 $router->add('/profile', function() {
     session_start();
     $GLOBALS['cover']->perfil();
@@ -68,6 +70,10 @@ $router->add('/update_profile', function() {
 
 $router->add('/ver', function() {
     $GLOBALS['cover']->ver_pelicula(); 
+});
+
+$router->add('/add_fav', function() {
+    $GLOBALS['cover']->agregar_pelicula(); 
 });
 
 $router->add('/close_acount', function() {

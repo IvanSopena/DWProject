@@ -152,6 +152,21 @@ class Cover extends Controlador
 		$triller = $model->pelicula_para_ver($_GET["id"]);
 		$GLOBALS['sq']->refrescar_credenciales($_SESSION["user"]);
 		$this->vista('tv', $triller);
-    }
+	}
+	
+
+	public function agregar_pelicula()
+	{
+		$GLOBALS['sq']->connect_DB();
+		$model = $this->modelo('ActionUsers');
+		session_start();
+		$model->agrega_favorita($_GET["id"],$_GET["mov"]);
+		$GLOBALS['sq']->refrescar_credenciales($_SESSION["user"]);
+
+		$GLOBALS['tipo'] = $model->getType();
+		$GLOBALS['error'] = $model->getError();
+
+		$this->vista('usercover', '');
+	}
 }
 

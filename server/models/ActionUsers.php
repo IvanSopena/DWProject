@@ -59,7 +59,7 @@ class ActionUsers
             $GLOBALS['sq']->connect_DB();
         }
 
-        $sql = "select  al1.idmovie,al1.name,al1.cover,al1.sinopsis,al1.trailler,al1.details,al1.duration,al1.age from " . $GLOBALS['sq']->getTableOwner() . ".Movies as al1, " . 
+        $sql = "select  al1.idmovie,al1.cat,al1.name,al1.cover,al1.sinopsis,al1.trailler,al1.details,al1.duration,al1.age from " . $GLOBALS['sq']->getTableOwner() . ".Movies as al1, " . 
         $GLOBALS['sq']->getTableOwner() . ".UserMovie as al2 where al1.IdMovie = al2.IdMovie and al2.IdUser = ".$GLOBALS['sq']->getMAppUserId()." and al1.active = '1' limit 5";
 
         $result = $GLOBALS['sq']->DbSelect_tablas($sql);
@@ -96,7 +96,7 @@ class ActionUsers
             $GLOBALS['sq']->connect_DB();
         }
 
-        $sql = "select  idmovie,name,cover,sinopsis,trailler,details,duration,age from " . $GLOBALS['sq']->getTableOwner() . ".Movies where status ='".$id."' and active = '1' limit " . $limit;
+        $sql = "select  idmovie,cat,name,cover,sinopsis,trailler,details,duration,age from " . $GLOBALS['sq']->getTableOwner() . ".Movies where status ='".$id."' and active = '1' limit " . $limit;
 
         $result = $GLOBALS['sq']->DbSelect_tablas($sql);
 
@@ -221,6 +221,45 @@ class ActionUsers
             return true;
         }
     } 
+
+    public function agrega_favorita($user,$movie)
+    {
+        $sql ="";
+
+        $sql = "Select count(IdMovie) as peli from " . $GLOBALS['sq']->getTableOwner() . ".UserMovie where IdMovie = '".$movie."' and IdUser = '".$user."'";
+        $result = $GLOBALS['sq']->DB_Select($sql);
+
+        if ($GLOBALS['sq']->fallo_query == false) {
+
+            if($result["peli"] != "0")
+            {
+                $this->setError("Esta pelicula ya esta en tus favoritos");
+                $this->setType("warning");
+                return;
+            }
+
+        } 
+
+        $sql = "Insert into " . $GLOBALS['sq']->getTableOwner() . ".UserMovie (IdUser,IdMovie) ";
+        $sql = $sql. "Values('". $user ."','". $movie ."')";
+
+        $GLOBALS['sq']->DB_Execute($sql);
+
+        if ($GLOBALS['sq']->fallo_query == true) {
+
+                $this->setError("Fallo al agregar la pelicua a favoritos. ");
+                $this->setType("error");
+               
+        } 
+        else{
+
+            $this->setError("Ya tienes una nueva pelicula favorita");
+            $this->setType("ok");
+            
+        }
+        return;
+        
+    }
 }
 
 

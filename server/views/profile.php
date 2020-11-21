@@ -169,12 +169,23 @@
     <?php
                     $temp = "".$GLOBALS['error']; 
                     if ($temp != "") {    
-                        $tipo = $GLOBALS['tipo'];             
-                            echo "<script> LlamarAviso('Información','" .$temp. "',true,'".$tipo."','toast-top-full-width',5000,true);                        
-                        </script>";
-                    }
-
-    ?>
+                        switch ($GLOBALS['tipo']) {
+                           case 'info':
+                               require_once  'Server/views/messages/info.php';
+                               break;
+                               case 'error':
+                                   require_once  'Server/views/messages/error.php';
+                               break;
+                               case 'warning':
+                                   require_once  'Server/views/messages/warning.php';
+                               break;
+                               case 'ok':
+                                   require_once  'Server/views/messages/success.php';
+                               break;
+                       }
+                      }
+                     
+                     ?>
    
   
 
