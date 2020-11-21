@@ -22,10 +22,16 @@ function inicializar() {
 
 function CambioImagenPerfil() {
     var imagenAsubir = perfil.files[0];
-    alert("Imagen modificada.");
+    alertify.alert("Streaming Movie","Se ha modificado tu imagen de perfil correctamente.", function(){
+       // alertify.message('OK');
+      });
     document.getElementById("FotoPerfil").src = "/public/img/users/" + imagenAsubir.name;
     
     
+}
+ 
+function viewall(tipo){
+    window.location.href = "/viewall" + "?id=" + tipo;
 }
 
 function vervideo(id){
@@ -42,6 +48,14 @@ function addfav(movie,id){
         alertify.message('OK');
       }); */
       window.location.href = "/add_fav" + "?mov=" + movie + "&id=" + id ;
+}
+
+function delfav(movie,id){
+    
+    /* alertify.alert(pelicula, function(){
+        alertify.message('OK');
+      }); */
+      window.location.href = "/del_fav" + "?mov=" + movie + "&id=" + id ;
 }
 
 function alerta()

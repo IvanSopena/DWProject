@@ -52,7 +52,7 @@ class ActionUsers
         $this->perfil_result = $data;
     }
 
-    public function buscar_favoritas()
+    public function buscar_favoritas($limite)
     {
         $sql = ""; 
         if ($GLOBALS['sq']->getIsOpen() === false) {
@@ -60,7 +60,11 @@ class ActionUsers
         }
 
         $sql = "select  al1.idmovie,al1.cat,al1.name,al1.cover,al1.sinopsis,al1.trailler,al1.details,al1.duration,al1.age from " . $GLOBALS['sq']->getTableOwner() . ".Movies as al1, " . 
-        $GLOBALS['sq']->getTableOwner() . ".UserMovie as al2 where al1.IdMovie = al2.IdMovie and al2.IdUser = ".$GLOBALS['sq']->getMAppUserId()." and al1.active = '1' limit 5";
+        $GLOBALS['sq']->getTableOwner() . ".UserMovie as al2 where al1.IdMovie = al2.IdMovie and al2.IdUser = ".$GLOBALS['sq']->getMAppUserId()." and al1.active = '1' ";
+
+        if($limite===true){
+            $sql = $sql . "limit 5";
+        }
 
         $result = $GLOBALS['sq']->DbSelect_tablas($sql);
 
@@ -96,7 +100,11 @@ class ActionUsers
             $GLOBALS['sq']->connect_DB();
         }
 
-        $sql = "select  idmovie,cat,name,cover,sinopsis,trailler,details,duration,age from " . $GLOBALS['sq']->getTableOwner() . ".Movies where status ='".$id."' and active = '1' limit " . $limit;
+        $sql = "select  idmovie,cat,name,cover,sinopsis,trailler,details,duration,age from " . $GLOBALS['sq']->getTableOwner() . ".Movies where status ='".$id."' and active = '1' ";
+
+        if($limit>0){
+            $sql = $sql . " limit " . $limit;
+        }
 
         $result = $GLOBALS['sq']->DbSelect_tablas($sql);
 
@@ -126,6 +134,24 @@ class ActionUsers
         }
     }
 
+    public function carga_por_categoria($id)
+    {
+        $sql = ""; 
+        if ($GLOBALS['sq']->getIsOpen() === false) {
+            $GLOBALS['sq']->connect_DB();
+        }
+
+        $sql = "select  idmovie,cat,name,cover,sinopsis,trailler,details,duration,age from " . $GLOBALS['sq']->getTableOwner() . ".Movies where type = '1' and cat ='".$id."' and active = '1' ";
+
+        
+        $result = $GLOBALS['sq']->DbSelect_tablas($sql);
+
+        if ($GLOBALS['sq']->fallo_query == false) {
+
+            //$this->setresultado($result);
+            return $result ;      
+        }
+    }
 
     public function obtener_notificaciones()
     {
@@ -259,6 +285,50 @@ class ActionUsers
         }
         return;
         
+    }
+
+    public function borrar_favorita($user,$movie)
+    {
+        $sql ="";
+
+        $sql = "delete from " . $GLOBALS['sq']->getTableOwner() . ".UserMovie ";
+        $sql = $sql. "where iduser = '". $user ."' and idmovie = '". $movie ."'";
+
+        $GLOBALS['sq']->DB_Execute($sql);
+
+        if ($GLOBALS['sq']->fallo_query == true) {
+
+                $this->setError("Fallo al eliminar la pelicua a favoritos. ");
+                $this->setType("error"); 
+        } 
+        else{
+
+            $this->setError("Pelicula elimanda correctamente");
+            $this->setType("ok");
+            
+        }
+        return;
+        
+    }
+
+    public function BuscarPelis($info)
+    {
+        $sql = ""; 
+        if ($GLOBALS['sq']->getIsOpen() === false) {
+            $GLOBALS['sq']->connect_DB();
+        }
+
+        $sql = "select  idmovie,cat,name,cover,sinopsis,trailler,details,duration,age from " . $GLOBALS['sq']->getTableOwner() . ".Movies where name like '%".$info."%'";
+
+        
+
+        $result = $GLOBALS['sq']->DbSelect_tablas($sql);
+
+        if ($GLOBALS['sq']->fallo_query == false) {
+
+            //$this->setresultado($result);
+            return $result ;      
+        }
     }
 }
 

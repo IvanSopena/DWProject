@@ -2,7 +2,6 @@
 
 <body>
 
-
 <div class="wrapper">
             <div class="container pt-5">
                 <div class="row no-gutters height-self-center">
@@ -10,7 +9,7 @@
                         <div class="iq-error position-relative">
                             <img src="/public/img/errors/404.png" class="img-fluid iq-error-img" alt="">
                             <h2 class="mb-0 mt-4">Oops! Esta pagina no se ha encontrado.</h2>
-                            <p>La peticion que has hecho no se encuentra.</p>
+                            <p>Vuelve a intentarlo mas tarde</p>
                             <a class="btn btn-hover mt-3" href="/home"><i class="fa fa-home"></i> Volver</a>
                         </div>
                     </div>

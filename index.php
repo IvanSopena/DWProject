@@ -76,8 +76,27 @@ $router->add('/add_fav', function() {
     $GLOBALS['cover']->agregar_pelicula(); 
 });
 
+$router->add('/del_fav', function() {
+    $GLOBALS['cover']->borrar_pelicula(); 
+});
+
+$router->add('/viewall', function() {
+    $GLOBALS['cover']->vertodas();
+    
+});
+
+$router->add('/search', function() {
+    $GLOBALS['cover']->buscar();
+    
+});
+
 $router->add('/close_acount', function() {
     $GLOBALS['cover']->delete();
+    
+});
+
+$router->add('/movies', function() {
+    $GLOBALS['cover']->movies();
     
 });
 

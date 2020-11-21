@@ -151,7 +151,7 @@ class Cover extends Controlador
 		session_start();
 		$triller = $model->pelicula_para_ver($_GET["id"]);
 		$GLOBALS['sq']->refrescar_credenciales($_SESSION["user"]);
-		$this->vista('tv', $triller);
+		$this->vista('viewer', $triller);
 	}
 	
 
@@ -167,6 +167,48 @@ class Cover extends Controlador
 		$GLOBALS['error'] = $model->getError();
 
 		$this->vista('usercover', '');
+	}
+
+	public function borrar_pelicula()
+	{
+		$GLOBALS['sq']->connect_DB();
+		$model = $this->modelo('ActionUsers');
+		session_start();
+		$model->borrar_favorita($_GET["id"],$_GET["mov"]);
+		$GLOBALS['sq']->refrescar_credenciales($_SESSION["user"]);
+
+		$GLOBALS['tipo'] = $model->getType();
+		$GLOBALS['error'] = $model->getError();
+
+		$this->vista('viewall', 'fav');
+	}
+
+
+	public function vertodas()
+	{
+
+		session_start();
+		$GLOBALS['sq']->connect_DB();
+		$GLOBALS['sq']->refrescar_credenciales($_SESSION["user"]);
+		$this->vista('viewall', $_GET["id"]);
+	}
+
+	public function buscar()
+	{
+
+		session_start();
+		$GLOBALS['sq']->connect_DB();
+		$GLOBALS['sq']->refrescar_credenciales($_SESSION["user"]);
+		$this->vista('viewall', $_POST["busqueda"]);
+	}
+
+	public function movies()
+	{
+
+		session_start();
+		$GLOBALS['sq']->connect_DB();
+		$GLOBALS['sq']->refrescar_credenciales($_SESSION["user"]);
+		$this->vista('movies', '');
 	}
 }
 

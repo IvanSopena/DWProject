@@ -1,9 +1,10 @@
 <?php 
 require_once("Template/header.php"); 
 require_once('server/models/ActionUsers.php'); ?>
-<body >
 
-<?php 
+<body>
+
+    <?php 
 require_once("Template/navigation.php"); 
 
 $temp = "".$GLOBALS['error']; 
@@ -26,9 +27,9 @@ if ($temp != "") {
 
 ?>
 
-      <section id="home" class="iq-main-slider p-0">
-         <div id="home-slider" class="slider m-0 p-0">
-         <?php 
+    <section id="home" class="iq-main-slider p-0">
+        <div id="home-slider" class="slider m-0 p-0">
+            <?php 
             
             $modelo = new ActionUsers();
             $novedades = $modelo->cargaPelis(1,5);
@@ -82,34 +83,34 @@ if ($temp != "") {
                   $i=$i+1;
             }
            
-         ?>      
-            
-         </div>
-         
-         <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+         ?>
+
+        </div>
+
+        <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
             <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" width="44px" height="44px" id="circle"
-               fill="none" stroke="currentColor">
-               <circle r="20" cy="22" cx="22" id="test"></circle>
+                fill="none" stroke="currentColor">
+                <circle r="20" cy="22" cx="22" id="test"></circle>
             </symbol>
-         </svg>
-      </section>
+        </svg>
+    </section>
 
-      <div class="main-content">
-         <section id="iq-favorites">
+    <div class="main-content">
+        <section id="iq-favorites">
             <div class="container-fluid">
-               <div class="row">
-                  <div class="col-sm-12 overflow-hidden">
-                     <div class="iq-main-header d-flex align-items-center justify-content-between">
-                        <h4 class="main-title">Mis Favoritas</h4>
-                        <a href="movie-category.html" class="text-primary">Ver Todas</a>
-                     </div>
-                     <div class="favorites-contens">
-                        <ul class="favorites-slider list-inline  row p-0 mb-0">
+                <div class="row">
+                    <div class="col-sm-12 overflow-hidden">
+                        <div class="iq-main-header d-flex align-items-center justify-content-between">
+                            <h4 class="main-title">MIS 5 PELIS FAVORITAS</h4>
+                            <a href="#" onclick="viewall('fav')" class="text-primary">Ver Todas las Favoritas</a>
+                        </div>
+                        <div class="favorites-contens">
+                            <ul class="favorites-slider list-inline  row p-0 mb-0">
 
-                        <?php 
+                                <?php 
             
             $modelo = new ActionUsers();
-            $favoritas = $modelo->buscar_favoritas();
+            $favoritas = $modelo->buscar_favoritas(true);
             
             
             while ($dato = $favoritas->fetch()){
@@ -136,25 +137,25 @@ if ($temp != "") {
            </li>";
                   
             }
-         ?>      
-                           
-                        </ul>
-                     </div>
-                  </div>
-               </div>
+         ?>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-         </section>
-         <section id="iq-upcoming-movie">
+        </section>
+        <section id="iq-upcoming-movie">
             <div class="container-fluid">
-               <div class="row">
-                  <div class="col-sm-12 overflow-hidden">
-                     <div class="iq-main-header d-flex align-items-center justify-content-between">
-                        <h4 class="main-title">Proximos Extrenos</h4>
-                        <a href="movie-category.html" class="text-primary">Ver todas</a>
-                     </div>
-                     <div class="upcoming-contens">
-                        <ul class="favorites-slider list-inline row p-0 mb-0">
-                        <?php 
+                <div class="row">
+                    <div class="col-sm-12 overflow-hidden">
+                        <div class="iq-main-header d-flex align-items-center justify-content-between">
+                            <h4 class="main-title">TOP 5 PROXIMOS ESTRENOS</h4>
+                            <a href="#" onclick="viewall('est')" class="text-primary">Ver todos los Estrenos</a>
+                        </div>
+                        <div class="upcoming-contens">
+                            <ul class="favorites-slider list-inline row p-0 mb-0">
+                                <?php 
             
             $modelo = new ActionUsers();
             $estrenos = $modelo->cargaPelis(2,5);
@@ -192,26 +193,26 @@ if ($temp != "") {
            </li>";
                   
             }
-         ?> 
-                        </ul>
-                     </div>
-                  </div>
-               </div>
+         ?>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-         </section>
+        </section>
 
-         <section id="iq-topten">
+        <section id="iq-topten">
             <div class="container-fluid">
-               <div class="row">
-                  <div class="col-sm-12 overflow-hidden">
-                     <div class="iq-main-header d-flex align-items-center justify-content-between">
-                        <h4 class="main-title topten-title-sm">Nuestro Top 8</h4>
-                     </div>
-                     <div class="topten-contens">
-                        <h4 class="main-title topten-title">Nuestro Top 8</h4>
-                        <ul id="top-ten-slider" class="list-inline p-0 m-0  d-flex align-items-center">
-                        
-                        <?php 
+                <div class="row">
+                    <div class="col-sm-12 overflow-hidden">
+                        <div class="iq-main-header d-flex align-items-center justify-content-between">
+                            <h4 class="main-title topten-title-sm">NUESTRO TOP 8</h4>
+                        </div>
+                        <div class="topten-contens">
+                            <h4 class="main-title topten-title">NUESTRO TOP 8</h4>
+                            <ul id="top-ten-slider" class="list-inline p-0 m-0  d-flex align-items-center">
+
+                                <?php 
             
             $modelo = new ActionUsers();
             $estrenos = $modelo->cargaPelis(3,8);
@@ -226,12 +227,12 @@ if ($temp != "") {
             }
 
             ?>
-                        
-                           
-                        </ul>
-                        <div class="vertical_s">
-                           <ul id="top-ten-slider-nav" class="list-inline p-0 m-0  d-flex align-items-center">
-                           <?php 
+
+
+                            </ul>
+                            <div class="vertical_s">
+                                <ul id="top-ten-slider-nav" class="list-inline p-0 m-0  d-flex align-items-center">
+                                    <?php 
                         
                                     $modelo = new ActionUsers();
                                     $estrenos = $modelo->cargaPelis(3,8);
@@ -260,27 +261,27 @@ if ($temp != "") {
                                     }
 
                                     ?>
-                                      
-                                       
-                           </ul>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </section>
 
-         <section id="iq-suggestede" class="s-margin">
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="iq-suggestede" class="s-margin">
             <div class="container-fluid">
-               <div class="row">
-                  <div class="col-sm-12 overflow-hidden">
-                     <div class="iq-main-header d-flex align-items-center justify-content-between">
-                        <h4 class="main-title">Tendencias</h4>
-                        <a href="show-category.html" class="text-primary">Ver todas</a>
-                     </div>
-                     <div class="suggestede-contens">
-                        <ul class="list-inline favorites-slider row p-0 mb-0">
-                        <?php 
+                <div class="row">
+                    <div class="col-sm-12 overflow-hidden">
+                        <div class="iq-main-header d-flex align-items-center justify-content-between">
+                            <h4 class="main-title">TOP 5 EN TENDENCIAS</h4>
+                            <a href="#" onclick="viewall('ten')" class="text-primary">Ver todas las Tendencias</a>
+                        </div>
+                        <div class="suggestede-contens">
+                            <ul class="list-inline favorites-slider row p-0 mb-0">
+                                <?php 
             
             $modelo = new ActionUsers();
             $estrenos =  $modelo->cargaPelis(5,5);
@@ -316,18 +317,18 @@ if ($temp != "") {
            </li>";
                   
             }
-         ?> 
-                        </ul>
-                     </div>
-                  </div>
-               </div>
+         ?>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-         </section>
-      </div>
-      
+        </section>
+    </div>
 
-      <section id="parallex" class="parallax-window">
-            <?php 
+
+    <section id="parallex" class="parallax-window">
+        <?php 
                   
                   $modelo = new ActionUsers();
                   $diaria = $modelo->cargaPelis(6,1);
@@ -382,18 +383,18 @@ if ($temp != "") {
                </div>
                <style> .parallax-window { height: 100%; padding: 100px 0; position: relative; background: url('".$dato['cover']."')center center; background-size: cover; background-attachment: fixed; } </style>";
             }
-            ?> 
-      </section>
+            ?>
+    </section>
 
-      <div id="back-to-top">
-         <a class="top" href="#top" id="top"> <i class="fa fa-angle-up"></i> </a>
-      </div>
+    <div id="back-to-top">
+        <a class="top" href="#top" id="top"> <i class="fa fa-angle-up"></i> </a>
+    </div>
 
-     
 
-      <?php require_once("Template/footernavigation.php"); ?>
-      <?php require_once("Template/footer.php"); ?>
-   </body>
+
+    <?php require_once("Template/footernavigation.php"); ?>
+    <?php require_once("Template/footer.php"); ?>
+</body>
 
 
 </html>
