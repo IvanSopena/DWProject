@@ -153,7 +153,7 @@
                         <h5 class="mb-3 pb-3 mt-4 a-border">Opciones</h5>
                         <div class="row">
                             <div class="col-12 setting">
-                                <a href="#" class="text-body d-block mb-1">Ver la actividad reciente</a>
+                               
                                 <a href="/logoff" class="text-body d-block mb-1">Cerrar sesión en todos los dispositivos </a>
                                 
                             </div>                            

@@ -210,5 +210,14 @@ class Cover extends Controlador
 		$GLOBALS['sq']->refrescar_credenciales($_SESSION["user"]);
 		$this->vista('movies', '');
 	}
+
+	public function series()
+	{
+
+		session_start();
+		$GLOBALS['sq']->connect_DB();
+		$GLOBALS['sq']->refrescar_credenciales($_SESSION["user"]);
+		$this->vista('series', '');
+	}
 }
 

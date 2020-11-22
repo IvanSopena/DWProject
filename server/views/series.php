@@ -38,7 +38,7 @@ if ($temp != "") {
                 <div class="row">
                     <div class="col-sm-12 overflow-hidden">
                         <div class="iq-main-header d-flex align-items-center justify-content-between">
-                            <h4 class="main-title">PELICULAS DE COMEDIA</h4>
+                            <h4 class="main-title">SERIES DE COMEDIA</h4>
                            
                         </div>
                         <div class="upcoming-contens">
@@ -46,7 +46,7 @@ if ($temp != "") {
                                 <?php 
             
             $modelo = new ActionUsers();
-            $datos = $modelo->carga_por_categoria(1,1);
+            $datos = $modelo->carga_por_categoria(1,2);
             
             
             while ($dato = $datos->fetch()){
@@ -94,14 +94,14 @@ if ($temp != "") {
                 <div class="row">
                     <div class="col-sm-12 overflow-hidden">
                         <div class="iq-main-header d-flex align-items-center justify-content-between">
-                            <h4 class="main-title">PELICULAS ROMANTICAS</h4>
+                            <h4 class="main-title">SERIES ROMANTICAS</h4>
                         </div>
                         <div class="upcoming-contens">
                             <ul class="favorites-slider list-inline row p-0 mb-0">
                                 <?php 
             
             $modelo = new ActionUsers();
-            $datos = $modelo->carga_por_categoria(2,1);
+            $datos = $modelo->carga_por_categoria(2,2);
             
             
             while ($dato = $datos->fetch()){
@@ -149,7 +149,7 @@ if ($temp != "") {
                 <div class="row">
                     <div class="col-sm-12 overflow-hidden">
                         <div class="iq-main-header d-flex align-items-center justify-content-between">
-                            <h4 class="main-title">PELICULAS DE TERROR</h4>
+                            <h4 class="main-title">SERIES DE TERROR</h4>
                            
                         </div>
                         <div class="upcoming-contens">
@@ -157,7 +157,7 @@ if ($temp != "") {
                                 <?php 
             
             $modelo = new ActionUsers();
-            $datos = $modelo->carga_por_categoria(3,1);
+            $datos = $modelo->carga_por_categoria(3,2);
             
             
             while ($dato = $datos->fetch()){
@@ -205,14 +205,14 @@ if ($temp != "") {
                 <div class="row">
                     <div class="col-sm-12 overflow-hidden">
                         <div class="iq-main-header d-flex align-items-center justify-content-between">
-                            <h4 class="main-title">PELICULAS DE DRAMA</h4>
+                            <h4 class="main-title">SERIES DE DRAMA</h4>
                         </div>
                         <div class="upcoming-contens">
                             <ul class="favorites-slider list-inline row p-0 mb-0">
                                 <?php 
             
             $modelo = new ActionUsers();
-            $datos = $modelo->carga_por_categoria(4,1);
+            $datos = $modelo->carga_por_categoria(4,2);
             
             
             while ($dato = $datos->fetch()){
@@ -259,7 +259,7 @@ if ($temp != "") {
                 <div class="row">
                     <div class="col-sm-12 overflow-hidden">
                         <div class="iq-main-header d-flex align-items-center justify-content-between">
-                            <h4 class="main-title">PELICULAS  INFANTILES</h4>
+                            <h4 class="main-title">SERIES INFANTILES</h4>
                            
                         </div>
                         <div class="upcoming-contens">
@@ -267,7 +267,7 @@ if ($temp != "") {
                                 <?php 
             
             $modelo = new ActionUsers();
-            $datos = $modelo->carga_por_categoria(5,1);
+            $datos = $modelo->carga_por_categoria(5,2);
             
             
             while ($dato = $datos->fetch()){
@@ -315,7 +315,7 @@ if ($temp != "") {
                 <div class="row">
                     <div class="col-sm-12 overflow-hidden">
                         <div class="iq-main-header d-flex align-items-center justify-content-between">
-                            <h4 class="main-title">PELICULAS DE FANTASIA</h4>
+                            <h4 class="main-title">SERIES DE FANTASIA</h4>
                             
                         </div>
                         <div class="upcoming-contens">
@@ -323,7 +323,7 @@ if ($temp != "") {
                                 <?php 
             
             $modelo = new ActionUsers();
-            $datos = $modelo->carga_por_categoria(6,1);
+            $datos = $modelo->carga_por_categoria(6,2);
             
             
             while ($dato = $datos->fetch()){
@@ -371,14 +371,14 @@ if ($temp != "") {
                 <div class="row">
                     <div class="col-sm-12 overflow-hidden">
                         <div class="iq-main-header d-flex align-items-center justify-content-between">
-                            <h4 class="main-title">PELICULAS DE THILLER</h4>
+                            <h4 class="main-title">SERIES DE THILLER</h4>
                         </div>
                         <div class="upcoming-contens">
                             <ul class="favorites-slider list-inline row p-0 mb-0">
                                 <?php 
             
             $modelo = new ActionUsers();
-            $datos = $modelo->carga_por_categoria(7,1);
+            $datos = $modelo->carga_por_categoria(7,2);
             
             
             while ($dato = $datos->fetch()){
@@ -426,7 +426,7 @@ if ($temp != "") {
                 <div class="row">
                     <div class="col-sm-12 overflow-hidden">
                         <div class="iq-main-header d-flex align-items-center justify-content-between">
-                            <h4 class="main-title">PELICULAS DOCUMENTALES</h4>
+                            <h4 class="main-title">SERIES DE DOCUMENTALES</h4>
                             
                         </div>
                         <div class="upcoming-contens">
@@ -434,7 +434,7 @@ if ($temp != "") {
                                 <?php 
             
             $modelo = new ActionUsers();
-            $datos = $modelo->carga_por_categoria(8,1);
+            $datos = $modelo->carga_por_categoria(8,2);
             
             
             while ($dato = $datos->fetch()){
@@ -482,7 +482,7 @@ if ($temp != "") {
                 <div class="row">
                     <div class="col-sm-12 overflow-hidden">
                         <div class="iq-main-header d-flex align-items-center justify-content-between">
-                            <h4 class="main-title">PELICULAS BELICAS</h4>
+                            <h4 class="main-title">SERIES BELICAS</h4>
                             
                         </div>
                         <div class="upcoming-contens">
@@ -490,7 +490,7 @@ if ($temp != "") {
                                 <?php 
             
             $modelo = new ActionUsers();
-            $datos = $modelo->carga_por_categoria(10,1);
+            $datos = $modelo->carga_por_categoria(10,2);
             
             
             while ($dato = $datos->fetch()){
@@ -538,7 +538,7 @@ if ($temp != "") {
                 <div class="row">
                     <div class="col-sm-12 overflow-hidden">
                         <div class="iq-main-header d-flex align-items-center justify-content-between">
-                            <h4 class="main-title">PELICULAS DE CIENCIA FICCIÓN</h4>
+                            <h4 class="main-title">SERIES DE CIENCIA FICCIÓN</h4>
                             
                         </div>
                         <div class="upcoming-contens">
@@ -546,7 +546,7 @@ if ($temp != "") {
                                 <?php 
             
             $modelo = new ActionUsers();
-            $datos = $modelo->carga_por_categoria(11,1);
+            $datos = $modelo->carga_por_categoria(11,2);
             
             
             while ($dato = $datos->fetch()){

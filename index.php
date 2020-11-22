@@ -100,6 +100,11 @@ $router->add('/movies', function() {
     
 });
 
+$router->add('/series', function() {
+    $GLOBALS['cover']->series();
+    
+});
+
 $router->add('/.*', function () {
     require_once  'Server/views/404.php';
 });

@@ -22,7 +22,7 @@
                                         <a href="/home">Inicio</a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="#">Series</a>
+                                        <a href="/series">Series</a>
                                     </li>
                                     <li class="menu-item">
                                         <a href="/movies">Peliculas</a>

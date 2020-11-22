@@ -134,14 +134,14 @@ class ActionUsers
         }
     }
 
-    public function carga_por_categoria($id)
+    public function carga_por_categoria($id,$tipo)
     {
         $sql = ""; 
         if ($GLOBALS['sq']->getIsOpen() === false) {
             $GLOBALS['sq']->connect_DB();
         }
 
-        $sql = "select  idmovie,cat,name,cover,sinopsis,trailler,details,duration,age from " . $GLOBALS['sq']->getTableOwner() . ".Movies where type = '1' and cat ='".$id."' and active = '1' ";
+        $sql = "select  idmovie,cat,name,cover,sinopsis,trailler,details,duration,age from " . $GLOBALS['sq']->getTableOwner() . ".Movies where type = '".$tipo."' and cat ='".$id."' and active = '1' ";
 
         
         $result = $GLOBALS['sq']->DbSelect_tablas($sql);

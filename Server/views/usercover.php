@@ -301,6 +301,7 @@ if ($temp != "") {
                           <span class='text-white'>" . $dato['duration'] ." min</span>
                           <div class='block-social-info'>
                            <ul class='list-inline p-0 m-0 music-play-lists'>
+                           <a href='#' onclick='addfav(". $dato['idmovie'] .",". $GLOBALS['sq']->getMAppUserId() .")'> 
                               <li><span><i class='fa fa-heart'></i></span></li>
                            </ul>
                         </div>
@@ -358,7 +359,7 @@ if ($temp != "") {
                                  <li><a href='javascript:void(0);' class='pl-2 text-primary'><i class='fa fa-star-half-o'
                                     aria-hidden='true'></i></a></li>
                               </ul>
-                              <span class='text-white ml-3'>9.2 (lmdb)</span>
+                              <span class='text-white ml-3'>4.5</span>
                            </div>
                            <div class='movie-time d-flex align-items-center mb-3'>
                               <div class='badge badge-secondary mr-3'>" . $dato['age'] ."</div>
