@@ -21,17 +21,14 @@ class Db_CLASS {
     private $OpenTrans;
     public $resultado;
     public $fallo_query;
-    public $error_login = "";
-    public $errors = false;
     public $mAppUserName = "";
     public $mRealUserName = "";
     public $mAppUserId = "";
     public $mAppUserPwd = "";
     public $mAppRol = 0;
     public $foto = "";
-    public $count;
-    public $UserName = "";
-    public $UserSurname = "";
+    public $errors = "";
+ 
 
     //Creamos el constructor de la clase
     public function __construct()
@@ -80,35 +77,8 @@ class Db_CLASS {
     function setOpenTrans($OpenTrans) {
         $this->OpenTrans = $OpenTrans;
     }
-    function getCount() {
-        return $this->count;
-    }
-
-    function setCount($count) {
-        $this->count = $count;
-    }
 
     function getUserName() {
-        return $this->UserName;
-    }
-
-    function setUserName($data) {
-        $this->UserName = $data;
-    }
-
-    function getUserSurname() {
-        return $this->UserSurname;
-    }
-
-    function setUserSurname($data) {
-        $this->UserSurname = $data;
-    }
-        
-    function getErrors() {
-        return $this->errors;
-    }
-
-    function getMAppUserName() {
         return $this->mAppUserName;
     }
 
@@ -127,8 +97,13 @@ class Db_CLASS {
     function getMAppRol() {
         return $this->mAppRol;
     }
-    function setErrors($errors) {
-        $this->errors = $errors;
+
+    function getErrors() {
+        return $this->errors;
+    }
+
+    function setErrors($errores) {
+        $this->errors = $errores;
     }
 
     function setMAppUserName($mAppUserName) {
@@ -181,7 +156,7 @@ class Db_CLASS {
             return $this->Connect_DB;
             
         } catch (Exception $ex) {
-            $this->ClsLastError = "Error al realizar la conexion: " . $ex->getMessage();
+            $this->ClsLastError =  $ex->getMessage();
             $this->setIsOpen(false);
         }
     }
@@ -196,29 +171,34 @@ class Db_CLASS {
 
     public function refrescar_credenciales($id)
     {
-        $sentencia = "";
+        try{
 
-      
-        $sentencia = "select  Nombre,Apellidos,Email,password, CONCAT(Nombre,' ', Apellidos) as Usuario , Id, rol,foto from " . $GLOBALS['sq']->getTableOwner() . ".Users where id= '" . $id . "'";
+            $sentencia = "";
 
-        $result = $this->DB_Select($sentencia);
-
-        if ($this->fallo_query == true) {
-
-            $this->setClsLastError("Fallo al buscar el usuario de la aplicación." . $this->DbLastSQL);
-            $this->setErrors(true);
-            return;
-        } else {
+            $sentencia = "select  Nombre,Apellidos,Email,password, CONCAT(Nombre,' ', Apellidos) as Usuario ,
+            Id, foto from " . $this->getTableOwner() . ".Users where id ='".$id."'";
 
 
-            $this->setMAppUserName($result['Email']);
-            $this->setMAppUserPwd($result['password']);
-            $this->setMRealUserName($result['Usuario']);
-            $this->setMAppUserId($result['Id']);
-            $this->setMAppRol($result['rol']);
-            $this->setUserName($result['Nombre']); 
-            $this->setUserSurname($result['Apellidos']); 
-            $this->setfoto($result['foto']); 
+            $result = $this->DB_Select($sentencia);
+            if ($this->fallo_query == true) {
+
+                $this->setClsLastError("Fallo al buscar el usuario de la aplicación." . $this->DbLastSQL);
+                $this->setErrors(true);
+                return;
+            } else {
+
+
+                $this->setMAppUserName($result['Email']);
+                $this->setMAppUserPwd($result['password']);
+                $this->setMRealUserName($result['Usuario']);
+                $this->setMAppUserId($result['Id']);
+                $this->setfoto($result['foto']); 
+
+                setcookie("Foto", $result['foto'], 0, "/"); 
+            }
+        }
+        catch (Exception $ex) {
+            $this->ClsLastError =  $ex->getMessage();
         }
             
     }
@@ -228,53 +208,60 @@ class Db_CLASS {
          * Funcion que se encarga de verificar si el usuario esta dado de alta en la base de datos
          * y si la contraseña que ha introducido es la correcta. 
          */
-        $sentencia = "";
+        try{
+            $sentencia = "";
 
-      
+       
 
-        $sentencia = "select  Nombre,Apellidos,Email,password, CONCAT(Nombre,' ', Apellidos) as Usuario , Id, rol,foto from " . $this->getTableOwner() . ".Users where upper (Email)= '" . strtoupper($AppUser) . "'";
-
-        $result = $this->DB_Select($sentencia);
-
-        if ($this->fallo_query == true) {
-
-            $this->setClsLastError("Fallo al buscar el usuario de la aplicación." . $this->DbLastSQL);
-            $this->setErrors(true);
-            return;
-        } else {
+            $sentencia = "select  Nombre,Apellidos,Email,password, CONCAT(Nombre,' ', Apellidos) as Usuario ,
+            Id, foto from " . $this->getTableOwner() . ".Users where activo ='1' 
+            and upper (Email)= '" . strtoupper($AppUser) . "'";
 
 
-            $this->setMAppUserName($result['Email']);
-            $this->setMAppUserPwd($result['password']);
-            $this->setMRealUserName($result['Usuario']);
-            $this->setMAppUserId($result['Id']);
-            $this->setMAppRol($result['rol']);
-            $this->setUserName($result['Nombre']); 
-            $this->setUserSurname($result['Apellidos']); 
-            $this->setfoto($result['foto']); 
-            
-            
-            $AppPwd = $GLOBALS['security']->decrypt($result['password'], strtoupper($AppUser)); 
-            
-         	
-            
-            if ($this->getMAppUserPwd() == "") {
-                $this->setClsLastError("El usuario introducido no esta dado de alta en el sistema.");
-                $this->setErrors(true);
-                return;
-            }
+            $result = $this->DB_Select($sentencia);
 
+            if ($this->fallo_query == true) {
 
-            if ($AppPassword != $AppPwd) {
-                $this->setClsLastError("Contraseña del usuario de la aplicación incorrecta.");
+                $this->setClsLastError("Fallo al buscar el usuario de la aplicación.");
                 $this->setErrors(true);
                 return;
             } else {
 
 
-                $this->setErrors(false);
-                return;
+                $this->setMAppUserName($result['Email']);
+                $this->setMAppUserPwd($result['password']);
+                $this->setMRealUserName($result['Usuario']);
+                $this->setMAppUserId($result['Id']);
+                $this->setfoto($result['foto']); 
+                
+                setcookie("Foto", $result['foto'],time()+3600, "", "localhost");  
+                setcookie("Id", $result['Id']); 
+                
+                $AppPwd = $GLOBALS['security']->decrypt($result['password'], strtoupper($AppUser)); 
+                
+                
+                
+                if ($this->getMAppUserPwd() == "") {
+                    $this->setClsLastError("El usuario introducido no esta dado de alta en el sistema.");
+                    $this->setErrors(true);
+                    return;
+                }
+
+
+                if ($AppPassword != $AppPwd) {
+                    $this->setClsLastError("Contraseña del usuario de la aplicación incorrecta.");
+                    $this->setErrors(true);
+                    return;
+                } else {
+
+
+                    $this->setErrors(false);
+                    return;
+                }
             }
+        }
+        catch (Exception $ex) {
+            $this->ClsLastError =  $ex->getMessage();
         }
     }
 
@@ -291,7 +278,7 @@ class Db_CLASS {
             
             
         } catch (Exception $ex) {
-            $this->setClsLastError($ex);
+            $this->setClsLastError($ex->getMessage());
             $this->setDbLastSQL($SQL);
             $this->fallo_query = true;
             return;

@@ -2,10 +2,7 @@
 
 class LoginModel
 {
-
-    /* private $sq; */
-    private $Error;
-    private $Type;
+    
     private $View;
 
     public function __construct()
@@ -22,155 +19,102 @@ class LoginModel
         $this->View = $view;
     }
 
-
-    function getError()
-    {
-        return $this->Error;
-    }
-
-    function setError($err)
-    {
-        $this->Error = $err;
-    }
-
-    function getType()
-    {
-        return $this->Type;
-    }
-
-    function setType($type)
-    {
-        $this->Type = $type;
-    }
-
     public function login($User, $Password)
     {
         
-        if ($GLOBALS['sq']->getIsOpen() === true) 
+        try
         {
+            if ($GLOBALS['sq']->getIsOpen() === true) 
+            {
             $GLOBALS['sq']->AppOpen($User, $Password);
 
             if ($GLOBALS['sq']->geterrors() == true) {
+                $GLOBALS['error']= $GLOBALS['sq']->getClsLastError();
+                $GLOBALS['type']="warning";
 
-                $this->setError($GLOBALS['sq']->getClsLastError());
-                $this->setType("error");
                 $this->setView("login");
-                return false;
+                return;
             } 
             else 
             {
-                    session_start();
-
-                    $_SESSION["user"] = $GLOBALS['sq']->getMAppUserId();
-
-                    if ($GLOBALS['sq']->getMAppRol() == 1) {
-                        $this->setView("usercover");
-                    } else {
-                        $this->setView("register");
-                    }
-
-                    return true;
+                
+                session_start();
+                $_SESSION["user"] = $GLOBALS['sq']->getMAppUserId(); 
+                    
+                $this->setView("main");
+                return;
             }
 
-        } else {
-            $this->setError($GLOBALS['sq']->getClsLastError());
-            $this->setType("error");
+            } else {
+                $GLOBALS['error']= "Error de conexión: ".$GLOBALS['sq']->getClsLastError();
+                $GLOBALS['type']="error";
+                $this->setView("login");
+                return;
+            }
+        }
+        catch(Exception $ex)
+        {
+            $GLOBALS['error']= $ex->getmessage();
+            $GLOBALS['type']="warning";
             $this->setView("login");
-            return false;
+            return;
         }
     }
 
-     public function OpenSession($id)
-    {
-        if ($GLOBALS['sq']->getIsOpen() === true) {
-            
-            $sentencia = "";
-
-            $sentencia = "select  Nombre,Apellidos,Email,password, CONCAT(Nombre,' ', Apellidos) as Usuario , Id, rol,foto from " . $GLOBALS['sq']->getTableOwner() . ".Users where id= '" . $id . "'";
-
-            $result = $GLOBALS['sq']->DB_Select($sentencia);
-
-            if ($GLOBALS['sq']->fallo_query == true) {
-
-                $this->setError("Fallo al buscar el usuario de la aplicación." . $GLOBALS['sq']->getDbLastSQL());
-                $this->setType("error");
-                $this->setView("login");
-                return false;
-            } 
-            else 
-            {
-
-                $GLOBALS['sq']->setMAppUserName($result['Email']);
-                $GLOBALS['sq']->setMAppUserPwd($result['password']);
-                $GLOBALS['sq']->setMRealUserName($result['Usuario']);
-                $GLOBALS['sq']->setMAppUserId($result['Id']);
-                $GLOBALS['sq']->setMAppRol($result['rol']);
-                $GLOBALS['sq']->setUserName($result['Nombre']); 
-                $GLOBALS['sq']->setUserSurname($result['Apellidos']); 
-                $GLOBALS['sq']->setfoto($result['foto']);  
-           
-                return true;
-            }
-        } 
-        else 
-        {
-            $this->setError($GLOBALS['sq']->getClsLastError());
-            $this->setType("error");
-            $this->setView("login");
-            return false;
-        }
-    } 
-
     public function AddUser($Nombre,$Apellidos,$Email,$password)
     {
-        $password = $GLOBALS['security']->crypt($password, strtoupper($Email)); 
+        try{
+            $password = $GLOBALS['security']->crypt($password, strtoupper($Email)); 
 
-        $sql = "";
+            $sql = "";
 
-        $sql = "Select max(id) +1 as id from " . $GLOBALS['sq']->getTableOwner() . ".Users";
-        $result = $GLOBALS['sq']->DB_Select($sql);
-
-        if ($GLOBALS['sq']->fallo_query == true) {
-
-            $this->setError("Fallo al generar el nuevo usuario de la aplicación. " . $GLOBALS['sq']->getDbLastSQL());
-            $this->setType("error");
-            $this->setView("register");
-            return false;
-        } 
-        else
-        {
-            $Id = $result['id'];
-            $sql = "Insert into " . $GLOBALS['sq']->getTableOwner() . ".Users (Id,Nombre,Apellidos,Email,password,rol,foto,Activo) ";
-            $sql = $sql. "Values('". $Id ."','". $Nombre ."','". $Apellidos ."','". $Email ."','". $password ."','1','no_photo.jpg','1')";
-
-            $GLOBALS['sq']->DB_Execute($sql);
+            $sql = "Select max(id) +1 as id from " . $GLOBALS['sq']->getTableOwner() . ".Users";
+            $result = $GLOBALS['sq']->DB_Select($sql);
 
             if ($GLOBALS['sq']->fallo_query == true) {
 
-                $this->setError("Fallo al generar el nuevo usuario de la aplicación. " . $GLOBALS['sq']->getDbLastSQL());
-                $this->setType("error");
+                $GLOBALS['error']="Fallo al generar el nuevo usuario de la aplicación. ";
+                $GLOBALS['type']="error";
                 $this->setView("register");
                 return false;
             } 
-            else{
+            else
+            {
+                $Id = $result['id'];
+                $sql = "Insert into " . $GLOBALS['sq']->getTableOwner() . ".Users (Id,Nombre,Apellidos,Email,password,rol,foto,Activo) ";
+                $sql = $sql. "Values('". $Id ."','". $Nombre ."','". $Apellidos ."','". $Email ."','". $password ."','1','no_photo.jpg','1')";
 
-                session_start();
+                $GLOBALS['sq']->DB_Execute($sql);
 
-                $_SESSION["user"] = $Id;
+                if ($GLOBALS['sq']->fallo_query == true) {
 
-                $GLOBALS['sq']->setMAppUserName($Email);
-                $GLOBALS['sq']->setMAppUserPwd($password);
-                $GLOBALS['sq']->setMRealUserName($Nombre ." ". $Apellidos);
-                $GLOBALS['sq']->setMAppUserId($Id);
-                $GLOBALS['sq']->setfoto("no_photo.jpg");  
+                    $GLOBALS['error']="Fallo al generar el nuevo usuario de la aplicación. ";
+                    $GLOBALS['type']="error";
+                    $this->setView("register");
+                    return false;
+                } 
+                else{
 
+                    session_start();
 
-                return true;
+                    $_SESSION["user"] = $Id;
+
+                    $GLOBALS['sq']->setMAppUserName($Email);
+                    $GLOBALS['sq']->setMAppUserPwd($password);
+                    $GLOBALS['sq']->setMRealUserName($Nombre ." ". $Apellidos);
+                    $GLOBALS['sq']->setMAppUserId($Id);
+                    $GLOBALS['sq']->setfoto("no_photo.jpg");  
+                    return true;
+                }
             }
-
+        }
+        catch(Exception $ex)
+        {
+            $GLOBALS['error']= $ex->getmessage();
+            $GLOBALS['type']="warning";
+            return false;
         }
        
     }
 
-   
 }

@@ -484,6 +484,188 @@
 		}), jQuery(".upload-button").on("click", function () {
 			jQuery(".file-upload").click();
 		});
+
+		/*---------------------------------------------------------------------
+    		Validacion
+		  -----------------------------------------------------------------------*/
+		  $("#register_form").validate({
+			
+				rules: {
+					Nombre:{
+					required: true,
+					minlength: 2
+				  },
+				  Apellidos:{
+					required: true,
+					minlength: 2
+				  },
+				  Email:{
+					required: true,
+					email: true
+				  },
+				  city:{
+					required: true,
+					minlength: 2
+				  },
+				  chcek: {
+					required: true
+				  },
+				  password: {
+					required: true,
+					minlength: 8
+				  },
+				  verifica: {
+					required: true,
+					minlength: 8,
+					equalTo: "#password"
+				  }
+				  
+				},
+				messages: {
+					Nombre: {
+					 required: "El campo Nombre es obligatorio",
+					 minlength: "El campo de Nombre no puede ser inferior a 2 caracteres"
+				  },
+				  Apellidos: {
+					 required: "El campo Apellidos es obligatorio",
+					 minlength: "El campo de Apellidos no puede ser inferior a 2 caracteres"
+				  },
+				  Email: "Debe poner una dirección de correo electronico valida",
+				  
+				  chcek: {
+					required: "Debe aceptar las condiciones de uso antes de continuar"
+				  },
+				  
+				},
+	  
+			 
+			} );
+
+			$("#profile").validate({
+				rules: {
+				  name : {
+					required: true,
+					minlength: 3
+				  },
+				  surname: {
+					required: true,
+					minlength: 3
+				  },
+				  pass: {
+					  required: true,
+					  minlength: 8
+					},
+				  email: {
+					required: true,
+					email: true
+				  },
+				  country: {
+					  required: true,
+					  minlength: 3
+				  },
+				  brid: {
+					  required: true
+				  },
+					
+				  plan: { 
+					  required: true
+					 
+				  }
+					 
+				   
+				},
+				messages : {
+				  name: {
+					required: "El campo Nombre es obligatorio",
+					minlength: "El Nombre debería tener al menos 3 caracteres"
+				  },
+				  surname: {
+					required: "El campo Apellidos es obligatorio",
+					minlength: "El Apellidos debería tener al menos 3 caracteres"
+				  },
+				  email: {
+					required: "El campo Email es obligatorio",
+					email: "El formato del email debe ser abc@domain.tld"
+				  },
+				  pass:{
+					  required: "El campo Contraseña es obligatorio",
+					  minlength: "El Contraseña debería tener al menos 8 caracteres"
+				  },
+				  country:{
+					  required: "El campo Pais es obligatorio",
+					  minlength: "El Pais debería tener al menos 3 caracteres"
+				  },
+				  brid:{
+					  required: "El campo Fecha es obligatorio"
+				  },
+		  
+				  plan: {
+					required: "<br/>Debe elegir el plan del cliente."
+				  }
+				}
+			  });
+
+		  /*---------------------------------------------------------------------
+    		Validacion de contraseña
+		  -----------------------------------------------------------------------*/
+			$('#password').keyup(function (e) {
+				var strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
+				var mediumRegex = new RegExp("^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
+				var enoughRegex = new RegExp("(?=.{6,}).*", "g");
+				if (false == enoughRegex.test($(this).val())) {
+					$('#passstrength').html('Very weak!');
+					$('#password').removeClass();
+					$('#password').addClass('border-left-0 Password1 border-md veryweak');
+				} else if (strongRegex.test($(this).val())) {
+					$('#passstrength').html('Strong!');
+					$('#password').removeClass();
+					$('#password').addClass('border-left-0 Password1 border-md strong');
+				} else if (mediumRegex.test($(this).val())) {
+					$('#passstrength').html('Medium!');
+					$('#password').removeClass();
+					$('#password').addClass('border-left-0 Password1 border-md medium');
+				} else {
+					$('#passstrength').html('Weak!');
+					$('#password').removeClass();
+					$('#password').addClass('border-left-0 Password1 border-md weak');
+				}
+				return true;
+			});
+			
+	
+
+			$(document).ready(function() {
+
+				var readURL = function(input) {
+					if (input.files && input.files[0]) {
+						var reader = new FileReader();
+			
+						reader.onload = function (e) {
+							$('.profile-pic').attr('src', e.target.result);
+						}
+				
+						reader.readAsDataURL(input.files[0]);
+					}
+				}
+				
+			
+				 $(".file-upload").on('change', function(){
+					readURL(this);
+				});
+				
+				$(".upload-button").on('click', function() {
+				   $(".file-upload").click();
+				}); 
+			});
+
+			$('.g-recaptcha').asyncReCAPTCHA({
+				spinner: {
+				attach: true,
+				remove: true
+				}
+			});
+
+			
 	
 	});
 })(jQuery);

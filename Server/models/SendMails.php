@@ -9,29 +9,7 @@ require 'Server/app/PHPMailer/SMTP.php';
 
 class SendMails
 {
-    private $Error;
-    private $Type;
-    function getErrorMail()
-    {
-        return $this->Error;
-    }
-
-    function setErrorMail($err)
-    {
-        $this->Error = $err;
-    }
-
-    function getTypeMail()
-    {
-        return $this->Type;
-    }
-
-    function setTypeMail($type)
-    {
-        $this->Type = $type;
-    }
-
-
+    
     public function send_new_password ($user_mail,$new_password){
         $mail = new PHPMailer(true);
         try {
@@ -57,11 +35,15 @@ class SendMails
         
             $mail->send();
             
-            $this->setErrorMail("Su nueva contraseña esta en camino, revise su correo");
-            $this->setTypeMail("info");
-        } catch (Exception $e) {
-            $this->setErrorMail("Error al generar su nueva contraseña, pongase en contacto con nuestro servicio tecnico en el telefono 900123456");
-            $this->setTypeMail("error");
+            $GLOBALS['error'] ="Contraseña restaurada, Su nueva contraseña esta en camino, revise su correo";
+			$GLOBALS['type'] ="success";
+            /* $this->setErrorMail("Su nueva contraseña esta en camino, revise su correo");
+            $this->setTypeMail("info"); */
+        } catch (Exception $ex) {
+            $GLOBALS['error'] = $ex->getmessage();
+			$GLOBALS['type'] ="error";
+           /*  $this->setErrorMail("Error al generar su nueva contraseña, pongase en contacto con nuestro servicio tecnico en el telefono 900123456");
+            $this->setTypeMail("error"); */
         }
     }
 

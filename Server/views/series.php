@@ -28,7 +28,7 @@ require_once('server/models/MoviesModel.php');
     <br>
     <br>
     <br>
-    <h1  class='main-title'>NUESTRO CATALOGO DE PELICULAS</h1>
+    <h1  class='main-title'>NUESTRO CATALOGO DE SERIES</h1>
     <br>
     <br>
     <section id="iq-upcoming-movie">
@@ -43,7 +43,7 @@ require_once('server/models/MoviesModel.php');
                         <ul class="favorites-slider list-inline row p-0 mb-0">
                             <?php
                             $modelo = new MoviesModel();
-                            $datos = $modelo->carga_por_categoria(1, 1);
+                            $datos = $modelo->carga_por_categoria(1, 2);
 
 
                             while ($dato = $datos->fetch()) {
@@ -96,7 +96,7 @@ require_once('server/models/MoviesModel.php');
                         <ul class="favorites-slider list-inline row p-0 mb-0">
                             <?php
 $modelo = new MoviesModel();
-$datos = $modelo->carga_por_categoria(2, 1);
+$datos = $modelo->carga_por_categoria(2, 2);
 
 
 while ($dato = $datos->fetch()) {
@@ -150,7 +150,7 @@ while ($dato = $datos->fetch()) {
                         <ul class="favorites-slider list-inline row p-0 mb-0">
                             <?php
 $modelo = new MoviesModel();
-$datos = $modelo->carga_por_categoria(3, 1);
+$datos = $modelo->carga_por_categoria(3, 2);
 
 
 while ($dato = $datos->fetch()) {
@@ -203,7 +203,7 @@ while ($dato = $datos->fetch()) {
                         <ul class="favorites-slider list-inline row p-0 mb-0">
                             <?php
 $modelo = new MoviesModel();
-$datos = $modelo->carga_por_categoria(4, 1);
+$datos = $modelo->carga_por_categoria(4, 2);
 
 
 while ($dato = $datos->fetch()) {
@@ -256,7 +256,7 @@ while ($dato = $datos->fetch()) {
                         <ul class="favorites-slider list-inline row p-0 mb-0">
                             <?php
 $modelo = new MoviesModel();
-$datos = $modelo->carga_por_categoria(5, 1);
+$datos = $modelo->carga_por_categoria(5, 2);
 
 
 while ($dato = $datos->fetch()) {
@@ -310,7 +310,7 @@ while ($dato = $datos->fetch()) {
                         <ul class="favorites-slider list-inline row p-0 mb-0">
                             <?php
 $modelo = new MoviesModel();
-$datos = $modelo->carga_por_categoria(6, 1);
+$datos = $modelo->carga_por_categoria(6, 2);
 
 
 while ($dato = $datos->fetch()) {
@@ -363,7 +363,7 @@ while ($dato = $datos->fetch()) {
                         <ul class="favorites-slider list-inline row p-0 mb-0">
                             <?php
 $modelo = new MoviesModel();
-$datos = $modelo->carga_por_categoria(7, 1);
+$datos = $modelo->carga_por_categoria(7, 2);
 
 
 while ($dato = $datos->fetch()) {
@@ -417,7 +417,7 @@ while ($dato = $datos->fetch()) {
                         <ul class="favorites-slider list-inline row p-0 mb-0">
                             <?php
 $modelo = new MoviesModel();
-$datos = $modelo->carga_por_categoria(8, 1);
+$datos = $modelo->carga_por_categoria(8, 2);
 
 
 while ($dato = $datos->fetch()) {
@@ -471,7 +471,7 @@ while ($dato = $datos->fetch()) {
                         <ul class="favorites-slider list-inline row p-0 mb-0">
                             <?php
 $modelo = new MoviesModel();
-$datos = $modelo->carga_por_categoria(10, 1);
+$datos = $modelo->carga_por_categoria(10, 2);
 
 
 while ($dato = $datos->fetch()) {
@@ -525,7 +525,7 @@ while ($dato = $datos->fetch()) {
                         <ul class="favorites-slider list-inline row p-0 mb-0">
                             <?php
                             $modelo = new MoviesModel();
-                            $datos = $modelo->carga_por_categoria(11, 1);
+                            $datos = $modelo->carga_por_categoria(11, 2);
 
 
                             while ($dato = $datos->fetch()) {

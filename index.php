@@ -6,49 +6,45 @@ include 'server/app/Router.php';
 include 'server/app/Security.php';
 include 'server/config/Config.php';
 include 'server/library/Controlador.php';
-include  'server/controllers/Home.php';
-include  'server/controllers/Cover.php';
+include  'server/controllers/HomeController.php';
+include  'server/controllers/ActionsController.php';
+include  'server/controllers/MoviesController.php';
 include 'server/app/Db_CLASS.php';
 
 
 
-
-// Si está en el directorio raíz dejar así, si no especificar como primer parámetro '/la-subcarpeta'
-$error = "";
-$tipo= "";
-$router = new Router\Router('');
-$home = new Home();
-$cover = new Cover();
+$error = null;
+$type = null;
+$siteKey="6LelWAkaAAAAAD7_ZHqojpz4XHAes81593BrdlSM";
+$secretKey="6LelWAkaAAAAAMOjSxsoVWb0BAyi031H-5C8U9GL";
+$router = new Router\Router('/DWproject');
+$home = new HomeController();
+$actions = new ActionsController();
+$movies = new MoviesController();
 $sq = new Db_CLASS();
 $security = new Security();
 
+$GLOBALS['sq']->connect_DB();
 
+/***************  Rutas Controlador principal *******************/
 $router->add('/', function() {
     $GLOBALS['home']->index();
 });
 
-$router->add('/home', function() {
-    $GLOBALS['cover']->index();
-});
-
 $router->add('/logoff', function() {
-    $GLOBALS['cover']->logoff();
+    $GLOBALS['home']->logoff();
 });
 
-
-
-$router->add('/profile', function() {
-    session_start();
-    $GLOBALS['cover']->perfil();
+$router->post('/login', function() {
+    $GLOBALS['home']->login();
 });
 
 $router->add('/registro', function() {
     $GLOBALS['home']->registro();
 });
 
-$router->add('/registrar', function() {
+$router->post('/registrar', function() {
     $GLOBALS['home']->registrar_usuario();
-    $GLOBALS['cover']->perfil();
 });
 
 $router->add('/reset_password', function() { 
@@ -59,47 +55,61 @@ $router->add('/change_pass', function() {
     $GLOBALS['home']->cambiar_pass();
 });
 
-$router->post('/login', function() {
-    $GLOBALS['home']->login();
-});
-
-$router->add('/update_profile', function() {
-    $GLOBALS['cover']->update();
-    $GLOBALS['cover']->perfil();
-});
-
-$router->add('/ver', function() {
-    $GLOBALS['cover']->ver_pelicula(); 
-});
-
-$router->add('/add_fav', function() {
-    $GLOBALS['cover']->agregar_pelicula(); 
-});
-
-$router->add('/del_fav', function() {
-    $GLOBALS['cover']->borrar_pelicula(); 
-});
-
-$router->add('/viewall', function() {
-    $GLOBALS['cover']->vertodas();
+/************** Acciones navbar ********************* */
+$router->add('/movies', function() {
+    $GLOBALS['actions']->movies();
     
 });
 
-$router->add('/search', function() {
-    $GLOBALS['cover']->buscar();
+$router->add('/series', function() {
+    $GLOBALS['actions']->series();
     
 });
+
+$router->post('/search', function() {
+    $GLOBALS['actions']->buscar();
+    
+});
+
+$router->add('/profile', function() {
+    $GLOBALS['actions']->perfil();
+});
+
+$router->get('/read_notifications', function() {
+    $GLOBALS['actions']->read_notifications();
+});
+
+/************** Acciones Perfil ********************* */
 
 $router->add('/close_acount', function() {
-    $GLOBALS['cover']->delete();
+    $GLOBALS['actions']->delete();
     
 });
 
-$router->add('/movies', function() {
-    $GLOBALS['cover']->movies();
+$router->post('/update_profile', function() {
+    $GLOBALS['actions']->update();
+});
+
+/************** Acciones Visualizaciones ***********************/
+
+$router->get('/ver', function() {
+    $GLOBALS['movies']->ver_pelicula(); 
+});
+
+$router->get('/add_fav', function() {
+    $GLOBALS['movies']->agregar_pelicula(); 
+});
+
+$router->get('/del_fav', function() {
+    $GLOBALS['movies']->borrar_pelicula(); 
+});
+
+$router->get('/view_all', function() {
+    $GLOBALS['movies']->vertodas();
     
 });
 
+/* Pagina no encontrada */
 $router->add('/.*', function () {
     require_once  'Server/views/404.php';
 });

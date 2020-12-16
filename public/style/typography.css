@@ -48,6 +48,7 @@ h6, .h6 { font-size: 1.0em; }
 .height-100-vh { height: 100vh; }
 .w-20 { width: 20px; }
 .big-title { font-family: 'Helvetica Neue Regular'; }
+.main-title { font-family: 'Helvetica Neue Regular'; text-decoration: underline;  text-align: center }
 .badge { border-radius: 0 !important; }
 .iq-mb-30 { margin-bottom: 30px; }
 
@@ -294,3 +295,16 @@ Password_Options
     border-bottom: 1px;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
+/*----------------------------------------------
+Validate Labels
+------------------------------------------------*/
+label.error{color: var(--iq-primary);display: none; }
+
+/*----------------------------------------------
+Color Options
+------------------------------------------------*/
+.option_primary{color: var(--iq-primary);}
+.option_info{color: var(--iq-info);}
+.option_success{color: var(--iq-success); }
+.option_warning{color: var(--iq-warning); }
+
