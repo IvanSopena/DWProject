@@ -224,31 +224,15 @@ Select 2
 /*----------------------------------------------
 Password_Options
 ------------------------------------------------*/
-.password-icon {
-    float: right;
-    position: relative;
-    margin: -25px 172px 0 0;
-    cursor: pointer;
+.password-icon {float: right; position: relative;margin: -25px 172px 0 0;cursor: pointer;
 }
 
- .strength_wrapper {
-    display: inline-block;
-    text-align: left;
-    width: 71%;
+.password-icon-login {float: right;position: relative;margin: -33px 29px 0 0;cursor: pointer;
+}
+ .strength_wrapper {display: inline-block;text-align: left;width: 71%;
 } 
 
-.veryweak {
-    background-color: #FF7979;
-    display: block;
-    width: 320px;
-    height: calc(1.5em + .75rem + 2px);
-    padding: 10px 10px 10px 5px;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #495057;
-    border: none;border-radius: 0 !important;border-bottom: 1px;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+.veryweak {background-color: #FF7979;display: block;width: 320px;height: calc(1.5em + .75rem + 2px);padding: 10px 10px 10px 5px;font-size: 1rem;font-weight: 400;line-height: 1.5;color: #495057;border: none;border-radius: 0 !important;border-bottom: 1px;transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
 .weak {

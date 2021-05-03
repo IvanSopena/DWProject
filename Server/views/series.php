@@ -23,12 +23,13 @@ require_once('server/models/MoviesModel.php');
     }
     ?>
 
+
     <br>
     <br>
     <br>
     <br>
     <br>
-    <h1  class='main-title'>NUESTRO CATALOGO DE SERIES</h1>
+    <h1  class='main-title'>NUESTRO CATALOGO DE PELICULAS</h1>
     <br>
     <br>
     <section id="iq-upcoming-movie">
@@ -48,6 +49,7 @@ require_once('server/models/MoviesModel.php');
 
                             while ($dato = $datos->fetch()) {
                                 echo " <li class='slide-item'>
+
               <a href='movie-details.html'>
                  <div class='block-images position-relative'>
                     <div class='img-box'>
@@ -82,6 +84,7 @@ require_once('server/models/MoviesModel.php');
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -101,6 +104,7 @@ $datos = $modelo->carga_por_categoria(2, 2);
 
 while ($dato = $datos->fetch()) {
     echo " <li class='slide-item'>
+
               <a href='movie-details.html'>
                  <div class='block-images position-relative'>
                     <div class='img-box'>
@@ -135,6 +139,7 @@ while ($dato = $datos->fetch()) {
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -155,6 +160,7 @@ $datos = $modelo->carga_por_categoria(3, 2);
 
 while ($dato = $datos->fetch()) {
     echo " <li class='slide-item'>
+
               <a href='movie-details.html'>
                  <div class='block-images position-relative'>
                     <div class='img-box'>
@@ -189,6 +195,7 @@ while ($dato = $datos->fetch()) {
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -208,6 +215,7 @@ $datos = $modelo->carga_por_categoria(4, 2);
 
 while ($dato = $datos->fetch()) {
     echo " <li class='slide-item'>
+
               <a href='movie-details.html'>
                  <div class='block-images position-relative'>
                     <div class='img-box'>
@@ -242,6 +250,7 @@ while ($dato = $datos->fetch()) {
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
     <section id="iq-upcoming-movie">
@@ -261,34 +270,35 @@ $datos = $modelo->carga_por_categoria(5, 2);
 
 while ($dato = $datos->fetch()) {
     echo " <li class='slide-item'>
-              <a href='movie-details.html'>
-                 <div class='block-images position-relative'>
-                    <div class='img-box'>
-                       <img src=/DWProject'" . $dato['cover'] . "' class='img-fluid' alt=''>
-                    </div>
-                    <div class='block-description'>
-                       <h6>" . $dato['name'] . "</h6>
-                       <div class='movie-time d-flex align-items-center my-2'>
-                          <div class='badge badge-secondary p-1 mr-2'>" . $dato['age'] . "</div>
-                          <span class='text-white'>" . $dato['duration'] . " min</span>
-                          <div class='block-social-info'>
-                           <ul class='list-inline p-0 m-0 music-play-lists'>
-                           <a href='#' onclick='addfav(" . $dato['idmovie'] . "," . $GLOBALS['sq']->getMAppUserId() . ")'> 
-                              <li><span><i class='fa fa-heart'></i></span></li>
-                           </a>
-                           </ul>
-                        </div>
-                       </div>
-                       <div class='hover-buttons'>
-                       <a href='#' onclick='vervideo(" . $dato['idmovie'] . ")' class='btn btn-hover'><i class='fa fa-play mr-2'
-                                 aria-hidden='true'></i>Ver Ahora</a>
-                       <a href='" . $dato['details'] . "' target='_blank' class='btn btn-link'>Mas detalles</a>
-                          
-                       </div>
-                       
-                  </div>
-              </a>
-           </li>";
+
+    <a href='movie-details.html'>
+       <div class='block-images position-relative'>
+          <div class='img-box'>
+             <img src='/DWProject" . $dato['cover'] . "' class='img-fluid' alt=''>
+          </div>
+          <div class='block-description'>
+             <h6>" . $dato['name'] . "</h6>
+             <div class='movie-time d-flex align-items-center my-2'>
+                <div class='badge badge-secondary p-1 mr-2'>" . $dato['age'] . "</div>
+                <span class='text-white'>" . $dato['duration'] . " min</span>
+                <div class='block-social-info'>
+                 <ul class='list-inline p-0 m-0 music-play-lists'>
+                 <a href='#' onclick='addfav(" . $dato['idmovie'] . "," . $GLOBALS['sq']->getMAppUserId() . ")'> 
+                    <li><span><i class='fa fa-heart'></i></span></li>
+                 </a>
+                 </ul>
+              </div>
+             </div>
+             <div class='hover-buttons'>
+             <a href='#' onclick='vervideo(" . $dato['idmovie'] . ")' class='btn btn-hover'><i class='fa fa-play mr-2'
+                       aria-hidden='true'></i>Ver Ahora</a>
+             <a href='" . $dato['details'] . "' target='_blank' class='btn btn-link'>Mas detalles</a>
+                
+             </div>
+             
+        </div>
+    </a>
+ </li>";
 }
 ?>
                         </ul>
@@ -315,6 +325,7 @@ $datos = $modelo->carga_por_categoria(6, 2);
 
 while ($dato = $datos->fetch()) {
     echo " <li class='slide-item'>
+
               <a href='movie-details.html'>
                  <div class='block-images position-relative'>
                     <div class='img-box'>
@@ -349,6 +360,7 @@ while ($dato = $datos->fetch()) {
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -368,6 +380,8 @@ $datos = $modelo->carga_por_categoria(7, 2);
 
 while ($dato = $datos->fetch()) {
     echo " <li class='slide-item'>
+
+
               <a href='movie-details.html'>
                  <div class='block-images position-relative'>
                     <div class='img-box'>
@@ -402,6 +416,7 @@ while ($dato = $datos->fetch()) {
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -422,6 +437,7 @@ $datos = $modelo->carga_por_categoria(8, 2);
 
 while ($dato = $datos->fetch()) {
     echo " <li class='slide-item'>
+
               <a href='movie-details.html'>
                  <div class='block-images position-relative'>
                     <div class='img-box'>
@@ -456,6 +472,7 @@ while ($dato = $datos->fetch()) {
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -476,6 +493,7 @@ $datos = $modelo->carga_por_categoria(10, 2);
 
 while ($dato = $datos->fetch()) {
     echo " <li class='slide-item'>
+
               <a href='movie-details.html'>
                  <div class='block-images position-relative'>
                     <div class='img-box'>
@@ -510,6 +528,7 @@ while ($dato = $datos->fetch()) {
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -530,6 +549,7 @@ while ($dato = $datos->fetch()) {
 
                             while ($dato = $datos->fetch()) {
                                 echo " <li class='slide-item'>
+
               <a href='movie-details.html'>
                  <div class='block-images position-relative'>
                     <div class='img-box'>

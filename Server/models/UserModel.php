@@ -54,8 +54,8 @@ class UserModel
     {
         try{
             $sql = "";
-            $sql = "select  IdNotify, CONCAT(Nombre,' ', Apellidos) as Usuario,Message from " . $GLOBALS['sq']->getTableOwner() . ".Notifications, " . $GLOBALS['sq']->getTableOwner() . ".Users
-            where Id=IdUser and Read_Message = '0' and IdUser ='".$GLOBALS['sq']->getMAppUserId()."'";
+            $sql = "select  IdNotify, CONCAT(Nombre,' ', Apellidos) as Usuario,Message,cover from " . $GLOBALS['sq']->getTableOwner() . ".Notifications, " . $GLOBALS['sq']->getTableOwner() . ".Users
+            where Id=IdOwner and Read_Message = '0' and IdUser ='".$GLOBALS['sq']->getMAppUserId()."'";
             $result = $GLOBALS['sq']->DbSelect_tablas($sql);
 
             if ($GLOBALS['sq']->fallo_query == false) {

@@ -24,12 +24,14 @@
                                             placeholder="Email" autocomplete="off">
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control mb-0" name="password" id="password"
+                                        <input type="password" class="form-control mb-0 Password1" name="password" id="password"
                                             placeholder="Contraseña">
+                                        <span class="fa fa-fw fa-eye password-icon-login show-password"></span>
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control mb-0" name="verifica" id="verifica"
+                                        <input type="password" class="form-control mb-0 Password1" name="verifica" id="verifica"
                                             placeholder="Verificar Contraseña">
+                                        <span class="fa fa-fw fa-eye password-icon-login show-password"></span>
                                     </div>
                                     <div class="custom-control custom-checkbox mb-3">
                                         <input type="checkbox" class="custom-control-input" name="chcek" id="chcek"
