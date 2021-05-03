@@ -23,7 +23,9 @@
                                         <a href="/DWProject/">Inicio</a>
                                     </li>
                                     <li class="menu-item">
+
                                         <a href="/DWProject/series">Series</a>
+
                                     </li>
                                     <li class="menu-item">
                                         <a href="/DWProject/movies">Peliculas</a>
@@ -78,14 +80,16 @@
                                               <div class='iq-card shadow-none m-0'>
                                             <div class='iq-card-body'>
                                             <a href='#' id ='iq-sub-card_msg'>
-                                                <div  class='media align-items-center '>
-                                                    <img id = 'msg_img' src='/DWProject/public/img/sobre.png' class='img-fluid mr-3'alt='streamit' />
-                                                    <div id = 'msg_txt' class='media-body'>
-                                                        <h6  class='mb-0 '>" . $dato['Message'] . "</h6>
-                                                        <small class='font-size-12'>Remitente: " . $dato['Usuario'] . "</small>
-                                                        <a href='#' class='btn bt-primary'>Enterado</a>
-                                                    </div>
-                                                </div>
+                                            <div  class='media align-items-center '>
+                                            <img id = 'msg_img' src='/DWProject/".$dato['cover']."' class='img-fluid mr-3'alt='streamit' />
+                                            <div id = 'msg_txt' class='media-body'>
+                                                <h6  class='mb-0 '>" . $dato['Message'] . "</h6>
+                                                <small class='font-size-12'>" . $dato['Usuario'] . "</small>
+                                                <input id='id_message_".$i."' hidden value ='". $dato['IdNotify'] ."'>
+                                                </br>
+                                            </div>
+                                                
+                                        </div>
                                             </a>
                                         </div>
                                         </div>";
@@ -177,13 +181,16 @@ if (intval($novedades["total"]) > 0) {
                                             <div class='iq-card-body'>
                                             <a href='#' id ='iq-sub-card_msg'>
                                                 <div  class='media align-items-center '>
-                                                    <img id = 'msg_img' src='/DWProject/public/img/sobre.png' class='img-fluid mr-3'alt='streamit' />
+                                                    <img id = 'msg_img' src='/DWProject/".$dato['cover']."' class='img-fluid mr-3'alt='streamit' />
                                                     <div id = 'msg_txt' class='media-body'>
                                                         <h6  class='mb-0 '>" . $dato['Message'] . "</h6>
-                                                        <small class='font-size-12'>Remitente: " . $dato['Usuario'] . "</small>
+                                                        <small class='font-size-12'>" . $dato['Usuario'] . "</small>
                                                         <input id='id_message_".$i."' hidden value ='". $dato['IdNotify'] ."'>
+                                                        </br>
                                                     </div>
+                                                        
                                                 </div>
+                                                
                                                 <a  onclick='myFunction(".$i.")' href='#'> 
                                                 <i class='fa fa-trash'></i> Quitar Notificación </a>
                                             </a>

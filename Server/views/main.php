@@ -286,7 +286,9 @@ while ($dato = $estrenos->fetch()) {
                           <span class='text-white'>" . $dato['duration'] . " min</span>
                           <div class='block-social-info'>
                            <ul class='list-inline p-0 m-0 music-play-lists'>
+
                            <a href='#' onclick='addfav(" . $dato['idmovie'] . "," . $GLOBALS['sq']->getMAppUserId() . ")'> 
+
                               <li><span><i class='fa fa-heart'></i></span></li>
                            </ul>
                         </div>

@@ -109,7 +109,9 @@ $router->get('/view_all', function() {
     
 });
 
+
 /* Pagina no encontrada */
+
 $router->add('/.*', function () {
     require_once  'Server/views/404.php';
 });
